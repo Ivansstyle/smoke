@@ -22,6 +22,9 @@ SDL_Window* gWindow = NULL;
 //OpenGL context
 SDL_GLContext gContext;
 
+// Creating base particle system
+ParticleSystem *particlesystem = NULL;
+
 
 int initSDL()
 {

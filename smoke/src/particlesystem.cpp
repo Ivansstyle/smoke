@@ -5,3 +5,12 @@ ParticleSystem::ParticleSystem()
 
 }
 
+ParticleSystem::~ParticleSystem(){
+
+}
+
+
+bool ParticleSystem::init(){}
+
+void ParticleSystem::update(){}
+

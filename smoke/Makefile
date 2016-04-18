@@ -13,7 +13,7 @@ MAKEFILE      = Makefile
 CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_GUI_LIB -DQT_CORE_LIB
-CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CFLAGS        = -pipe -std=c++11 -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I. -I. -I/usr/include -Ipackages/obj-0.1 -I/opt/qt/5.5/gcc_64/include -I/opt/qt/5.5/gcc_64/include/QtGui -I/opt/qt/5.5/gcc_64/include/QtCore -I. -I/opt/qt/5.5/gcc_64/mkspecs/linux-g++
 QMAKE         = /opt/qt/5.5/gcc_64/bin/qmake
@@ -538,7 +538,8 @@ compiler_clean:
 
 ####### Compile
 
-obj/main.o: src/main.cpp 
+obj/main.o: src/main.cpp src/particle.h \
+		src/particlesystem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/main.o src/main.cpp
 
 obj/particlesystem.o: src/particlesystem.cpp src/particlesystem.h

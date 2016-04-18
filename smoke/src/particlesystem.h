@@ -5,7 +5,17 @@
 class ParticleSystem
 {
 public:
+
   ParticleSystem();
+
+  ~ParticleSystem();
+
+ bool virtual init();
+
+ void virtual update();
+
+
+
 };
 
 #endif // PARTICLESYSTEM_H

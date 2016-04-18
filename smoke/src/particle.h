@@ -6,6 +6,16 @@ class Particle
 {
 public:
   Particle();
+
+private:
+  int m_pos;
+  int m_vel;
+  int m_mass;
+  bool m_inSphere;
+
+
+
+
 };
 
 #endif // PARTICLE_H

@@ -39,3 +39,6 @@ macx{
 
   LIBS += -framework OpenGL
     }
+
+QMAKE_CFLAGS += -std=c++11
+

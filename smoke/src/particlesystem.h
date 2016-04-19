@@ -5,6 +5,9 @@
 
 #ifdef __APPLE__ //OpenGL for MacOsX
 
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+
 #else
 
 #include <GL/gl.h>

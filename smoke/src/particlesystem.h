@@ -2,6 +2,17 @@
 #define PARTICLESYSTEM_H
 
 
+
+#ifdef __APPLE__ //OpenGL for MacOsX
+
+#else
+
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <stdlib.h>
+
+#endif
+
 class ParticleSystem
 {
 public:
@@ -10,10 +21,19 @@ public:
 
   ~ParticleSystem();
 
- bool virtual init();
+ void virtual init();
 
  void virtual update();
 
+ void draw();
+
+ void resize(int w, int h);
+
+private:
+
+protected:
+
+ bool m_isInit;
 
 
 };

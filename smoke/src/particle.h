@@ -6,7 +6,8 @@ class Particle
 {
 public:
   Particle();
-
+  ~Particle();
+  
 private:
   int m_pos;
   int m_vel;

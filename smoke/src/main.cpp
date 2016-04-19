@@ -14,8 +14,8 @@
 #define WINDOW_TITLE "SMOKE PS"
 
 // These defines are for the initial window size (it can be changed in the resize function)
-#define WIDTH 640
-#define HEIGHT 480
+#define WIDTH 1280
+#define HEIGHT 720
 
 //Window
 SDL_Window* gWindow = NULL;
@@ -25,6 +25,8 @@ SDL_GLContext gContext;
 
 // Creating base particle system
 ParticleSystem *particlesystem = NULL;
+
+
 
 
 int initSDL()
@@ -107,12 +109,13 @@ int main( int argc, char* args[] ) {
     // We should now be ready to use OpenGL
     // This object holds our scene. It needs to be initialised before it can be drawn.
 
-    ///scene = new CubeScene();
+    particlesystem = new ParticleSystem();
 
-    // Initialise the scene
-    ///scene->init();
+    // Initialise the Particle System
+    particlesystem->init();
+
     // Need an initial resize to make sure the projection matrix is initialised
-    ///scene->resize(WIDTH, HEIGHT);
+    particlesystem->resize(WIDTH, HEIGHT);
 
     // Use a timer to update our scene. This is the best way to handle updates,
     // as the timer runs in a separate thread and is therefore not affected by the
@@ -158,7 +161,7 @@ int main( int argc, char* args[] ) {
         ///scene->draw();
 
         //Update screen
-        ///SDL_GL_SwapWindow( gWindow );
+        SDL_GL_SwapWindow( gWindow );
     }
     //MAINLOOP END
 

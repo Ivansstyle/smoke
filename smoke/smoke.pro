@@ -21,6 +21,7 @@ unix:linux{
   INCLUDEPATH += . /usr/include packages/obj-0.1
   LIBS += -lSDL2 -lglut -lGLU -lGL -lpng
   OBJECTS_DIR = obj
+  DEFINES += __OS_LINUX__
           }
 
 
@@ -29,6 +30,7 @@ unix:linux{
 
 # Multiplatform : Mac OsX
 macx{
+  DEFINES += __OS_OSX__
   LIBS += -F/Library/Frameworks -framework SDL2
   LIBS += -F/Library/Frameworks -framework SDL2_image
   INCLUDEPATH  += Library/Frameworks/SDL.framework/Headers

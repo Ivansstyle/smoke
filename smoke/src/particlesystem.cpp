@@ -14,3 +14,8 @@ bool ParticleSystem::init(){}
 
 void ParticleSystem::update(){}
 
+
+void ParticleSystem::draw()
+{
+
+}

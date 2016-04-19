@@ -1,9 +1,9 @@
 #include <iostream>
 #define LINUX
 
-#ifdef _APPLE_
-//MacIncludes
-
+#ifdef __APPLE__
+                        //MacIncludes
+#include <SDL2/SDL.h>
 #else
 #include <SDL2/SDL.h>
 #endif
@@ -19,6 +19,7 @@
 
 //Window
 SDL_Window* gWindow = NULL;
+
 //OpenGL context
 SDL_GLContext gContext;
 
@@ -36,7 +37,7 @@ int initSDL()
     }
     else
     {
-#ifdef _APPLE_ //Use OpenGL 2.1 core for MacOsX in Compability Mode
+#ifdef __APPLE__ //Use OpenGL 2.1 core for MacOsX in Compability Mode
 
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 2 );
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 1 );
@@ -96,6 +97,7 @@ int main( int argc, char* args[] ) {
     //Create context
     gContext = SDL_GL_CreateContext( gWindow );
     if( gContext == NULL ) return EXIT_FAILURE;
+    else std::cout<<"GL_CreateContext => created context context is != 0 "<<std::endl;
 
     //Use Vsync
     if( SDL_GL_SetSwapInterval( 1 ) < 0 ) {
@@ -156,8 +158,9 @@ int main( int argc, char* args[] ) {
         ///scene->draw();
 
         //Update screen
-        SDL_GL_SwapWindow( gWindow );
+        ///SDL_GL_SwapWindow( gWindow );
     }
+    //MAINLOOP END
 
     //Disable text input
     SDL_StopTextInput();

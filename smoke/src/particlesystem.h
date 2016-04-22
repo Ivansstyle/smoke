@@ -8,13 +8,19 @@
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 
+
 #else
 
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <stdlib.h>
 
 #endif
+
+
+#include "particle.h"
+#include <stdlib.h>
+#include <vector>
+
 
 class ParticleSystem
 {
@@ -24,19 +30,33 @@ public:
 
   ~ParticleSystem();
 
- void virtual init();
+ void init();
 
- void virtual update();
+ void update();
 
  void draw();
 
  void resize(int w, int h);
 
+ bool const isInit();
+
 private:
+
+std::vector<Particle> m_particles;
+
 
 protected:
 
  bool m_isInit;
+
+
+
+
+ /// The time since the object was initialised, which is used for animation purposes
+ double m_startTime;
+
+ /// A member that is updated when update() is called indicating the elapsed time
+ double m_elapsedTime;
 
 
 };

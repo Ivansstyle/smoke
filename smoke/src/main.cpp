@@ -76,7 +76,7 @@ int initSDL()
  */
 Uint32 timerCallback(Uint32 interval, void *)
 {
-    //if (scene != NULL) scene->update();
+    if (particlesystem != NULL) particlesystem->update();
     return interval;
 }
 
@@ -114,6 +114,8 @@ int main( int argc, char* args[] ) {
 
     // Initialise the Particle System
     particlesystem->init();
+
+    if (!particlesystem->isInit()) std::cout<<"particleSystem initilisation failed"<<std::endl;
 
     // Need an initial resize to make sure the projection matrix is initialised
     particlesystem->resize(WIDTH, HEIGHT);
@@ -159,9 +161,13 @@ int main( int argc, char* args[] ) {
         }
 
         //Render the scene
-        ///scene->draw();
+        //scene->draw();
+
+
+        particlesystem->draw();
 
         //Update screen
+
         SDL_GL_SwapWindow( gWindow );
     }
     //MAINLOOP END
@@ -183,4 +189,5 @@ int main( int argc, char* args[] ) {
 
     return EXIT_SUCCESS;
 }
+
 

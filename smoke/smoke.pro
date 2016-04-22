@@ -1,18 +1,22 @@
 TEMPLATE = app
 CONFIG += console
 CONFIG += debug
+CONFIG += c++11
 
 
 TARGET = smoke
 SOURCES += src/main.cpp \
     src/particlesystem.cpp \
     src/particle.cpp \
-    src/controlsphere.cpp
+    src/controlsphere.cpp \
+    src/Vec4.cpp
 HEADERS += \
     src/particlesystem.h \
     src/particle.h \
-    src/controlsphere.h
+    src/controlsphere.h \
+    src/Vec4.h
 
+QMAKE_CFLAGS += -std=c++11
 
 
 # Multiplatform : Linux

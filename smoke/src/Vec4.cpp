@@ -86,7 +86,8 @@ bool Vec4::operator ==(const Vec4 &_rhs) const
 
 GLfloat & Vec4::operator [](int _i)
 {
-
+    assert(_i>=0 && _i<=2);
+    return m_openGL[_i];
 }
 
 void Vec4::set(GLfloat _x, GLfloat _y, GLfloat _z, GLfloat _w)

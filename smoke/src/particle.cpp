@@ -35,15 +35,15 @@ void Particle::SetPos(Vec4 _pos)
 
 void Particle::draw()
 {
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-    glBegin(GL_POINT);
+
+    glBegin(GL_POINTS);
     glVertex3f(m_pos[0],m_pos[1],m_pos[2]);
             glEnd();
 }
 
 void Particle::UpdateGravity()
 {
-    m_vel += Vec4(0,-0.02,0);
+    m_vel += Vec4(0,-0.00002,0);
 }
 
 void Particle::SetVel(Vec4 _vel)

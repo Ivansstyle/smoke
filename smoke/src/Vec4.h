@@ -6,6 +6,8 @@
 #ifdef __APPLE__
   #include <OpenGL/gl.h>
 #endif
+
+#include <cassert>
 class Mat4;
 
 class Vec4

@@ -37,6 +37,8 @@ void ParticleSystem::init()
     // Enable texturing
     glDisable(GL_TEXTURE_2D);
 
+    glPointSize(15);
+
 
     // Enable counter clockwise face ordering
     glFrontFace(GL_CCW);
@@ -70,12 +72,13 @@ void ParticleSystem::init()
     gettimeofday(&tim, NULL);
     //m_startTime = tim.tv_sec+(tim.tv_usec * 1e-6);
 
-
-    Particle p = Particle();
-    p.SetPos(Vec4(0.5,0,-2));
-    p.SetVel(Vec4(0,0,0));
-    m_particles.push_back(p);
-
+for (int i = 0; i < 10; ++i)
+    {
+     Particle p = Particle();
+     p.SetPos(Vec4(i*0.5 / 3,0,-2));
+     p.SetVel(Vec4(0,0,0));
+     m_particles.push_back(p);
+    }
 
 
     m_isInit = true;
@@ -93,7 +96,7 @@ void ParticleSystem::update()
 
 void ParticleSystem::draw()
 {
-
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     for (auto& i : m_particles)
     {
         i.draw();

@@ -18,6 +18,8 @@
 
 
 #include "particle.h"
+#include "space.h"
+
 #include <stdlib.h>
 #include <vector>
 
@@ -27,15 +29,11 @@ class ParticleSystem
 public:
 
   ParticleSystem();
-
   ~ParticleSystem();
 
  void init();
-
  void update();
-
  void draw();
-
  void resize(int w, int h);
 
  bool const isInit();
@@ -43,6 +41,8 @@ public:
 private:
 
 std::vector<Particle> m_particles;
+
+Space space;
 
 
 protected:

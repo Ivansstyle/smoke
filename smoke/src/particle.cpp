@@ -1,7 +1,7 @@
 #include "particle.h"
 
 
-Particle::Particle()
+Particle::Particle() : m_bouncieness(0.88)
 {
 
 }
@@ -43,10 +43,19 @@ void Particle::draw()
 
 void Particle::UpdateGravity()
 {
-    m_vel += Vec4(0,-0.00002,0);
+    m_vel += Vec4(0,-0.002,0);
 }
 
 void Particle::SetVel(Vec4 _vel)
 {
     m_vel = _vel;
+}
+
+void Particle::bounce()
+{
+
+    m_vel = Vec4(-m_vel.m_x * m_bouncieness,
+                 -m_vel.m_y * m_bouncieness,
+                 -m_vel.m_z * m_bouncieness,
+                 1);
 }

@@ -52,12 +52,16 @@ SOURCES       = ../smoke/src/main.cpp \
 		../smoke/src/particlesystem.cpp \
 		../smoke/src/particle.cpp \
 		../smoke/src/controlsphere.cpp \
-		../smoke/src/Vec4.cpp 
+		../smoke/src/Vec4.cpp \
+		../smoke/src/space.cpp \
+		../smoke/src/flowspace.cpp 
 OBJECTS       = main.o \
 		particlesystem.o \
 		particle.o \
 		controlsphere.o \
-		Vec4.o
+		Vec4.o \
+		space.o \
+		flowspace.o
 DIST          = ../../../Qt/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.5/clang_64/mkspecs/qdevice.pri \
 		../../../Qt/5.5/clang_64/mkspecs/features/device_config.prf \
@@ -203,11 +207,15 @@ DIST          = ../../../Qt/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		../smoke/smoke.pro ../smoke/src/particlesystem.h \
 		../smoke/src/particle.h \
 		../smoke/src/controlsphere.h \
-		../smoke/src/Vec4.h ../smoke/src/main.cpp \
+		../smoke/src/Vec4.h \
+		../smoke/src/space.h \
+		../smoke/src/flowspace.h ../smoke/src/main.cpp \
 		../smoke/src/particlesystem.cpp \
 		../smoke/src/particle.cpp \
 		../smoke/src/controlsphere.cpp \
-		../smoke/src/Vec4.cpp
+		../smoke/src/Vec4.cpp \
+		../smoke/src/space.cpp \
+		../smoke/src/flowspace.cpp
 QMAKE_TARGET  = smoke
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = smoke.app/Contents/MacOS/smoke
@@ -571,8 +579,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../smoke/src/particlesystem.h ../smoke/src/particle.h ../smoke/src/controlsphere.h ../smoke/src/Vec4.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../smoke/src/main.cpp ../smoke/src/particlesystem.cpp ../smoke/src/particle.cpp ../smoke/src/controlsphere.cpp ../smoke/src/Vec4.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../smoke/src/particlesystem.h ../smoke/src/particle.h ../smoke/src/controlsphere.h ../smoke/src/Vec4.h ../smoke/src/space.h ../smoke/src/flowspace.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../smoke/src/main.cpp ../smoke/src/particlesystem.cpp ../smoke/src/particle.cpp ../smoke/src/controlsphere.cpp ../smoke/src/Vec4.cpp ../smoke/src/space.cpp ../smoke/src/flowspace.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -677,6 +685,13 @@ controlsphere.o: ../smoke/src/controlsphere.cpp ../smoke/src/controlsphere.h
 Vec4.o: ../smoke/src/Vec4.cpp ../smoke/src/Vec4.h \
 		../smoke/src/Mat4.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Vec4.o ../smoke/src/Vec4.cpp
+
+space.o: ../smoke/src/space.cpp ../smoke/src/space.h \
+		../smoke/src/Vec4.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o space.o ../smoke/src/space.cpp
+
+flowspace.o: ../smoke/src/flowspace.cpp ../smoke/src/flowspace.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o flowspace.o ../smoke/src/flowspace.cpp
 
 ####### Install
 

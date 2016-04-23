@@ -34,6 +34,13 @@ void ParticleSystem::init()
     // Sanity check - if we've already initialised this class we shouldn't be here
     if (m_isInit) return;
 
+
+    //SPACE INITIALISATION
+
+    space = Space();
+    space.SetSpace(Vec4(2,1,2));
+
+
     // Enable texturing
     glDisable(GL_TEXTURE_2D);
 
@@ -89,7 +96,19 @@ void ParticleSystem::update()
     //Update the particles
     for (auto& i : m_particles)
     {
-        i.UpdatePos();
+        Vec4 totVel = Vec4(0,0,0);
+        Vec4 _ppos = i.GetPos();
+        _ppos = space.isInSpace(_ppos);
+        if (_ppos.m_w == -2)
+        {
+            i.SetPos(_ppos);
+            i.bounce();
+        }
+        else
+        {
+            i.AddVel(totVel);
+        }
+            i.UpdatePos();
     }
 }
 

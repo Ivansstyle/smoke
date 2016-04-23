@@ -22,12 +22,14 @@ public:
   Vec4 GetVel();
   Vec4 GetPos();
   void draw();
+  void bounce();
 
 
 private:
   Vec4 m_pos;
   Vec4 m_vel;
   float m_mass;
+  float m_bouncieness;
 
   void UpdateGravity();
 

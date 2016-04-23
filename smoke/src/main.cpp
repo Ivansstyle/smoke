@@ -178,8 +178,8 @@ int main( int argc, char* args[] ) {
     // Disable our timer
     SDL_RemoveTimer(timerID);
 
-    // Delete our scene
-    ///delete scene;
+    // Delete particlesystem
+    delete particlesystem;
 
     //Destroy window
     SDL_DestroyWindow( gWindow );

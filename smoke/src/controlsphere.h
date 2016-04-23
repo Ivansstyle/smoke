@@ -9,13 +9,15 @@ public:
   ~ControlSphere();
   void draw();
   void update();
-  Vec4 GetPos();
-  void SetPos();
+  Vec4 GetPos() const;
+  void SetPos(Vec4 _pos);
+  GLdouble GetR() const;
+  void SetR(GLdouble _r);
 
 
 private:
   Vec4 m_pos;
-  GLfloat r;
+  GLdouble m_r;
 
 
 };

@@ -19,6 +19,7 @@
 
 #include "particle.h"
 #include "space.h"
+#include "controlsphere.h"
 
 #include <stdlib.h>
 #include <vector>
@@ -36,13 +37,14 @@ public:
  void draw();
  void resize(int w, int h);
 
- bool const isInit();
+ bool isInit() const;
 
 private:
 
 std::vector<Particle> m_particles;
 
 Space space;
+ControlSphere controlsphere;
 
 
 protected:

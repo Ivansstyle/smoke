@@ -40,18 +40,20 @@ void ParticleSystem::init()
     space = Space();
     space.SetSpace(Vec4(2,1,2));
 
+    controlsphere = ControlSphere();
+
 
     // Enable texturing
     glDisable(GL_TEXTURE_2D);
 
-    glPointSize(15);
+    glPointSize(10);
 
 
     // Enable counter clockwise face ordering
     glFrontFace(GL_CCW);
 
     glDisable(GL_LIGHTING);
-    glDisable(GL_NORMALIZE);
+    gldisable(GL_NORMALIZE);
 
     glEnable(GL_LIGHT0);
     glEnable (GL_BLEND);
@@ -120,9 +122,11 @@ void ParticleSystem::draw()
     {
         i.draw();
     }
+
+    controlsphere.draw();
 }
 
-bool const ParticleSystem::isInit()
+bool ParticleSystem::isInit() const
 {
     return m_isInit;
 }

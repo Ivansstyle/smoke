@@ -1,0 +1,1092 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+		5E618435888B9D49F8540165 = {
+			buildActionMask = 2147483647;
+			files = (
+				);
+			isa = PBXShellScriptBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Qt Qmake";
+			shellPath = "/bin/sh";
+			shellScript = "make -C /Users/ivansstyle/Coding/smoke/smoke/ -f smoke.xcodeproj/qt_makeqmake.mak";
+			showEnvVarsInLog = "0";
+		};
+		5A2CA46FD38C804BE57104E4 = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/main.cpp";
+			name = "main.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		A09C04E4BA496D30AE5469A8 = {
+			fileRef = "5A2CA46FD38C804BE57104E4";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		783592B8DB0C6FA22D473AB6 = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/particlesystem.cpp";
+			name = "particlesystem.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		6160D3CA41F38631E50EB874 = {
+			fileRef = "783592B8DB0C6FA22D473AB6";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		B747F3396DE09FA8B7E0C663 = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/particle.cpp";
+			name = "particle.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		DAF62EFD4DB9BADF8CBC4089 = {
+			fileRef = "B747F3396DE09FA8B7E0C663";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		3B8DC1A89603B0790BC30BE2 = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/controlsphere.cpp";
+			name = "controlsphere.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		4FBEA3830B84EB6B8C676761 = {
+			fileRef = "3B8DC1A89603B0790BC30BE2";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		AD324048B5877E9F8B7FDDE1 = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/Vec4.cpp";
+			name = "Vec4.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		C8A0A69E5C68B33462E9A16C = {
+			fileRef = "AD324048B5877E9F8B7FDDE1";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		30951EFD55F02D62233119DD = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/space.cpp";
+			name = "space.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		4A8D87F5E96EA594D9DBA523 = {
+			fileRef = "30951EFD55F02D62233119DD";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		7311A40AF46C7FBCBEBF631B = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/flowspace.cpp";
+			name = "flowspace.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		B28C27DB45559E4EE6F3AD1D = {
+			fileRef = "7311A40AF46C7FBCBEBF631B";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		60FF32D110025CD1043BACCC = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/smoke_plugin_import.cpp";
+			name = "smoke_plugin_import.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		61BBC038E9CEC757FCCC78B1 = {
+			fileRef = "60FF32D110025CD1043BACCC";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		7748397859BAB8F4FEB25168 = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/particlesystem.h";
+			name = "particlesystem.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		E6ED76E21002B381AF6C9CFF = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/particle.h";
+			name = "particle.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		F41F832F704DE7770257E7F2 = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/controlsphere.h";
+			name = "controlsphere.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		746B359CE0935ACAA11B4A59 = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/Vec4.h";
+			name = "Vec4.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		805C027C56DB10638BB41E81 = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/space.h";
+			name = "space.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		7F247DDAA4152BFA0E770DF5 = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/src/flowspace.h";
+			name = "flowspace.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
+		FA71D0FF23B0EF710AF2EAF6 = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/smoke.pro";
+			name = "smoke.pro";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "text";
+		};
+		762AE72E0EDBA946611C64CD = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/.qmake.stash";
+			name = ".qmake.stash";
+			sourceTree = "<absolute>";
+		};
+		921315FAA7F261D737F4F4C7 = {
+			isa = PBXGroup;
+			children = (
+				"5A2CA46FD38C804BE57104E4",
+				"783592B8DB0C6FA22D473AB6",
+				"B747F3396DE09FA8B7E0C663",
+				"3B8DC1A89603B0790BC30BE2",
+				"AD324048B5877E9F8B7FDDE1",
+				"30951EFD55F02D62233119DD",
+				"7311A40AF46C7FBCBEBF631B",
+				"7748397859BAB8F4FEB25168",
+				"E6ED76E21002B381AF6C9CFF",
+				"F41F832F704DE7770257E7F2",
+				"746B359CE0935ACAA11B4A59",
+				"805C027C56DB10638BB41E81",
+				"7F247DDAA4152BFA0E770DF5");
+			name = "src";
+			sourceTree = "<Group>";
+		};
+		2EB56BE3C2D93CDAB0C52E67 = {
+			isa = PBXGroup;
+			children = (
+				"921315FAA7F261D737F4F4C7",
+				"60FF32D110025CD1043BACCC");
+			name = "Sources";
+			sourceTree = "<Group>";
+		};
+		74B182DB50CB5611B5C1C297 = {
+			isa = PBXGroup;
+			children = (
+				"FA71D0FF23B0EF710AF2EAF6",
+				"762AE72E0EDBA946611C64CD");
+			name = "Supporting Files";
+			sourceTree = "<Group>";
+		};
+		7EF0942E79C014DCEC8976BC = {
+			buildActionMask = 2147483647;
+			files = (
+				);
+			isa = PBXShellScriptBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Qt Preprocessors";
+			shellPath = "/bin/sh";
+			shellScript = "make -C /Users/ivansstyle/Coding/smoke/smoke/ -f smoke.xcodeproj/qt_preprocess.mak";
+			showEnvVarsInLog = "0";
+		};
+		F7E50F631C51CD5B5DC0BC43 = {
+			buildActionMask = 2147483647;
+			files = (
+				"A09C04E4BA496D30AE5469A8",
+				"6160D3CA41F38631E50EB874",
+				"DAF62EFD4DB9BADF8CBC4089",
+				"4FBEA3830B84EB6B8C676761",
+				"C8A0A69E5C68B33462E9A16C",
+				"4A8D87F5E96EA594D9DBA523",
+				"B28C27DB45559E4EE6F3AD1D",
+				"61BBC038E9CEC757FCCC78B1");
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Compile Sources";
+		};
+		9F7A7C8C5E7503DE88C6E267 = {
+			isa = PBXFileReference;
+			name = "qios";
+			path = "/Users/ivansstyle/Qt/5.5/ios/plugins/platforms/libqios$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		DA4DDC7590C4134EE0602175 = {
+			fileRef = "9F7A7C8C5E7503DE88C6E267";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		FCC237CA5AD60B9BA4447615 = {
+			isa = PBXFileReference;
+			name = "Foundation.framework";
+			path = "/System/Library/Frameworks/Foundation.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		F26454630C80841CBDCFE1CA = {
+			fileRef = "FCC237CA5AD60B9BA4447615";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		7EC00404ACD5AB0E97726B0E = {
+			isa = PBXFileReference;
+			name = "QuartzCore.framework";
+			path = "/System/Library/Frameworks/QuartzCore.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		B460F624007324313696BE86 = {
+			fileRef = "7EC00404ACD5AB0E97726B0E";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		4D765E1B1EA6C757220C63E7 = {
+			isa = PBXFileReference;
+			name = "CoreFoundation.framework";
+			path = "/System/Library/Frameworks/CoreFoundation.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		F8B465CE34D8DF87AAE95913 = {
+			fileRef = "4D765E1B1EA6C757220C63E7";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		7D7B02101166B76FD2D4F8B4 = {
+			isa = PBXFileReference;
+			name = "CoreText.framework";
+			path = "/System/Library/Frameworks/CoreText.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		2B02D9DC58A01E45248DDBCE = {
+			fileRef = "7D7B02101166B76FD2D4F8B4";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		6AE3EC31EE5BB1FCEE84137C = {
+			isa = PBXFileReference;
+			name = "CoreGraphics.framework";
+			path = "/System/Library/Frameworks/CoreGraphics.framework";
+			refType = 0;
+			sourceTree = "<absolute>";
+			lastKnownFileType = "wrapper.framework";
+		};
+		0CE02722F00CAD43741297B5 = {
+			fileRef = "6AE3EC31EE5BB1FCEE84137C";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		3E3D60F9C97701E52E2203E0 = {
+			isa = PBXFileReference;
+			name = "Qt5PlatformSupport";
+			path = "/Users/ivansstyle/Qt/5.5/ios/lib/libQt5PlatformSupport$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		442D6F0B0086976B289FB982 = {
+			fileRef = "3E3D60F9C97701E52E2203E0";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		EC8CA9A4D294A8A18FA187A5 = {
+			isa = PBXFileReference;
+			name = "Qt5DBus";
+			path = "/Users/ivansstyle/Qt/5.5/ios/lib/libQt5DBus$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		A19B04191E3DFAB47D558779 = {
+			fileRef = "EC8CA9A4D294A8A18FA187A5";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		21FA3B59D60646A3AAE71F41 = {
+			isa = PBXFileReference;
+			name = "qdds";
+			path = "/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats/libqdds$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		C8BCDE6332D31F90F701A816 = {
+			fileRef = "21FA3B59D60646A3AAE71F41";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		C03FC6BB636BA376FE8F3149 = {
+			isa = PBXFileReference;
+			name = "qicns";
+			path = "/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats/libqicns$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		F57A6733C87E411B5B4A81FB = {
+			fileRef = "C03FC6BB636BA376FE8F3149";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		9B1716A78560DA13E6E98BF7 = {
+			isa = PBXFileReference;
+			name = "qico";
+			path = "/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats/libqico$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		5A111BC9F232E3F2D7FDD519 = {
+			fileRef = "9B1716A78560DA13E6E98BF7";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0AE3C4A895AB4F809E573A38 = {
+			isa = PBXFileReference;
+			name = "qjp2";
+			path = "/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats/libqjp2$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6699F2C43B59F36DE6F07CDB = {
+			fileRef = "0AE3C4A895AB4F809E573A38";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		811F78A93C37126AAA60316A = {
+			isa = PBXFileReference;
+			name = "qmng";
+			path = "/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats/libqmng$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		0DD6FCAF063ED0953C137ABF = {
+			fileRef = "811F78A93C37126AAA60316A";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		293B4F96F602494E1780AAA8 = {
+			isa = PBXFileReference;
+			name = "qtga";
+			path = "/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats/libqtga$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		FC3025AB9760AB665FDDBE3D = {
+			fileRef = "293B4F96F602494E1780AAA8";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		AD7E10B655BEFDCAEDEDFC8C = {
+			isa = PBXFileReference;
+			name = "qtiff";
+			path = "/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats/libqtiff$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		5C1D3E39ABCE63B91987F4D4 = {
+			fileRef = "AD7E10B655BEFDCAEDEDFC8C";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		091FE2F612ED8484927EEFFB = {
+			isa = PBXFileReference;
+			name = "qwbmp";
+			path = "/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats/libqwbmp$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		F3DED983C0632C39920061AE = {
+			fileRef = "091FE2F612ED8484927EEFFB";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		EA85A4598AA4D54A4CD0814A = {
+			isa = PBXFileReference;
+			name = "qwebp";
+			path = "/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats/libqwebp$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		98CBF68FCBF2441E9FF34DB7 = {
+			fileRef = "EA85A4598AA4D54A4CD0814A";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		3D728C4E3A6DBC571053A680 = {
+			isa = PBXFileReference;
+			name = "Qt5Gui";
+			path = "/Users/ivansstyle/Qt/5.5/ios/lib/libQt5Gui$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		6710F6AB9E8EB565DACD9ED1 = {
+			fileRef = "3D728C4E3A6DBC571053A680";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		11AEF1065D30355FF55036F0 = {
+			isa = PBXFileReference;
+			name = "qtharfbuzzng";
+			path = "/Users/ivansstyle/Qt/5.5/ios/lib/libqtharfbuzzng$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		01F24AA2B7F89A9CECAF429D = {
+			fileRef = "11AEF1065D30355FF55036F0";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		33907552314A3EB6FE999613 = {
+			isa = PBXFileReference;
+			name = "Qt5Core";
+			path = "/Users/ivansstyle/Qt/5.5/ios/lib/libQt5Core$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		F15D51CD97E5699CE7412066 = {
+			fileRef = "33907552314A3EB6FE999613";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		BEA0E4177415DD3383CD1319 = {
+			isa = PBXFileReference;
+			name = "qtpcre";
+			path = "/Users/ivansstyle/Qt/5.5/ios/lib/libqtpcre$(QT_LIBRARY_SUFFIX).a";
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		D36B42A0336CF328BBCAADA3 = {
+			fileRef = "BEA0E4177415DD3383CD1319";
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		3DA90DAE39A0C9D07C6F6B0F = {
+			buildActionMask = 2147483647;
+			files = (
+				);
+			inputPaths = (
+				"$(OBJECT_FILE_DIR_$(CURRENT_VARIANT))/armv7/",
+				"$(OBJECT_FILE_DIR_$(CURRENT_VARIANT))/arm64/",
+				"$(OBJECT_FILE_DIR_$(CURRENT_VARIANT))/i386/",
+				"$(OBJECT_FILE_DIR_$(CURRENT_VARIANT))/x86_64/");
+			outputPaths = (
+				"$(LINK_FILE_LIST_$(CURRENT_VARIANT)_armv7)",
+				"$(LINK_FILE_LIST_$(CURRENT_VARIANT)_arm64)",
+				"$(LINK_FILE_LIST_$(CURRENT_VARIANT)_i386)",
+				"$(LINK_FILE_LIST_$(CURRENT_VARIANT)_x86_64)");
+			isa = PBXShellScriptBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Qt Prelink";
+			shellPath = "/bin/sh";
+			shellScript = "/Users/ivansstyle/Qt/5.5/ios/mkspecs/macx-ios-clang/rename_main.sh \"${OBJECT_FILE_DIR}-${CURRENT_VARIANT}\" \"${ARCHS}\"";
+			showEnvVarsInLog = "0";
+		};
+		AF39DD055C3EF8226FBE929D = {
+			children = (
+				"9F7A7C8C5E7503DE88C6E267",
+				"FCC237CA5AD60B9BA4447615",
+				"7EC00404ACD5AB0E97726B0E",
+				"4D765E1B1EA6C757220C63E7",
+				"7D7B02101166B76FD2D4F8B4",
+				"6AE3EC31EE5BB1FCEE84137C",
+				"3E3D60F9C97701E52E2203E0",
+				"EC8CA9A4D294A8A18FA187A5",
+				"21FA3B59D60646A3AAE71F41",
+				"C03FC6BB636BA376FE8F3149",
+				"9B1716A78560DA13E6E98BF7",
+				"0AE3C4A895AB4F809E573A38",
+				"811F78A93C37126AAA60316A",
+				"293B4F96F602494E1780AAA8",
+				"AD7E10B655BEFDCAEDEDFC8C",
+				"091FE2F612ED8484927EEFFB",
+				"EA85A4598AA4D54A4CD0814A",
+				"3D728C4E3A6DBC571053A680",
+				"11AEF1065D30355FF55036F0",
+				"33907552314A3EB6FE999613",
+				"BEA0E4177415DD3383CD1319");
+			isa = PBXGroup;
+			name = "Frameworks";
+			sourceTree = "<Group>";
+		};
+		D1C883685E82D5676953459A = {
+			buildActionMask = 2147483647;
+			files = (
+				"DA4DDC7590C4134EE0602175",
+				"F26454630C80841CBDCFE1CA",
+				"B460F624007324313696BE86",
+				"F8B465CE34D8DF87AAE95913",
+				"2B02D9DC58A01E45248DDBCE",
+				"0CE02722F00CAD43741297B5",
+				"442D6F0B0086976B289FB982",
+				"A19B04191E3DFAB47D558779",
+				"C8BCDE6332D31F90F701A816",
+				"F57A6733C87E411B5B4A81FB",
+				"5A111BC9F232E3F2D7FDD519",
+				"6699F2C43B59F36DE6F07CDB",
+				"0DD6FCAF063ED0953C137ABF",
+				"FC3025AB9760AB665FDDBE3D",
+				"5C1D3E39ABCE63B91987F4D4",
+				"F3DED983C0632C39920061AE",
+				"98CBF68FCBF2441E9FF34DB7",
+				"6710F6AB9E8EB565DACD9ED1",
+				"01F24AA2B7F89A9CECAF429D",
+				"F15D51CD97E5699CE7412066",
+				"D36B42A0336CF328BBCAADA3");
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Link Binary With Libraries";
+		};
+		8737121564B76D54A611B2CB = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/smoke.xcodeproj/Default-568h@2x.png";
+			name = "Default-568h@2x.png";
+			sourceTree = "<absolute>";
+		};
+		721B6A3F16FE2E80406AE187 = {
+			fileRef = "8737121564B76D54A611B2CB";
+			isa = PBXBuildFile;
+		};
+		8F477B9901024241E304DDD7 = {
+			isa = PBXFileReference;
+			path = "/Users/ivansstyle/Coding/smoke/smoke/smoke.xcodeproj/LaunchScreen.xib";
+			name = "LaunchScreen.xib";
+			sourceTree = "<absolute>";
+		};
+		7D7BC718753D69AE9CD41388 = {
+			fileRef = "8F477B9901024241E304DDD7";
+			isa = PBXBuildFile;
+		};
+		858FCAB0EB1F29CF8B07677C = {
+			children = (
+				"8737121564B76D54A611B2CB",
+				"8F477B9901024241E304DDD7");
+			isa = PBXGroup;
+			name = "Bundle Data";
+			sourceTree = "<Group>";
+		};
+		30414803F31797EB689AE508 = {
+			buildActionMask = 2147483647;
+			files = (
+				"721B6A3F16FE2E80406AE187",
+				"7D7BC718753D69AE9CD41388");
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Copy Bundle Resources";
+		};
+		64C7858C91D3284490EACAA9 = {
+			isa = PBXFileReference;
+			includeInIndex = 0;
+			explicitFileType = "wrapper.application";
+			path = "smoke.app";
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FE0A091FDBFB3E9C31B7A1BD = {
+			children = (
+				"64C7858C91D3284490EACAA9");
+			isa = PBXGroup;
+			name = "Products";
+			sourceTree = "<Group>";
+		};
+		E8C543AB96796ECAA2E65C57 = {
+			children = (
+				"2EB56BE3C2D93CDAB0C52E67",
+				"74B182DB50CB5611B5C1C297",
+				"AF39DD055C3EF8226FBE929D",
+				"858FCAB0EB1F29CF8B07677C",
+				"FE0A091FDBFB3E9C31B7A1BD");
+			isa = PBXGroup;
+			name = "smoke";
+			sourceTree = "<Group>";
+		};
+		253548B6283B8CDF43056D02 = {
+			buildPhases = (
+				"5E618435888B9D49F8540165",
+				"7EF0942E79C014DCEC8976BC");
+			dependencies = (
+				);
+			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59;
+			isa = PBXAggregateTarget;
+			buildRules = (
+);
+			productName = "Qt Preprocess";
+			name = "Qt Preprocess";
+		};
+		E4A11829A3B209316ED99559 = {
+			isa = PBXTargetDependency;
+			target = "253548B6283B8CDF43056D02";
+		};
+		F9CBD691C338BCDE665166C2 = {
+			buildPhases = (
+				"F7E50F631C51CD5B5DC0BC43",
+				"3DA90DAE39A0C9D07C6F6B0F",
+				"D1C883685E82D5676953459A",
+				"30414803F31797EB689AE508");
+			dependencies = (
+				"E4A11829A3B209316ED99559");
+			productReference = "64C7858C91D3284490EACAA9";
+			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59;
+			isa = PBXNativeTarget;
+			buildRules = (
+);
+			productType = "com.apple.product-type.application";
+			name = "smoke";
+			productName = "smoke";
+		};
+		3AA6C32AC930069E80220CF1 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"ARCHS[sdk=iphoneos*]" = "armv7 arm64";
+				"ARCHS[sdk=iphonesimulator*]" = "i386 x86_64";
+				COPY_PHASE_STRIP = "NO";
+				DEBUG_INFORMATION_FORMAT = "dwarf";
+				ENABLE_BITCODE = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
+				GCC_OPTIMIZATION_LEVEL = "0";
+				ONLY_ACTIVE_ARCH = "YES";
+				PRODUCT_NAME = "smoke";
+				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.3.sdk";
+				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.3.sdk";
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphoneos*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform";
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphonesimulator*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform";
+				QT_LIBRARY_SUFFIX = "_debug";
+				"QT_LIBRARY_SUFFIX[sdk=iphonesimulator*]" = "_iphonesimulator$(QT_LIBRARY_SUFFIX)";
+				SDKROOT = "iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				CC = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang";
+				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
+				INFOPLIST_FILE = "Info.plist";
+				SYMROOT = "/Users/ivansstyle/Coding/smoke/smoke/";
+				DYLIB_CURRENT_VERSION = "1.0.0";
+				DYLIB_COMPATIBILITY_VERSION = "1.0";
+				IPHONEOS_DEPLOYMENT_TARGET = "5.1.1";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					".",
+					"/Users/ivansstyle/Qt/5.5/ios/mkspecs/macx-ios-clang/ios",
+					"../../../Qt/5.5/ios/include",
+					"../../../Qt/5.5/ios/include/QtGui",
+					"../../../Qt/5.5/ios/include/QtCore",
+					".",
+					"../../../Qt/5.5/ios/mkspecs/macx-ios-clang");
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/ivansstyle/Qt/5.5/ios/plugins/platforms",
+					"/System/Library/Frameworks/",
+					"/Users/ivansstyle/Qt/5.5/ios/lib",
+					"/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats");
+				FRAMEWORK_SEARCH_PATHS = "";
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-fvisibility=hidden",
+					"-fpascal-strings",
+					"-fmessage-length=0",
+					"-Wno-trigraphs",
+					"-Wreturn-type",
+					"-Wparentheses",
+					"-Wswitch",
+					"-Wno-unused-parameter",
+					"-Wunused-variable",
+					"-Wunused-value",
+					"-Wno-shorten-64-to-32",
+					"-Wno-sign-conversion",
+					"-fexceptions",
+					"-fasm-blocks",
+					"-Wno-missing-field-initializers",
+					"-Wno-missing-prototypes",
+					"-Wno-implicit-atomic-properties",
+					"-Wformat",
+					"-Wno-missing-braces",
+					"-Wno-unused-function",
+					"-Wno-unused-label",
+					"-Wuninitialized",
+					"-Wno-unknown-pragmas",
+					"-Wno-shadow",
+					"-Wno-four-char-constants",
+					"-Wno-sign-compare",
+					"-Wpointer-sign",
+					"-Wno-newline-eof",
+					"-Wdeprecated-declarations",
+					"-Winvalid-offsetof",
+					"-Wno-conversion",
+					"-std=c++11",
+					"-std=c++11",
+					"-g",
+					"-Wall",
+					"-W",
+					"-fPIC",
+					"-DDARWIN_NO_CARBON",
+					"-DQT_NO_PRINTER",
+					"-DQT_NO_PRINTDIALOG",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB");
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-fvisibility=hidden",
+					"-fpascal-strings",
+					"-fmessage-length=0",
+					"-Wno-trigraphs",
+					"-Wreturn-type",
+					"-Wparentheses",
+					"-Wswitch",
+					"-Wno-unused-parameter",
+					"-Wunused-variable",
+					"-Wunused-value",
+					"-Wno-shorten-64-to-32",
+					"-Wno-sign-conversion",
+					"-fexceptions",
+					"-fasm-blocks",
+					"-Wno-missing-field-initializers",
+					"-Wno-missing-prototypes",
+					"-Wno-implicit-atomic-properties",
+					"-Wformat",
+					"-Wno-missing-braces",
+					"-Wno-unused-function",
+					"-Wno-unused-label",
+					"-Wuninitialized",
+					"-Wno-unknown-pragmas",
+					"-Wno-shadow",
+					"-Wno-four-char-constants",
+					"-Wno-sign-compare",
+					"-Wpointer-sign",
+					"-Wno-newline-eof",
+					"-Wdeprecated-declarations",
+					"-Winvalid-offsetof",
+					"-Wno-conversion",
+					"-fvisibility-inlines-hidden",
+					"-Wno-non-virtual-dtor",
+					"-Wno-overloaded-virtual",
+					"-Wno-exit-time-destructors",
+					"-g",
+					"-std=c++11",
+					"-stdlib=libc++",
+					"-Wall",
+					"-W",
+					"-fPIC",
+					"-DDARWIN_NO_CARBON",
+					"-DQT_NO_PRINTER",
+					"-DQT_NO_PRINTDIALOG",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB");
+				OTHER_LDFLAGS = (
+						"-headerpad_max_install_names",
+						"-stdlib=libc++",
+						"-u",
+						"_qt_registerPlatformPlugin",
+						"-L/Users/ivansstyle/Qt/5.5/ios/plugins/platforms",
+						"-framework",
+						"UIKit",
+						"-framework",
+						"AssetsLibrary",
+						"-L/Users/ivansstyle/Qt/5.5/ios/lib",
+						"-framework",
+						"OpenGLES",
+						"-L/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats",
+						"-lz",
+						"-lm");
+				ARCHS = "armv7 arm64 i386 x86_64";
+			};
+			name = "Debug";
+		};
+		77418F46922677BB04ED38DD = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"ARCHS[sdk=iphoneos*]" = "armv7 arm64";
+				"ARCHS[sdk=iphonesimulator*]" = "i386 x86_64";
+				COPY_PHASE_STRIP = "NO";
+				DEBUG_INFORMATION_FORMAT = "dwarf";
+				ENABLE_BITCODE = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "YES";
+				GCC_OPTIMIZATION_LEVEL = "0";
+				ONLY_ACTIVE_ARCH = "YES";
+				PRODUCT_NAME = "smoke";
+				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.3.sdk";
+				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.3.sdk";
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphoneos*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform";
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphonesimulator*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform";
+				QT_LIBRARY_SUFFIX = "_debug";
+				"QT_LIBRARY_SUFFIX[sdk=iphonesimulator*]" = "_iphonesimulator$(QT_LIBRARY_SUFFIX)";
+				SDKROOT = "iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				PRODUCT_NAME = "smoke";
+			};
+			name = "Debug";
+		};
+		339EE1B2CC4FC24589A0EA95 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"ARCHS[sdk=iphoneos*]" = "armv7 arm64";
+				"ARCHS[sdk=iphonesimulator*]" = "i386 x86_64";
+				COPY_PHASE_STRIP = "YES";
+				ENABLE_BITCODE = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
+				PRODUCT_NAME = "smoke";
+				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.3.sdk";
+				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.3.sdk";
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphoneos*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform";
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphonesimulator*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform";
+				QT_LIBRARY_SUFFIX = "";
+				"QT_LIBRARY_SUFFIX[sdk=iphonesimulator*]" = "_iphonesimulator$(QT_LIBRARY_SUFFIX)";
+				SDKROOT = "iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				CC = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang";
+				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
+				INFOPLIST_FILE = "Info.plist";
+				SYMROOT = "/Users/ivansstyle/Coding/smoke/smoke/";
+				DYLIB_CURRENT_VERSION = "1.0.0";
+				DYLIB_COMPATIBILITY_VERSION = "1.0";
+				IPHONEOS_DEPLOYMENT_TARGET = "5.1.1";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				HEADER_SEARCH_PATHS = (
+					".",
+					"/Users/ivansstyle/Qt/5.5/ios/mkspecs/macx-ios-clang/ios",
+					"../../../Qt/5.5/ios/include",
+					"../../../Qt/5.5/ios/include/QtGui",
+					"../../../Qt/5.5/ios/include/QtCore",
+					".",
+					"../../../Qt/5.5/ios/mkspecs/macx-ios-clang");
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/ivansstyle/Qt/5.5/ios/plugins/platforms",
+					"/System/Library/Frameworks/",
+					"/Users/ivansstyle/Qt/5.5/ios/lib",
+					"/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats");
+				FRAMEWORK_SEARCH_PATHS = "";
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-fvisibility=hidden",
+					"-fpascal-strings",
+					"-fmessage-length=0",
+					"-Wno-trigraphs",
+					"-Wreturn-type",
+					"-Wparentheses",
+					"-Wswitch",
+					"-Wno-unused-parameter",
+					"-Wunused-variable",
+					"-Wunused-value",
+					"-Wno-shorten-64-to-32",
+					"-Wno-sign-conversion",
+					"-fexceptions",
+					"-fasm-blocks",
+					"-Wno-missing-field-initializers",
+					"-Wno-missing-prototypes",
+					"-Wno-implicit-atomic-properties",
+					"-Wformat",
+					"-Wno-missing-braces",
+					"-Wno-unused-function",
+					"-Wno-unused-label",
+					"-Wuninitialized",
+					"-Wno-unknown-pragmas",
+					"-Wno-shadow",
+					"-Wno-four-char-constants",
+					"-Wno-sign-compare",
+					"-Wpointer-sign",
+					"-Wno-newline-eof",
+					"-Wdeprecated-declarations",
+					"-Winvalid-offsetof",
+					"-Wno-conversion",
+					"-std=c++11",
+					"-std=c++11",
+					"-g",
+					"-Wall",
+					"-W",
+					"-fPIC",
+					"-DDARWIN_NO_CARBON",
+					"-DQT_NO_PRINTER",
+					"-DQT_NO_PRINTDIALOG",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB");
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-fvisibility=hidden",
+					"-fpascal-strings",
+					"-fmessage-length=0",
+					"-Wno-trigraphs",
+					"-Wreturn-type",
+					"-Wparentheses",
+					"-Wswitch",
+					"-Wno-unused-parameter",
+					"-Wunused-variable",
+					"-Wunused-value",
+					"-Wno-shorten-64-to-32",
+					"-Wno-sign-conversion",
+					"-fexceptions",
+					"-fasm-blocks",
+					"-Wno-missing-field-initializers",
+					"-Wno-missing-prototypes",
+					"-Wno-implicit-atomic-properties",
+					"-Wformat",
+					"-Wno-missing-braces",
+					"-Wno-unused-function",
+					"-Wno-unused-label",
+					"-Wuninitialized",
+					"-Wno-unknown-pragmas",
+					"-Wno-shadow",
+					"-Wno-four-char-constants",
+					"-Wno-sign-compare",
+					"-Wpointer-sign",
+					"-Wno-newline-eof",
+					"-Wdeprecated-declarations",
+					"-Winvalid-offsetof",
+					"-Wno-conversion",
+					"-fvisibility-inlines-hidden",
+					"-Wno-non-virtual-dtor",
+					"-Wno-overloaded-virtual",
+					"-Wno-exit-time-destructors",
+					"-g",
+					"-std=c++11",
+					"-stdlib=libc++",
+					"-Wall",
+					"-W",
+					"-fPIC",
+					"-DDARWIN_NO_CARBON",
+					"-DQT_NO_PRINTER",
+					"-DQT_NO_PRINTDIALOG",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB");
+				OTHER_LDFLAGS = (
+						"-headerpad_max_install_names",
+						"-stdlib=libc++",
+						"-u",
+						"_qt_registerPlatformPlugin",
+						"-L/Users/ivansstyle/Qt/5.5/ios/plugins/platforms",
+						"-framework",
+						"UIKit",
+						"-framework",
+						"AssetsLibrary",
+						"-L/Users/ivansstyle/Qt/5.5/ios/lib",
+						"-framework",
+						"OpenGLES",
+						"-L/Users/ivansstyle/Qt/5.5/ios/plugins/imageformats",
+						"-lz",
+						"-lm");
+				ARCHS = "armv7 arm64 i386 x86_64";
+			};
+			name = "Release";
+		};
+		6666AA5E688052234F6758D8 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"ARCHS[sdk=iphoneos*]" = "armv7 arm64";
+				"ARCHS[sdk=iphonesimulator*]" = "i386 x86_64";
+				COPY_PHASE_STRIP = "YES";
+				ENABLE_BITCODE = "NO";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = "NO";
+				PRODUCT_NAME = "smoke";
+				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.3.sdk";
+				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.3.sdk";
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphoneos*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform";
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphonesimulator*]" = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform";
+				QT_LIBRARY_SUFFIX = "";
+				"QT_LIBRARY_SUFFIX[sdk=iphonesimulator*]" = "_iphonesimulator$(QT_LIBRARY_SUFFIX)";
+				SDKROOT = "iphonesimulator";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				PRODUCT_NAME = "smoke";
+			};
+			name = "Release";
+		};
+		DAC4C1AA5EDEA1C85E9CA5E6 = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				"3AA6C32AC930069E80220CF1",
+				"339EE1B2CC4FC24589A0EA95");
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+		6CC3B5D2136C7CD6A5CF5A59 = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				"77418F46922677BB04ED38DD",
+				"6666AA5E688052234F6758D8");
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug";
+		};
+		6DB9C3763D02B1415CD9D565 = {
+			hasScannedForEncodings = 1;
+			compatibilityVersion = "Xcode 3.2";
+			isa = PBXProject;
+			mainGroup = "E8C543AB96796ECAA2E65C57";
+			productRefGroup = "FE0A091FDBFB3E9C31B7A1BD";
+			buildConfigurationList = "DAC4C1AA5EDEA1C85E9CA5E6";
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"F9CBD691C338BCDE665166C2",
+				"253548B6283B8CDF43056D02");
+			attributes = {
+				TargetAttributes = {
+				};
+			};
+		};
+	};
+	rootObject = "6DB9C3763D02B1415CD9D565";
+}

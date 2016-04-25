@@ -39,6 +39,9 @@ void Vec4::normalize()
 Vec4 Vec4::operator *(const Mat4 &_r) const
 {
 
+    //return Vec4(m_x * _r,
+             //   m_y * _r,
+               // m_z * _r,)
 }
 
 Vec4 Vec4::operator *(GLfloat _rhs) const
@@ -100,3 +103,9 @@ void Vec4::vertexGL() const
 
 }
 
+Vec4 Vec4::refl(Vec4 _vec)
+{
+    Vec4 reflected(1,1,1
+                );
+    return reflected;
+}

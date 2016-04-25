@@ -46,6 +46,7 @@ class Vec4
     GLfloat & operator [](int _i);
     void set(GLfloat _x, GLfloat _y, GLfloat _z, GLfloat _w=1.0f);
     void vertexGL() const;
+    Vec4 refl(Vec4 _vec);
 
 
   union

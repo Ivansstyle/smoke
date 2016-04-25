@@ -53,7 +53,7 @@ void ParticleSystem::init()
     glFrontFace(GL_CCW);
 
     glDisable(GL_LIGHTING);
-    gldisable(GL_NORMALIZE);
+    glDisable(GL_NORMALIZE);
 
     glEnable(GL_LIGHT0);
     glEnable (GL_BLEND);
@@ -85,7 +85,7 @@ for (int i = 0; i < 10; ++i)
     {
      Particle p = Particle();
      p.SetPos(Vec4(i*0.5 / 3,0,-2));
-     p.SetVel(Vec4(0,0,0));
+     p.SetVel(Vec4(i*0.01,0,0));
      m_particles.push_back(p);
     }
 

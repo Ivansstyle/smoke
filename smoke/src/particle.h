@@ -1,9 +1,16 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 
+#ifdef __APPLE__
+  #include <OpenGL/gl.h>
+  #include <OpenGL/glu.h>
+#endif
 
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
+#ifdef __linux__
+  #include <GL/gl.h>
+  #include <GL/glu.h>
+#endif
+
 
 #include "Vec4.h"
 class Particle

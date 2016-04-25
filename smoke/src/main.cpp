@@ -81,6 +81,15 @@ Uint32 timerCallback(Uint32 interval, void *)
 }
 
 
+void handleInput(SDL_Event _e)
+{
+
+  //Handle keypress with current mouse position
+      std::cout<<"typed input --->"  <<_e.text.text[0]<<std::endl;
+      char c = _e.text.text[0];
+      std::cout<<"text input /t == "<< _e.text.text[0]<<"  and something else is "<<c<<std::endl;
+
+}
 
 
 /**
@@ -146,18 +155,14 @@ int main( int argc, char* args[] ) {
             if ((e.type == SDL_WINDOWEVENT) &&
                     (e.window.event == SDL_WINDOWEVENT_RESIZED)) {
                 SDL_SetWindowSize(gWindow, e.window.data1, e.window.data2);
-                ///scene->resize(e.window.data1, e.window.data2);
+                particlesystem->resize(e.window.data1, e.window.data2);
             }
             //User requests quit
             else if( e.type == SDL_QUIT ) {
                 quit = true;
             }
-            //Handle keypress with current mouse position
-            else if( e.type == SDL_TEXTINPUT ) {
-                int x = 0, y = 0;
-                SDL_GetMouseState( &x, &y );
-                //handleKeys( e.text.text[ 0 ], x, y );
-            }
+
+            handleInput(e);
         }
 
         //Render the scene

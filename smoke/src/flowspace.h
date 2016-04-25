@@ -8,8 +8,7 @@ public:
     FlowSpace();
     ~FlowSpace();
 
-
-
 };
+
 
 #endif // FLOWSPACE_H

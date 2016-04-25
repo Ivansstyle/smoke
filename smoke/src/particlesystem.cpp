@@ -38,7 +38,7 @@ void ParticleSystem::init()
     //SPACE INITIALISATION
 
     space = Space();
-    space.SetSpace(Vec4(2,1,2));
+    space.SetSize(Vec4(2,1,1));
 
     controlsphere = ControlSphere();
 
@@ -85,7 +85,7 @@ for (int i = 0; i < 10; ++i)
     {
      Particle p = Particle();
      p.SetPos(Vec4(i*0.5 / 3,0,-2));
-     p.SetVel(Vec4(i*0.01,0,0));
+     p.SetVel(Vec4(i*0,0,0.5));
      m_particles.push_back(p);
     }
 
@@ -101,17 +101,18 @@ void ParticleSystem::update()
         Vec4 totVel = Vec4(0,0,0);
         Vec4 _ppos = i.GetPos();
         _ppos = space.isInSpace(_ppos);
-        if (_ppos.m_w == -2)
-        {
-            i.SetPos(_ppos);
-            i.bounce();
-        }
-        else
-        {
-            i.AddVel(totVel);
-        }
-            i.UpdatePos();
+//        if (_ppos.m_w == -2)
+//        {
+//            i.SetPos(_ppos);
+//            i.bounce();
+//        }
+//        else
+//        {
+//            i.AddVel(totVel);
+//        }
+//            i.UpdatePos();
     }
+
 }
 
 

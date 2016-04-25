@@ -16,12 +16,12 @@ void Space::init()
 }
 
 
-Vec4 Space::GetSpace()
+Vec4 Space::GetSize()
 {
     return m_size;
 }
 
-void Space::SetSpace(Vec4 _size)
+void Space::SetSize(Vec4 _size)
 {
     m_size = _size;
 }

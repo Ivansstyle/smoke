@@ -1,7 +1,16 @@
 #include "controlsphere.h"
 
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
+#ifdef __APPLE__
+  #include <OpenGL/gl.h>
+  #include <OpenGL/glu.h>
+#endif
+
+#ifdef __linux__
+  #include <GL/gl.h>
+  #include <GL/glu.h>
+#endif
+
+#include <iostream>
 
 ControlSphere::ControlSphere() : m_pos(0.0,0.0,-3) , m_r(0.25)
 {
@@ -44,5 +53,11 @@ void ControlSphere::draw()
       gluSphere( quadric , m_r , 16 , 16 );
       gluDeleteQuadric(quadric);
       glPopMatrix();
-
 }
+
+void ControlSphere::Move(Vec4 _move)
+{
+  m_pos += _move;
+}
+
+

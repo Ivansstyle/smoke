@@ -11,13 +11,14 @@
   #include <GL/glu.h>
 #endif
 
-
+#include "flow.h"
 #include "Vec4.h"
 class Particle
 {
 public:
   Particle();
   ~Particle();
+
   bool m_inSphere;
 
   void UpdatePos();
@@ -33,6 +34,8 @@ public:
 
 
 private:
+
+  //Flow::FlowID m_pFlowID;
   Vec4 m_pos;
   Vec4 m_vel;
   float m_mass;

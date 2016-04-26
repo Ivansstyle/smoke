@@ -58,6 +58,10 @@ void Vec4::operator *=(GLfloat _rhs)
 
 Vec4 Vec4::operator +(const Vec4 &_r) const
 {
+  return Vec4(
+        m_x + _r.m_x,
+        m_y + _r.m_y,
+        m_z + _r.m_z);
 
 }
 
@@ -77,13 +81,20 @@ Vec4 Vec4::operator -(const Vec4 &_rhs) const
               m_w);
 }
 
-void Vec4::operator -=(const Vec4 &_r) const
+void Vec4::operator -=(const Vec4 &_r)
 {
 
+  m_x -= _r.m_x;
+  m_y -= _r.m_y;
+  m_z -= _r.m_z;
 }
 
 bool Vec4::operator ==(const Vec4 &_rhs) const
 {
+  if (m_x == _rhs.m_x &&
+      m_y == _rhs.m_y &&
+      m_z == _rhs.m_z) return true;
+  else return false;
 
 }
 

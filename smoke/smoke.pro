@@ -11,14 +11,18 @@ SOURCES += src/main.cpp \
     src/controlsphere.cpp \
     src/Vec4.cpp \
     src/space.cpp \
-    src/flowspace.cpp
+    src/flowspace.cpp \
+    src/controls.cpp \
+    src/flow.cpp
 HEADERS += \
     src/particlesystem.h \
     src/particle.h \
     src/controlsphere.h \
     src/Vec4.h \
     src/space.h \
-    src/flowspace.h
+    src/flowspace.h \
+    src/controls.h \
+    src/flow.h
 
 QMAKE_CFLAGS += -std=c++11
 

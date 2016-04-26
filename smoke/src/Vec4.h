@@ -41,7 +41,7 @@ class Vec4
     Vec4 operator +(const Vec4 &_r) const;
     void operator +=(const Vec4 &_r);
     Vec4 operator -(const Vec4 &_rhs) const;
-    void operator -=(const Vec4 &_r) const;
+    void operator -=(const Vec4 &_r);
     bool operator ==(const Vec4 &_rhs) const;
     GLfloat & operator [](int _i);
     void set(GLfloat _x, GLfloat _y, GLfloat _z, GLfloat _w=1.0f);

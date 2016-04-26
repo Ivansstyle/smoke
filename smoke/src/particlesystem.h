@@ -20,6 +20,7 @@
 #include "particle.h"
 #include "space.h"
 #include "controlsphere.h"
+#include "controls.h"
 
 #include <stdlib.h>
 #include <vector>
@@ -37,7 +38,12 @@ public:
  void draw();
  void resize(int w, int h);
 
+
+
  bool isInit() const;
+
+ Controls controls;
+ void takeControl(SDL_Event _e);
 
 private:
 
@@ -50,7 +56,6 @@ ControlSphere controlsphere;
 protected:
 
  bool m_isInit;
-
 
 
 

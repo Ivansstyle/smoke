@@ -32,6 +32,9 @@ public:
     Vec4 isInSpace(Vec4 _ppos);
     void initFlowSpace();
 
+
+    FlowSpace flowspace;
+
 private:
 
     Vec4 m_size;

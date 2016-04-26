@@ -52,7 +52,7 @@ int initSDL()
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 1 );
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE );
 
-#endif
+#endif= false;
         //Create window
         gWindow = SDL_CreateWindow( WINDOW_TITLE,
                                     SDL_WINDOWPOS_UNDEFINED,
@@ -85,9 +85,10 @@ void handleInput(SDL_Event _e)
 {
 
   //Handle keypress with current mouse position
-      std::cout<<"typed input --->"  <<_e.text.text[0]<<std::endl;
+      //std::cout<<"typed input --->"  <<_e.text.text[0]<<std::endl;
       char c = _e.text.text[0];
-      std::cout<<"text input /t == "<< _e.text.text[0]<<"  and something else is "<<c<<std::endl;
+      //std::cout<<"text input /t == "<< _e.text.text[0]<<"  and something else is "<<c<<std::endl;
+      particlesystem->takeControl(_e);
 
 }
 

@@ -95,22 +95,24 @@ for (int i = 0; i < 10; ++i)
 
 void ParticleSystem::update()
 {
+
     //Update the particles
     for (auto& i : m_particles)
     {
         Vec4 totVel = Vec4(0,0,0);
         Vec4 _ppos = i.GetPos();
         _ppos = space.isInSpace(_ppos);
-//        if (_ppos.m_w == -2)
-//        {
-//            i.SetPos(_ppos);
-//            i.bounce();
-//        }
-//        else
-//        {
-//            i.AddVel(totVel);
-//        }
-//            i.UpdatePos();
+
+        if (_ppos.m_w == -2)
+        {
+            i.SetPos(_ppos);
+            i.bounce();
+        }
+        else
+        {
+            i.AddVel(totVel);
+        }
+            i.UpdatePos();
     }
 
 }
@@ -130,6 +132,11 @@ void ParticleSystem::draw()
 bool ParticleSystem::isInit() const
 {
     return m_isInit;
+}
+
+void ParticleSystem::takeControl(SDL_Event _e)
+{
+  controls.TakeControls(_e);
 }
 
 

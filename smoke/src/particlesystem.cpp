@@ -1,6 +1,7 @@
 
 #include "particlesystem.h"
 #include <sys/time.h>
+#include <iostream>
 
 ParticleSystem::ParticleSystem() : m_isInit(false),m_startTime(0.0),m_elapsedTime(0.0)
 {
@@ -17,7 +18,7 @@ void ParticleSystem::resize(int w, int h) {
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(60.0, float(w) / float(h), 0.1f, 100.0);
+  gluPerspective(75.0, float(w) / float(h), 0.1f, 20.0f);
   glViewport(0,0,w,h);
   glMatrixMode(GL_MODELVIEW);
 }
@@ -36,9 +37,12 @@ void ParticleSystem::init()
     //SPACE INITIALISATION
 
     space = Space();
-    space.SetSize(Vec4(2,0.5,1));
+    space.SetSize(Vec4(1.8f,1.0f,1.0f));
 
     controlsphere = ControlSphere();
+    controlsphere.SetPos(Vec4(0,0,-2));
+
+    TriggerSpeed = 0.1;
 
 
     // Enable texturing
@@ -79,15 +83,10 @@ void ParticleSystem::init()
     // Set our start time by using the gettimeofday function (accurate to 10 nanosecs)
     struct timeval tim;
     gettimeofday(&tim, NULL);
-    //m_startTime = tim.tv_sec+(tim.tv_usec * 1e-6);
+    m_startTime = tim.tv_sec+(tim.tv_usec * 1e-6);
 
-for (int i = 0; i < 10; ++i)
-    {
-     Particle p = Particle();
-     p.SetPos(Vec4(i*0.5 / 3,0,-2));
-     p.SetVel(Vec4(i*-0.01,0,0));
-     m_particles.push_back(p);
-    }
+
+    m_particles.reserve(MAX_PARTICLES);
 
 
     m_isInit = true;
@@ -95,26 +94,24 @@ for (int i = 0; i < 10; ++i)
 
 void ParticleSystem::update()
 {
+ //Timing Update
+  TimingUpdate();
+
+  //Passing controls to the ControlSphere
   controlsphere.update(controls.GiveControls());
 
-    //Update the particles
-    for (auto& i : m_particles)
-    {
-        Vec4 totVel = Vec4(0,0,0);
-        Vec4 _ppos = i.GetPos();
-        _ppos = space.isInSpace(_ppos);
+  //Calling Particle creation
+  CreateParticles();
 
-        if (_ppos.m_w == -2)
-        {
-            i.SetPos(_ppos);
-            i.bounce();
-        }
-        else
-        {
-            i.AddVel(totVel);
-        }
-            i.UpdatePos();
-    }
+  //Updating the particles
+  ParticleUpdate();
+
+  TriggerTick = ParticleTriggerTick();
+  if (TriggerTick)
+  {
+    //std::cout<<"half tick is = "<<HalfSec<<std::endl;
+  }
+
     //controls.KillControls();
 
 }
@@ -129,6 +126,8 @@ void ParticleSystem::draw()
     }
 
     controlsphere.draw();
+
+    space.testDrawSpace();
 }
 
 bool ParticleSystem::isInit() const
@@ -141,4 +140,68 @@ void ParticleSystem::takeControl(SDL_Event* _e)
   controls.TakeControls(_e);
 }
 
+void ParticleSystem::CreateParticles()
+{
+    if (controls.event.space && TriggerTick)
+    {
+      Particle p = Particle();
+      p.SetPos(controlsphere.GetPos());
+      p.SetVel(Vec4(0,0,0));
+      m_particles.push_back(p);
 
+     std::cout<<"ControlSphere Position: x = "<<controlsphere.GetPos().m_x
+             <<" y = "<< controlsphere.GetPos().m_y
+            <<" z = "<<controlsphere.GetPos().m_z<<std::endl;
+    }
+}
+
+bool ParticleSystem::ParticleTriggerTick()
+{
+  static double elapsed = 0.0;
+  if ((m_elapsedTime - elapsed) < TriggerSpeed)
+  {
+    elapsed -= TriggerSpeed;
+    //      std::cout<<elapsed<<"  is elapsed"<<std::endl;
+    return true;
+  }
+  else return false;
+}
+
+void ParticleSystem::TimingUpdate()
+{
+  //Timing update
+  // Some stuff we need to perform timings
+      struct timeval tim;
+
+      // Retrieve the current time in nanoseconds (accurate to 10ns)
+      gettimeofday(&tim, NULL);
+      double now =tim.tv_sec+(tim.tv_usec * 1e-6);
+
+      // Increment the rotation based on the time elapsed since we started running
+      m_elapsedTime = m_startTime - now;
+
+
+     // printf("%G \n", m_elapsedTime);
+}
+
+void ParticleSystem::ParticleUpdate()
+{
+  for (auto& i : m_particles)
+  {
+      Vec4 totVel = Vec4(0,0,0);
+      Vec4 _ppos = i.GetPos();
+     // _ppos = space.isInSpace(_ppos);
+
+      if (_ppos.m_w == -2)
+      {
+          i.SetPos(_ppos);
+          i.bounce();
+      }
+      else
+      {
+          i.AddVel(totVel);
+      }
+          i.UpdatePos();
+  }
+
+}

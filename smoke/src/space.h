@@ -28,16 +28,29 @@ public:
     void init();
 
     Vec4 GetSize();
-    void SetSize(Vec4);
+    void SetSize(Vec4 _size);
+    Vec4 GetOrigin() const;
+    void SetOrigin(Vec4 _origin);
+    void SetSpace();
+
+
     Vec4 isInSpace(Vec4 _ppos);
+
     void initFlowSpace();
+
+
+    void testDrawSpace();
 
 
     FlowSpace flowspace;
 
 private:
 
+
     Vec4 m_size;
+
+    Vec4 m_origin;
+
     int m_resolution;
     GLfloat m_height;
     GLfloat m_width;

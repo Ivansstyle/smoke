@@ -76,7 +76,11 @@ int initSDL()
  */
 Uint32 timerCallback(Uint32 interval, void *)
 {
-    if (particlesystem != NULL) particlesystem->update();
+    if (particlesystem != NULL)
+    {
+      particlesystem->update();
+
+    }
     return interval;
 }
 

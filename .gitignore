@@ -26,3 +26,17 @@
 *.exe
 *.out
 *.app
+
+# .pro.user settings
+*.pro.user.*
+
+# makefile
+Makefile
+
+# Makefile dubug stuff
+*.DebugDevice
+*.DebugSimulator
+*.ReleaseDevice
+*.ReleaseSimulator
+smoke.build
+*.xcodeproj

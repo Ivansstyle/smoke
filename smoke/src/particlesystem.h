@@ -1,6 +1,8 @@
 #ifndef PARTICLESYSTEM_H
 #define PARTICLESYSTEM_H
 
+#define MAX_PARTICLES 2^13
+
 
 
 #ifdef __APPLE__ //OpenGL for MacOsX
@@ -38,6 +40,14 @@ public:
  void draw();
  void resize(int w, int h);
 
+ void CreateParticles();
+ void TimingUpdate();
+ void ParticleUpdate();
+
+
+ bool TriggerTick;
+ bool ParticleTriggerTick();
+ double TriggerSpeed;
 
 
  bool isInit() const;
@@ -56,6 +66,7 @@ ControlSphere controlsphere;
 protected:
 
  bool m_isInit;
+
 
 
 

@@ -43,7 +43,7 @@ void Particle::draw()
 
 void Particle::UpdateGravity()
 {
-    m_vel += Vec4(0,-0.002,0);
+    m_vel += Vec4(0,-0.0002,0);
 }
 
 void Particle::SetVel(Vec4 _vel)

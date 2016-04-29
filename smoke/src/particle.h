@@ -13,6 +13,7 @@
 
 #include "flow.h"
 #include "Vec4.h"
+
 class Particle
 {
 public:

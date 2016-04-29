@@ -43,7 +43,7 @@ public:
  bool isInit() const;
 
  Controls controls;
- void takeControl(SDL_Event _e);
+ void takeControl(SDL_Event* _e);
 
 private:
 

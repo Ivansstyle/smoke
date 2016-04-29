@@ -21,6 +21,11 @@ public:
     bool operator ==(const FlowID &_rhs) const;
   };
 
+  struct FlowVectors{
+    Vec4 v[8];
+
+  };
+
 
 
 };

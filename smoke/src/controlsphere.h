@@ -1,6 +1,7 @@
 #ifndef CONTROLSPHERE_H
 #define CONTROLSPHERE_H
 #include "Vec4.h"
+#include "controls.h"
 
 class ControlSphere
 {
@@ -9,7 +10,7 @@ public:
   ~ControlSphere();
 
   void draw();
-  void update();
+  void update(Event* event);
 
   Vec4 GetPos() const;
   void SetPos(Vec4 _pos);
@@ -22,6 +23,7 @@ public:
 private:
   Vec4 m_pos;
   GLdouble m_r;
+  float m_speed;
 
 
 };

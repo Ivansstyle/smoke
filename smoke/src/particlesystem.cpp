@@ -17,10 +17,8 @@ void ParticleSystem::resize(int w, int h) {
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(60.0, float(w) / float(h), 0.1, 10.0);
-
+  gluPerspective(60.0, float(w) / float(h), 0.1f, 100.0);
   glViewport(0,0,w,h);
-
   glMatrixMode(GL_MODELVIEW);
 }
 
@@ -38,7 +36,7 @@ void ParticleSystem::init()
     //SPACE INITIALISATION
 
     space = Space();
-    space.SetSize(Vec4(2,1,1));
+    space.SetSize(Vec4(2,0.5,1));
 
     controlsphere = ControlSphere();
 
@@ -68,6 +66,8 @@ void ParticleSystem::init()
     glLightfv(GL_LIGHT0, GL_SPECULAR, lightspec);
 
 
+
+
     // Make our points lovely and smooth
     glEnable( GL_POINT_SMOOTH );
     glEnable( GL_MULTISAMPLE_ARB);
@@ -85,7 +85,7 @@ for (int i = 0; i < 10; ++i)
     {
      Particle p = Particle();
      p.SetPos(Vec4(i*0.5 / 3,0,-2));
-     p.SetVel(Vec4(i*0,0,0.5));
+     p.SetVel(Vec4(i*-0.01,0,0));
      m_particles.push_back(p);
     }
 
@@ -95,6 +95,7 @@ for (int i = 0; i < 10; ++i)
 
 void ParticleSystem::update()
 {
+  controlsphere.update(controls.GiveControls());
 
     //Update the particles
     for (auto& i : m_particles)
@@ -114,6 +115,7 @@ void ParticleSystem::update()
         }
             i.UpdatePos();
     }
+    //controls.KillControls();
 
 }
 
@@ -134,7 +136,7 @@ bool ParticleSystem::isInit() const
     return m_isInit;
 }
 
-void ParticleSystem::takeControl(SDL_Event _e)
+void ParticleSystem::takeControl(SDL_Event* _e)
 {
   controls.TakeControls(_e);
 }

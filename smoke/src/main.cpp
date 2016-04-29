@@ -52,7 +52,7 @@ int initSDL()
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 1 );
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE );
 
-#endif= false;
+#endif
         //Create window
         gWindow = SDL_CreateWindow( WINDOW_TITLE,
                                     SDL_WINDOWPOS_UNDEFINED,
@@ -81,14 +81,14 @@ Uint32 timerCallback(Uint32 interval, void *)
 }
 
 
-void handleInput(SDL_Event _e)
+void handleInput(SDL_Event* _e)
 {
 
   //Handle keypress with current mouse position
       //std::cout<<"typed input --->"  <<_e.text.text[0]<<std::endl;
-      char c = _e.text.text[0];
+      //char c = _e.text.text[0];
       //std::cout<<"text input /t == "<< _e.text.text[0]<<"  and something else is "<<c<<std::endl;
-      particlesystem->takeControl(_e);
+      particlesystem->controls.TakeControls( _e);
 
 }
 
@@ -163,7 +163,7 @@ int main( int argc, char* args[] ) {
                 quit = true;
             }
 
-            handleInput(e);
+            handleInput(&e);
         }
 
         //Render the scene

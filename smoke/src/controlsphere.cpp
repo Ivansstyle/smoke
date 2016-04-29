@@ -12,7 +12,7 @@
 
 #include <iostream>
 
-ControlSphere::ControlSphere() : m_pos(0.0,0.0,-3) , m_r(0.25)
+ControlSphere::ControlSphere() : m_pos(0.0,0.0,-3) , m_r(0.25) , m_speed(0.1f)
 {
 
 }
@@ -57,7 +57,18 @@ void ControlSphere::draw()
 
 void ControlSphere::Move(Vec4 _move)
 {
-  m_pos += _move;
+  m_pos.m_x += _move.m_x;
+  m_pos.m_y += _move.m_y;
+  m_pos.m_z += _move.m_z;
 }
 
+void ControlSphere::update(Event* event)
+{
+ if (event->left) {Move(Vec4(-1.0f*m_speed,0.0,0.0));}
+ else if (event->right) {Move(Vec4(1.0f*m_speed,0.0,0.0));}
+ else if (event->down) {Move(Vec4(0.0,0.0,1.0f *m_speed));}
+ else if (event->up) {Move(Vec4(0.0,0.0,-1.0f * m_speed));}
+ else if (event->shift) {Move(Vec4 (0.0,1.0f * m_speed, 0.0));}
+ else if (event->ctrl) {Move(Vec4 (0.0, -1.0f * m_speed, 0.0));}
+}
 

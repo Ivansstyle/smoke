@@ -21,6 +21,9 @@ void Space::init()
   normal.left =    Vec4(1,0,0);
   normal.right =   Vec4(-1,0,0);
   normal.zero =    Vec4(0,0,0);
+
+  //Default gravity
+  m_gravity = Vec4(0,-0.002f,0);
 }
 
 
@@ -33,6 +36,28 @@ void Space::SetSize(Vec4 _size)
 {
     m_size = _size;
 }
+
+Vec4 Space::GetOrigin() const
+{
+  return m_origin;
+}
+
+void Space::SetOrigin(Vec4 _origin)
+{
+  m_origin = _origin;
+}
+
+Vec4 Space::GetGravity()
+{
+  return m_gravity;
+}
+void Space::SetGravity(Vec4 _gravity)
+{
+  m_gravity += _gravity;
+}
+
+
+
 
 Vec4 Space::isInSpace(Vec4 _ppos)
 {
@@ -58,12 +83,12 @@ Vec4 Space::isInSpace(Vec4 _ppos)
   // The problem was that I declared size.m_z as a positive number,
   // spent 2 hours fixing this *&^$*%£*^%"!
 
-    if      (_ppos.m_x >  (w + m_origin.m_x)) {_ppos.m_x = w;return normal.right;}
-    else if (_ppos.m_y >  (h + m_origin.m_y)) {_ppos.m_y = h;return normal.ceiling;}
-    else if (_ppos.m_z <  (d + m_origin.m_z)){_ppos.m_z = d;return normal.front;}
-    else if (_ppos.m_x < (-w + m_origin.m_x)){_ppos.m_x = -w;return normal.left;}
-    else if (_ppos.m_y < (-h + m_origin.m_y)){_ppos.m_y = -h;return normal.floor;}
-    else if (_ppos.m_z > (-d + m_origin.m_z)){_ppos.m_z = -d;return normal.back;}
+    if      (_ppos.m_x >  (w + m_origin.m_x)) {return normal.right;}
+    else if (_ppos.m_y >  (h + m_origin.m_y)) {return normal.ceiling;}
+    else if (_ppos.m_z <  (d + m_origin.m_z)){return normal.front;}
+    else if (_ppos.m_x < (-w + m_origin.m_x)){return normal.left;}
+    else if (_ppos.m_y < (-h + m_origin.m_y)){return normal.floor;}
+    else if (_ppos.m_z > (-d + m_origin.m_z)){return normal.back;}
     else return normal.zero;
 }
 
@@ -110,15 +135,6 @@ void Space::testDrawSpace()
 
 }
 
-Vec4 Space::GetOrigin() const
-{
-  return m_origin;
-}
-
-void Space::SetOrigin(Vec4 _origin)
-{
-  m_origin = _origin;
-}
 
 
 // TRASHBIN

@@ -28,7 +28,10 @@ public:
     void SetSize(Vec4 _size);
     Vec4 GetOrigin() const;
     void SetOrigin(Vec4 _origin);
-    void SetSpace();
+    Vec4 GetGravity();
+    void SetGravity(Vec4 _gravity);
+
+#warning "implement element that will represent space vertex coordinates"
 
 
     Vec4 isInSpace(Vec4 _ppos);
@@ -59,6 +62,8 @@ private:
     Vec4 m_size;
 
     Vec4 m_origin;
+
+    Vec4 m_gravity;
 
     int m_resolution;
     GLfloat m_height;

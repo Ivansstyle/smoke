@@ -11,27 +11,28 @@ Particle::~Particle()
 
 void Particle::UpdatePos()
 {
-    UpdateGravity();
     m_pos += m_vel;
-
-
-    //May create a timestep
 }
 
 Vec4 Particle::GetPos()
 {
     return m_pos;
 }
+void Particle::SetPos(Vec4 _pos)
+{
+    m_pos = _pos;
+}
 
+
+void Particle::SetVel(Vec4 _vel)
+{
+    m_vel = _vel;
+}
 void Particle::AddVel(Vec4 _vel)
 {
     m_vel += _vel;
 }
 
-void Particle::SetPos(Vec4 _pos)
-{
-    m_pos = _pos;
-}
 
 void Particle::draw()
 {
@@ -41,15 +42,11 @@ void Particle::draw()
             glEnd();
 }
 
-void Particle::UpdateGravity()
+void Particle::UpdateGravity(Vec4 _gravity)
 {
-    m_vel += Vec4(0,-0.0002,0);
+    m_vel += _gravity;
 }
 
-void Particle::SetVel(Vec4 _vel)
-{
-    m_vel = _vel;
-}
 
 void Particle::bounce(Vec4 _normal)
 {

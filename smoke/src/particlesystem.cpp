@@ -162,7 +162,6 @@ bool ParticleSystem::ParticleTriggerTick()
   if ((m_elapsedTime - elapsed) < TriggerSpeed)
   {
     elapsed -= TriggerSpeed;
-    //      std::cout<<elapsed<<"  is elapsed"<<std::endl;
     return true;
   }
   else return false;
@@ -193,10 +192,7 @@ void ParticleSystem::ParticleUpdate()
       Vec4 _ppos = i.GetPos();
       Vec4 normal;
       normal = space.isInSpace(_ppos);
-      std::cout<< " normal x = "<<normal.m_x
-               <<" normal y = "<<normal.m_y
-              << " normal z = "<<normal.m_z
-              <<std::endl;
+
 
 
       if (normal != Vec4(0,0,0))
@@ -208,6 +204,7 @@ void ParticleSystem::ParticleUpdate()
       {
           i.AddVel(totVel);
       }
+          i.UpdateGravity(space.GetGravity());
           i.UpdatePos();
   }
 
@@ -222,13 +219,23 @@ void ParticleSystem::ParticleUpdate()
 //    glPopMatrix();
 
 
+      ///from ParticleUpdate
       std::cout<< " ppos x = "<<_ppos.m_x
                << " ppos y = "<<_ppos.m_y
                << " ppos z = "<<_ppos.m_z
                <<std::endl;
  *
- *  std::cout<<"ControlSphere Position: x = "<<controlsphere.GetPos().m_x
-             <<" y = "<< controlsphere.GetPos().m_y
+   std::cout<<"ControlSphere Position: x = "<<controlsphere.GetPos().m_x
+            <<" y = "<< controlsphere.GetPos().m_y
             <<" z = "<<controlsphere.GetPos().m_z<<std::endl;
- *
+
+      std::cout<< " normal x = "<<normal.m_x
+               <<" normal y = "<<normal.m_y
+               << " normal z = "<<normal.m_z
+               <<std::endl;
+
+       /// from timerTick
+      //      std::cout<<elapsed<<"  is elapsed"<<std::endl;
+
 */
+

@@ -56,9 +56,6 @@ void Space::SetGravity(Vec4 _gravity)
   m_gravity += _gravity;
 }
 
-
-
-
 Vec4 Space::isInSpace(Vec4 _ppos)
 {
   Vec4 _size_in_space;
@@ -132,9 +129,7 @@ void Space::testDrawSpace()
   glLineWidth(3.0f);
 
   glPopMatrix();
-
 }
-
 
 
 // TRASHBIN

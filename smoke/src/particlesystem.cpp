@@ -2,6 +2,7 @@
 #include "particlesystem.h"
 #include <sys/time.h>
 #include <iostream>
+#include "GLFunctions.h"
 
 ParticleSystem::ParticleSystem() : m_isInit(false),m_startTime(0.0),m_elapsedTime(0.0)
 {
@@ -40,9 +41,10 @@ void ParticleSystem::init()
     space.SetSize(Vec4(1.8f,1.0f,1.0f));
 
     controlsphere = ControlSphere();
-    controlsphere.SetPos(Vec4(0,0,-2));
+    controlsphere.SetPos(space.GetOrigin());
 
     TriggerSpeed = 0.1;
+
 
 
     // Enable texturing
@@ -112,6 +114,7 @@ void ParticleSystem::update()
     //std::cout<<"half tick is = "<<HalfSec<<std::endl;
   }
 
+
     //controls.KillControls();
 
 }
@@ -128,6 +131,8 @@ void ParticleSystem::draw()
     controlsphere.draw();
 
     space.testDrawSpace();
+
+
 }
 
 bool ParticleSystem::isInit() const
@@ -146,12 +151,8 @@ void ParticleSystem::CreateParticles()
     {
       Particle p = Particle();
       p.SetPos(controlsphere.GetPos());
-      p.SetVel(Vec4(0,0,0));
+      p.SetVel(Vec4(0.2,0,0.2));
       m_particles.push_back(p);
-
-     std::cout<<"ControlSphere Position: x = "<<controlsphere.GetPos().m_x
-             <<" y = "<< controlsphere.GetPos().m_y
-            <<" z = "<<controlsphere.GetPos().m_z<<std::endl;
     }
 }
 
@@ -190,12 +191,14 @@ void ParticleSystem::ParticleUpdate()
   {
       Vec4 totVel = Vec4(0,0,0);
       Vec4 _ppos = i.GetPos();
-     // _ppos = space.isInSpace(_ppos);
+      Vec4 normal;
+      normal = space.isInSpace(_ppos);
 
-      if (_ppos.m_w == -2)
+
+      if (normal != Vec4(0,0,0))
       {
-          i.SetPos(_ppos);
-          i.bounce();
+          i.SetPos(space.SetBackToSpace(_ppos, normal));
+          i.bounce(normal);
       }
       else
       {
@@ -205,3 +208,26 @@ void ParticleSystem::ParticleUpdate()
   }
 
 }
+
+/* TRASHBIN
+ *
+ *
+//    glPushMatrix();
+//    glTranslatef(0,0.0f,-6.0f);
+//    GLFunctions::WiredCube(1.0f,1.0f,1.0f);
+//    glPopMatrix();
+
+      std::cout<< " normal x = "<<normal.m_x
+               <<" normal y = "<<normal.m_y
+              << " normal z = "<<normal.m_z
+              <<std::endl;
+      std::cout<< " ppos x = "<<_ppos.m_x
+               << " ppos y = "<<_ppos.m_y
+               << " ppos z = "<<_ppos.m_z
+               <<std::endl;
+ *
+ *  std::cout<<"ControlSphere Position: x = "<<controlsphere.GetPos().m_x
+             <<" y = "<< controlsphere.GetPos().m_y
+            <<" z = "<<controlsphere.GetPos().m_z<<std::endl;
+ *
+*/

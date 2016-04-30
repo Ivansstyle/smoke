@@ -12,7 +12,7 @@
 
 #include <iostream>
 
-ControlSphere::ControlSphere() : m_pos(0.0,0.0,-3) , m_r(0.25) , m_speed(0.1f)
+ControlSphere::ControlSphere() : m_pos(0.0,0.0,-3) , m_r(0.1) , m_speed(0.005f)
 {
 
 }

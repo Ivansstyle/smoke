@@ -13,7 +13,10 @@ SOURCES += src/main.cpp \
     src/space.cpp \
     src/flowspace.cpp \
     src/controls.cpp \
-    src/flow.cpp
+    src/flow.cpp \
+    src/Mat4.cpp \
+    src/GLFunctions.cpp
+
 HEADERS += \
     src/particlesystem.h \
     src/particle.h \
@@ -22,7 +25,9 @@ HEADERS += \
     src/space.h \
     src/flowspace.h \
     src/controls.h \
-    src/flow.h
+    src/flow.h \
+    src/Mat4.h \
+    src/GLFunctions.h
 
 QMAKE_CFLAGS += -std=c++11
 

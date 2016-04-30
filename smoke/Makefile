@@ -56,7 +56,9 @@ SOURCES       = src/main.cpp \
 		src/space.cpp \
 		src/flowspace.cpp \
 		src/controls.cpp \
-		src/flow.cpp 
+		src/flow.cpp \
+		src/Mat4.cpp \
+		src/GLFunctions.cpp 
 OBJECTS       = obj/main.o \
 		obj/particlesystem.o \
 		obj/particle.o \
@@ -65,7 +67,9 @@ OBJECTS       = obj/main.o \
 		obj/space.o \
 		obj/flowspace.o \
 		obj/controls.o \
-		obj/flow.o
+		obj/flow.o \
+		obj/Mat4.o \
+		obj/GLFunctions.o
 DIST          = /opt/qt/5.5/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/qt/5.5/gcc_64/mkspecs/common/unix.conf \
 		/opt/qt/5.5/gcc_64/mkspecs/common/linux.conf \
@@ -204,7 +208,9 @@ DIST          = /opt/qt/5.5/gcc_64/mkspecs/features/spec_pre.prf \
 		src/space.h \
 		src/flowspace.h \
 		src/controls.h \
-		src/flow.h src/main.cpp \
+		src/flow.h \
+		src/Mat4.h \
+		src/GLFunctions.h src/main.cpp \
 		src/particlesystem.cpp \
 		src/particle.cpp \
 		src/controlsphere.cpp \
@@ -212,7 +218,9 @@ DIST          = /opt/qt/5.5/gcc_64/mkspecs/features/spec_pre.prf \
 		src/space.cpp \
 		src/flowspace.cpp \
 		src/controls.cpp \
-		src/flow.cpp
+		src/flow.cpp \
+		src/Mat4.cpp \
+		src/GLFunctions.cpp
 QMAKE_TARGET  = smoke
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = smoke
@@ -526,8 +534,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents src/particlesystem.h src/particle.h src/controlsphere.h src/Vec4.h src/space.h src/flowspace.h src/controls.h src/flow.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/main.cpp src/particlesystem.cpp src/particle.cpp src/controlsphere.cpp src/Vec4.cpp src/space.cpp src/flowspace.cpp src/controls.cpp src/flow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/particlesystem.h src/particle.h src/controlsphere.h src/Vec4.h src/space.h src/flowspace.h src/controls.h src/flow.h src/Mat4.h src/GLFunctions.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/main.cpp src/particlesystem.cpp src/particle.cpp src/controlsphere.cpp src/Vec4.cpp src/space.cpp src/flowspace.cpp src/controls.cpp src/flow.cpp src/Mat4.cpp src/GLFunctions.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -695,6 +703,7 @@ obj/controlsphere.o: src/controlsphere.cpp src/controlsphere.h \
 		/usr/include/gnu/stubs-64.h \
 		/usr/include/stdint.h \
 		/usr/include/bits/wchar.h \
+		src/controls.h \
 		/usr/include/GL/glu.h \
 		/usr/include/GL/glu_mangle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/controlsphere.o src/controlsphere.cpp
@@ -770,6 +779,39 @@ obj/flow.o: src/flow.cpp src/flow.h \
 		/usr/include/stdint.h \
 		/usr/include/bits/wchar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/flow.o src/flow.cpp
+
+obj/Mat4.o: src/Mat4.cpp src/Mat4.h \
+		/usr/include/GL/gl.h \
+		/usr/include/GL/gl_mangle.h \
+		/usr/include/GL/glext.h \
+		/usr/include/inttypes.h \
+		/usr/include/features.h \
+		/usr/include/stdc-predef.h \
+		/usr/include/sys/cdefs.h \
+		/usr/include/bits/wordsize.h \
+		/usr/include/gnu/stubs.h \
+		/usr/include/gnu/stubs-64.h \
+		/usr/include/stdint.h \
+		/usr/include/bits/wchar.h \
+		src/Vec4.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/Mat4.o src/Mat4.cpp
+
+obj/GLFunctions.o: src/GLFunctions.cpp src/GLFunctions.h \
+		/usr/include/GL/gl.h \
+		/usr/include/GL/gl_mangle.h \
+		/usr/include/GL/glext.h \
+		/usr/include/inttypes.h \
+		/usr/include/features.h \
+		/usr/include/stdc-predef.h \
+		/usr/include/sys/cdefs.h \
+		/usr/include/bits/wordsize.h \
+		/usr/include/gnu/stubs.h \
+		/usr/include/gnu/stubs-64.h \
+		/usr/include/stdint.h \
+		/usr/include/bits/wchar.h \
+		src/Vec4.h \
+		src/Mat4.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/GLFunctions.o src/GLFunctions.cpp
 
 ####### Install
 

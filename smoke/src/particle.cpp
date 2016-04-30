@@ -51,11 +51,8 @@ void Particle::SetVel(Vec4 _vel)
     m_vel = _vel;
 }
 
-void Particle::bounce()
+void Particle::bounce(Vec4 _normal)
 {
 
-    m_vel = Vec4(-m_vel.m_x * m_bouncieness,
-                 -m_vel.m_y * m_bouncieness,
-                 -m_vel.m_z * m_bouncieness,
-                 1);
+    m_vel = (m_vel.refl(_normal)) * m_bouncieness;
 }

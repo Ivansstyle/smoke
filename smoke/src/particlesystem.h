@@ -6,16 +6,13 @@
 
 
 #ifdef __APPLE__ //OpenGL for MacOsX
-
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
+#endif
 
-
-#else
-
+#ifdef __linux__
 #include <GL/gl.h>
 #include <GL/glu.h>
-
 #endif
 
 
@@ -80,3 +77,8 @@ protected:
 };
 
 #endif // PARTICLESYSTEM_H
+
+/* TRASHBIN
+
+
+*/

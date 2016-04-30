@@ -31,7 +31,7 @@ public:
   Vec4 GetVel();
   Vec4 GetPos();
   void draw();
-  void bounce();
+  void bounce(Vec4 _normal);
 
 
 private:

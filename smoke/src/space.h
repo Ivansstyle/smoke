@@ -3,19 +3,16 @@
 
 #include "flowspace.h"
 #include "Vec4.h"
-
+#include "GLFunctions.h"
 
 #ifdef __APPLE__ //OpenGL for MacOsX
-
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
+#endif
 
-
-#else
-
+#ifdef __linux__
 #include <GL/gl.h>
 #include <GL/glu.h>
-
 #endif
 
 
@@ -35,6 +32,7 @@ public:
 
 
     Vec4 isInSpace(Vec4 _ppos);
+    Vec4 SetBackToSpace(Vec4 _ppos, Vec4 _normal);
 
     void initFlowSpace();
 
@@ -46,6 +44,17 @@ public:
 
 private:
 
+    struct Normal{
+      Vec4 floor;
+      Vec4 ceiling;
+      Vec4 front;
+      Vec4 back;
+      Vec4 left;
+      Vec4 right;
+      Vec4 zero;
+    };
+
+    Normal normal;
 
     Vec4 m_size;
 

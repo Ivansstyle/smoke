@@ -193,6 +193,10 @@ void ParticleSystem::ParticleUpdate()
       Vec4 _ppos = i.GetPos();
       Vec4 normal;
       normal = space.isInSpace(_ppos);
+      std::cout<< " normal x = "<<normal.m_x
+               <<" normal y = "<<normal.m_y
+              << " normal z = "<<normal.m_z
+              <<std::endl;
 
 
       if (normal != Vec4(0,0,0))
@@ -217,10 +221,7 @@ void ParticleSystem::ParticleUpdate()
 //    GLFunctions::WiredCube(1.0f,1.0f,1.0f);
 //    glPopMatrix();
 
-      std::cout<< " normal x = "<<normal.m_x
-               <<" normal y = "<<normal.m_y
-              << " normal z = "<<normal.m_z
-              <<std::endl;
+
       std::cout<< " ppos x = "<<_ppos.m_x
                << " ppos y = "<<_ppos.m_y
                << " ppos z = "<<_ppos.m_z

@@ -39,6 +39,7 @@ void ParticleSystem::init()
 
     space = Space();
     space.SetSize(Vec4(1.8f,1.0f,1.0f));
+    space.init();
 
     controlsphere = ControlSphere();
     controlsphere.SetPos(space.GetOrigin());
@@ -132,6 +133,7 @@ void ParticleSystem::draw()
 
     space.testDrawSpace();
 
+    space.flowspace.drawFlows();
 
 }
 

@@ -12,16 +12,28 @@ public:
     FlowSpace();
     ~FlowSpace();
 
-    bool InitFlowSpace();
-    void CreateFlows(Vec4 _size, int _resolution);
+    void init(Vec4 _size, int _resolution, Vec4 _origin);
+    void createFlows(const Vec4 _size, Vec4 _origin);
+    void drawFlows();
+    void CalculateFlowSize(Vec4 _size, int _resolution);
 
 
 private:
 
 
-std::vector<Flow> m_flows;
+    std::vector<Flow> m_flows;
+    GLfloat m_flowsize;
 
 };
 
 
 #endif // FLOWSPACE_H
+
+/* TRASHBIN
+ *
+ *
+ * bool InitFlowSpace();
+ *
+ *
+ *
+ */

@@ -30,6 +30,9 @@ public:
     void SetOrigin(Vec4 _origin);
     Vec4 GetGravity();
     void SetGravity(Vec4 _gravity);
+    float GetResistance();
+    void SetResistance(float _airResistance);
+
 
 #warning "implement element that will represent space vertex coordinates"
 
@@ -64,6 +67,8 @@ private:
     Vec4 m_origin;
 
     Vec4 m_gravity;
+
+    float m_airresistance;
 
     int m_resolution;
     GLfloat m_height;

@@ -4,12 +4,10 @@
 
 Space::Space() : m_size(0,0,0), m_origin(0,0,-1.2f)
 {
-  init();
 }
 
 Space::~Space()
 {
-
 }
 
 void Space::init()
@@ -24,6 +22,9 @@ void Space::init()
 
   //Default gravity
   m_gravity = Vec4(0,-0.002f,0);
+
+  //FlowSpace initialisation
+  flowspace.init(m_size, m_resolution, m_origin);
 }
 
 
@@ -51,9 +52,20 @@ Vec4 Space::GetGravity()
 {
   return m_gravity;
 }
+
 void Space::SetGravity(Vec4 _gravity)
 {
   m_gravity += _gravity;
+}
+
+float Space::GetResistance()
+{
+  return m_airresistance;
+}
+
+void Space::SetResistance(float _airResistance)
+{
+  m_airresistance = _airResistance;
 }
 
 Vec4 Space::isInSpace(Vec4 _ppos)

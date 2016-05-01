@@ -44,7 +44,7 @@ void Particle::draw()
 
 void Particle::UpdateGravity(Vec4 _gravity)
 {
-    m_vel += _gravity;
+    //m_vel += _gravity;
 }
 
 

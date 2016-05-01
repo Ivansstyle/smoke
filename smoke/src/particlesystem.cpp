@@ -153,7 +153,7 @@ void ParticleSystem::CreateParticles()
     {
       Particle p = Particle();
       p.SetPos(controlsphere.GetPos());
-      p.SetVel(Vec4(0.2,0,0.2));
+      p.SetVel(Vec4(0.01,0,0.0));
       m_particles.push_back(p);
     }
 }
@@ -192,15 +192,19 @@ void ParticleSystem::ParticleUpdate()
   {
       Vec4 totVel = Vec4(0,0,0);
       Vec4 _ppos = i.GetPos();
-      Vec4 normal;
-      normal = space.isInSpace(_ppos);
+      Vec4 normal_space = space.isInSpace(_ppos);
+      Vec4 normal_controlsphere = controlsphere.SphereCollisionNormal(_ppos);
 
 
-
-      if (normal != Vec4(0,0,0))
+      if (normal_space != Vec4(0,0,0))
       {
-          i.SetPos(space.SetBackToSpace(_ppos, normal));
-          i.bounce(normal);
+          i.SetPos(space.SetBackToSpace(_ppos, normal_space));
+          i.bounce(normal_space);
+      }
+      else if(normal_controlsphere != Vec4(0,0,0))
+      {
+        i.bounce(normal_controlsphere);
+        i.SetPos(controlsphere.SetBackToSpace(normal_controlsphere));
       }
       else
       {

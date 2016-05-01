@@ -44,13 +44,6 @@ void Controls::KillControls()
 {
   Event m_event;
 
-//  if (m_e->key.keysym.sym != SDLK_LEFT) { event.left = false;}
-//  if (m_e->key.keysym.sym != SDLK_RIGHT) { event.right = false;}
-//  if (m_e->key.keysym.sym != SDLK_UP) { event.up = false;}
-//  if (m_e->key.keysym.sym != SDLK_DOWN) { event.down = false;}
-//  if (m_e->key.keysym.sym != SDLK_SPACE) { event.space = false;}
-//  if (m_e->key.keysym.sym != SDLK_LCTRL) { event.ctrl = false;}
-//  if (m_e->key.keysym.sym != SDLK_LSHIFT ) {event.shift = false;}
 
     event.shift = false;
     event.ctrl = false;
@@ -71,3 +64,18 @@ Event* Controls::GiveControls()
 {
   return &event;
 }
+
+/*    TRASHBIN
+ *
+ * from Controls::KillControls()
+ *
+  if (m_e->key.keysym.sym != SDLK_LEFT) { event.left = false;}
+  if (m_e->key.keysym.sym != SDLK_RIGHT) { event.right = false;}
+  if (m_e->key.keysym.sym != SDLK_UP) { event.up = false;}
+  if (m_e->key.keysym.sym != SDLK_DOWN) { event.down = false;}
+  if (m_e->key.keysym.sym != SDLK_SPACE) { event.space = false;}
+  if (m_e->key.keysym.sym != SDLK_LCTRL) { event.ctrl = false;}
+  if (m_e->key.keysym.sym != SDLK_LSHIFT ) {event.shift = false;}
+
+ *
+ */

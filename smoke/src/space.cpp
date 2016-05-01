@@ -135,6 +135,8 @@ void Space::testDrawSpace()
 {
   glPushMatrix();
 
+  glLineWidth(2.0f);
+
   glTranslatef(m_origin.m_x, m_origin.m_y, m_origin.m_z);
   GLFunctions::WiredCube(m_size.m_x, m_size.m_y, m_size.m_z);
 

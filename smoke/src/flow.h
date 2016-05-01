@@ -37,7 +37,7 @@ public:
 
 
   struct FlowVectors{
-    Vec4 v[8];
+
 
   };
 private:

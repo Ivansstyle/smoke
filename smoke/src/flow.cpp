@@ -43,11 +43,17 @@ void Flow::SetFlowID(int _r, int _c, int _s)
 }
 
 
+
 void Flow::SetPos(Vec4 _pos)
 {
   m_position = _pos;
 
 }
+FlowID Flow::GetFlowID()
+{
+  return m_id;
+}
+
 bool FlowID::operator ==(const FlowID &_rhs) const
 {
   if(row == _rhs.row &&

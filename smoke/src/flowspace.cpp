@@ -2,6 +2,7 @@
 #include "GLFunctions.h"
 #include <vector>
 #include <cmath>
+#include <iostream>
 
 
 FlowSpace::FlowSpace() : m_spherePtr(NULL)
@@ -83,20 +84,26 @@ void FlowSpace::createFlows(const Vec4 _size,Vec4 _origin)
         {
           Flow f = Flow();
           f.SetFlowID(r, c, s);
-
-          f.SetPos(Vec4(-w + m_flowsize + ((2.0f * m_flowsize) * r),
+          f.SetPos(Vec4( -w + m_flowsize + ((2.0f * m_flowsize) * r),
                          h - m_flowsize - ((2.0f * m_flowsize) * c),
                         -d - m_flowsize - ((2.0f * m_flowsize) * s))
                         + _origin);
 
           f.SetFlowVecPos(m_flowsize);
           f.GetSpherePtr(m_spherePtr);
-
+          f.SetNullFriends(r,c,s,r_max,c_max,s_max);
           m_flows.push_back(f);
         }
       }
     }
 
+    for (auto& i : m_flows)
+    {
+      for (auto& j : m_flows)
+      {
+        i.isMyFriend(&j);
+      }
+  }
 }
 
 void FlowSpace::CalculateFlowSize(int _resolution)

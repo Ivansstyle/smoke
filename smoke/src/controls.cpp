@@ -4,6 +4,15 @@
 Controls::Controls()
 {
   KillControls();
+      event.shift = false;
+      event.ctrl = false;
+      event.down = false;
+      event.left = false;
+      event.right = false;
+      event.up = false;
+      event.space = false;
+      event.lmouse = false;
+      event.rmouse = false;
 }
 
 void Controls::TakeControls(SDL_Event* _e)
@@ -33,6 +42,17 @@ void Controls::TakeControls(SDL_Event* _e)
     if (m_e->key.keysym.sym == SDLK_LCTRL) { event.ctrl = true;}
     if (m_e->key.keysym.sym == SDLK_LSHIFT ) {event.shift = true;}
   }
+  if (m_e->type == SDL_KEYUP)
+  {
+    if (m_e->key.keysym.sym == SDLK_LEFT) { event.left = false;}
+    if (m_e->key.keysym.sym == SDLK_RIGHT) { event.right = false;}
+    if (m_e->key.keysym.sym == SDLK_UP) { event.up = false;}
+    if (m_e->key.keysym.sym == SDLK_DOWN) { event.down = false;}
+    if (m_e->key.keysym.sym == SDLK_SPACE) { event.space = false;}
+    if (m_e->key.keysym.sym == SDLK_LCTRL) { event.ctrl = false;}
+    if (m_e->key.keysym.sym == SDLK_LSHIFT ) {event.shift = false;}
+  }
+
 
   SDL_GetMouseState(&event.mouse_x, &event.mouse_y);
 
@@ -45,18 +65,17 @@ void Controls::KillControls()
   Event m_event;
 
 
-    event.shift = false;
-    event.ctrl = false;
-    event.down = false;
-    event.left = false;
-    event.right = false;
-    event.up = false;
-    event.space = false;
-    event.lmouse = false;
-    event.rmouse = false;
-    event.letter = 0;
-if (m_event != event)
-    std::cout<<"Control Kill Call"<<std::endl;
+//    event.shift = false;
+//    event.ctrl = false;
+//    event.down = false;
+//    event.left = false;
+//    event.right = false;
+//    event.up = false;
+//    event.space = false;
+//    event.lmouse = false;
+//    event.rmouse = false;
+
+  //    event.letter = 0;
 
 }
 

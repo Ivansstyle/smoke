@@ -47,6 +47,7 @@ class Vec4
     void operator -=(const Vec4 &_r);
     bool operator ==(const Vec4 &_rhs) const;
     bool operator !=(const Vec4 &_rhs) const;
+    Vec4 operator  /(const float &_rhs) const;
     GLfloat & operator [](int _i);
     void set(GLfloat _x, GLfloat _y, GLfloat _z, GLfloat _w=1.0f);
     void vertexGL() const;

@@ -20,6 +20,23 @@ typedef struct FlowID{
   bool operator ==(const FlowID &_rhs) const;
 }FlowID;
 
+typedef struct FlowVectors{ //L - left,  R - Right, T - top,
+                            //D - Down, F - front, B - back.
+  Vec4 ltf;
+  Vec4 rtf;
+  Vec4 ldf;             //Execution sequence: 1)from L to R                         //
+  Vec4 rdf;             //                    2)from T to D
+  Vec4 ltb;             //                    3)from F to B
+  Vec4 rtb;
+  Vec4 ldb;
+  Vec4 rdb;
+
+  bool operator ==(const FlowVectors &_rhs) const;
+  void operator +=(const FlowVectors &_rhs) const;
+  void operator -=(const FlowVectors &_rhs) const;
+
+
+}FlowVectors;
 
 class Flow
 {
@@ -45,42 +62,46 @@ public:
   void SetFlowVecPos(float _size);
   void GetSpherePtr(ControlSphere* _ptr);
   void InteractWithSphere();
+
+  //Interaction with "friend" flows
+  void SetNullFriends(int _r, int _c, int _s,
+                      int _rmax, int _cmax, int _smax);
+  void isMyFriend(Flow* _flowPtr);
+  FlowVectors* fVec(); // returns a pointer to Flow FlowVector struct
+  void SetFriendVecFromPtr(FlowVectors* _fvecs);
+  void SetFriendVec(FlowVectors _fvecs, Flow* _friend);
+  void AddFriendVecFromPtr(FlowVectors *_fvecs);
+
+  void SelfEquilibrium();
+  void FriendsEquilibrium();
+
   void Decoy();
 
 
 private:
 
-  struct FlowVectorPos{ //L - left,  R - Right, T - top, D - Down, F - front, B - back
-    Vec4 ltf;           // To have easy access to vector position, and no need to
-    Vec4 rtf;           // calculate positions again;
-    Vec4 ldf;
-    Vec4 rdf;
-    Vec4 ltb;
-    Vec4 rtb;
-    Vec4 ldb;
-    Vec4 rdb;
+
+  struct FlowFriends{
+    Flow* l;
+    Flow* r;
+    Flow* t;
+    Flow* b;
+    Flow* f;
+    Flow* d;
   };
 
-  struct FlowVectors{ //L - left,  R - Right, T - top, D - Down, F - front, B - back.
-    Vec4 ltf;
-    Vec4 rtf;
-    Vec4 ldf;
-    Vec4 rdf;
-    Vec4 ltb;
-    Vec4 rtb;
-    Vec4 ldb;
-    Vec4 rdb;
-  };
-
-  float m_fsize;
-  float m_sphere_attraction_factor;
-  GLfloat m_decoy;
-  float m_particle_interaction_factor;
-  FlowID m_id;
-  Vec4 m_position;
-  FlowVectors fvec;
-  FlowVectorPos fvec_p;
-  ControlSphere* controlSphere;
+  float           m_fsize;
+  float           m_sphere_attraction_factor;
+  GLfloat         m_decoy;
+  float           m_particle_interaction_factor;
+  FlowID          m_id;
+  Vec4            m_position;
+  FlowFriends     m_friend;
+  FlowVectors     fvec;
+  FlowVectors     fvec_p;
+  ControlSphere*  controlSphere;
+  float           m_equilibrium_factor;
+  float           m_friends_equilibrium_factor;
 
 
 };

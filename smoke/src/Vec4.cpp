@@ -72,6 +72,10 @@ Vec4 Vec4::operator *(GLfloat _rhs) const
 {
  return Vec4(m_x*_rhs,m_y*_rhs,m_z*_rhs);
 }
+Vec4 Vec4::operator /(const float &_rhs) const
+{
+ return Vec4(m_x/_rhs, m_y/_rhs, m_z/_rhs);
+}
 
 void Vec4::operator *=(GLfloat _rhs)
 {

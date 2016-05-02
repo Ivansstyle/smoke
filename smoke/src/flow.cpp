@@ -1,9 +1,11 @@
 #include "flow.h"
 #include "GLFunctions.h"
 #include <cmath>
+#include <iostream>
 
-Flow::Flow() : m_sphere_attraction_factor(10.5f) , m_decoy(0.99f),
-               m_particle_interaction_factor(0.0003f), controlSphere(NULL)
+Flow::Flow() : m_sphere_attraction_factor(10.5f) , m_decoy(0.995f),
+               m_particle_interaction_factor(0.03f), controlSphere(NULL),
+               m_equilibrium_factor(0.000001f)
 {
   fvec.ltf = Vec4(0,0,0);
   fvec.rtf = Vec4(0,0,0);
@@ -17,11 +19,21 @@ Flow::Flow() : m_sphere_attraction_factor(10.5f) , m_decoy(0.99f),
 
   fvec.ldb = Vec4(0,0,0);
   fvec.rdb = Vec4(0,0,0);
+
+  m_friend.l = this;
+  m_friend.r = this;
+  m_friend.t = this;
+  m_friend.d = this;
+  m_friend.f = this;
+  m_friend.b = this;
+  m_friend.f = this;
+  m_friend.b = this;
 }
 
 
 Vec4 Flow::CalculateParticleVector(Vec4 _ppos)
 {
+
   // Calculate Resoluting Power times Interaction Factor
   Vec4 respow = ( fvec.ltf * (fvec.ltf + fvec_p.ltf).dist(_ppos) * m_particle_interaction_factor +
                   fvec.rtf * (fvec.rtf + fvec_p.rtf).dist(_ppos) * m_particle_interaction_factor +
@@ -38,10 +50,61 @@ Vec4 Flow::CalculateParticleVector(Vec4 _ppos)
   return respow;
 }
 
+
 void Flow::update()
 {
+//  if(m_friend.l !=0) {SetFriendVec(_fvecs, m_friend.l);}
+//  if(m_friend.r !=0) {SetFriendVec(_fvecs, m_friend.r);}
+//  if(m_friend.t !=0) {SetFriendVec(_fvecs, m_friend.t);}
+//  if(m_friend.d !=0) {SetFriendVec(_fvecs, m_friend.d);}
+//  if(m_friend.f !=0) {SetFriendVec(_fvecs, m_friend.f);}
+//  if(m_friend.b !=0) {SetFriendVec(_fvecs, m_friend.b);}
+
+
+
+
+
+
+
  InteractWithSphere();
+ SelfEquilibrium();
  Decoy();
+}
+
+
+void Flow::SetFriendVec(FlowVectors _fvecs, Flow *_friend)
+{
+  _friend->SetFriendVecFromPtr(&_fvecs);
+
+}
+
+void Flow::SetFriendVecFromPtr(FlowVectors *_fvecs)
+{
+  fvec.ltf = _fvecs->ltf;
+  fvec.rtf = _fvecs->rtf;
+  fvec.ldf = _fvecs->ldf;
+  fvec.rdf = _fvecs->rdf;
+  fvec.ltb = _fvecs->ltb;
+  fvec.rtb = _fvecs->rtb;
+  fvec.ldb = _fvecs->ldb;
+  fvec.rdb = _fvecs->rdb;
+}
+
+void Flow::AddFriendVecFromPtr(FlowVectors *_fvecs)
+{
+  fvec.ltf = _fvecs->ltf;
+  fvec.rtf = _fvecs->rtf;
+  fvec.ldf = _fvecs->ldf;
+  fvec.rdf = _fvecs->rdf;
+  fvec.ltb = _fvecs->ltb;
+  fvec.rtb = _fvecs->rtb;
+  fvec.ldb = _fvecs->ldb;
+  fvec.rdb = _fvecs->rdb;
+}
+
+FlowVectors* Flow::fVec()
+{
+  return &fvec;
 }
 
 void Flow::draw()
@@ -76,36 +139,44 @@ void Flow::InteractWithSphere()
 
   if (m_position.dist(controlSphere->GetPos()) < interaction_distance)
   {
-    fvec.ltf += (controlSphere->GetVel() *
-(2.0f/((fvec.ltf + fvec_p.ltf).dist(controlSphere->GetPos()) * m_sphere_attraction_factor))) ;
+    fvec.ltf += controlSphere->GetVel() *
+(2.0f/((fvec.ltf + fvec_p.ltf).dist(controlSphere->GetPos()) *
+                                  m_sphere_attraction_factor));
 
 
     fvec.rtf += controlSphere->GetVel() *
-(2.0f/((fvec.rtf + fvec_p.rtf).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
+(2.0f/((fvec.rtf + fvec_p.rtf).dist(controlSphere->GetPos()) *
+                                  m_sphere_attraction_factor));
 
 
     fvec.ldf += controlSphere->GetVel() *
-(2.0f/((fvec.ldf + fvec_p.ldf).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
+(2.0f/((fvec.ldf + fvec_p.ldf).dist(controlSphere->GetPos()) *
+                                  m_sphere_attraction_factor));
 
 
     fvec.rdf += controlSphere->GetVel() *
-(2.0f/((fvec.rdf + fvec_p.rdf).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
+(2.0f/((fvec.rdf + fvec_p.rdf).dist(controlSphere->GetPos()) *
+                                  m_sphere_attraction_factor));
 
 
     fvec.ltb += controlSphere->GetVel() *
-(2.0f/((fvec.ltb + fvec_p.ltb).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
+(2.0f/((fvec.ltb + fvec_p.ltb).dist(controlSphere->GetPos()) *
+                                  m_sphere_attraction_factor));
 
 
     fvec.rtb += controlSphere->GetVel() *
-(2.0f/((fvec.rtb + fvec_p.rtb).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
+(2.0f/((fvec.rtb + fvec_p.rtb).dist(controlSphere->GetPos()) *
+                                  m_sphere_attraction_factor));
 
 
     fvec.ldb += controlSphere->GetVel() *
-(2.0f/((fvec.ldb + fvec_p.ldb).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
+(2.0f/((fvec.ldb + fvec_p.ldb).dist(controlSphere->GetPos()) *
+                                  m_sphere_attraction_factor));
 
 
     fvec.rdb += controlSphere->GetVel() *
-(2.0f/((fvec.rdb + fvec_p.rdb).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
+(2.0f/((fvec.rdb + fvec_p.rdb).dist(controlSphere->GetPos()) *
+                                  m_sphere_attraction_factor));
   }
 }
 
@@ -196,6 +267,150 @@ void Flow::SetFlowVecPos(float _size)
   m_fsize = _size;
 }
 
+void Flow::SetNullFriends(int _r, int _c, int _s, int _rmax, int _cmax, int _smax)
+{
+
+  if (_r == 0)        {m_friend.l = NULL;}
+  if (_r == _rmax -1) {m_friend.r = NULL;}
+  if (_c == 0)        {m_friend.t = NULL;}
+  if (_c == _cmax -1) {m_friend.d = NULL;}
+  if (_s ==  0)       {m_friend.f = NULL;}
+  if (_s == _smax -1) {m_friend.b = NULL;}
+}
+
+void Flow::isMyFriend(Flow *_flowPtr)
+{
+  if (_flowPtr->GetFlowID() == m_id)
+  {
+    return;
+  }
+  if  (_flowPtr->GetFlowID().row + 1 == m_id.row &&
+            _flowPtr->GetFlowID().col == m_id.col &&
+            _flowPtr->GetFlowID().seg == m_id.seg &&
+            m_friend.l != NULL)
+  {
+    m_friend.l = _flowPtr; //Left friend
+  }
+
+  else if (_flowPtr->GetFlowID().row - 1 == m_id.row &&
+           _flowPtr->GetFlowID().col == m_id.col &&
+           _flowPtr->GetFlowID().seg == m_id.seg &&
+           m_friend.r != NULL)
+  {
+    m_friend.r = _flowPtr; //Right friend
+  }
+
+  if (_flowPtr->GetFlowID().col + 1 == m_id.col &&
+           _flowPtr->GetFlowID().row == m_id.row &&
+           _flowPtr->GetFlowID().seg == m_id.seg &&
+           m_friend.t != NULL)
+  {
+    m_friend.t = _flowPtr; //Top friend
+  }
+
+  else if (_flowPtr->GetFlowID().col - 1 == m_id.col &&
+           _flowPtr->GetFlowID().row == m_id.row &&
+           _flowPtr->GetFlowID().seg == m_id.seg &&
+           m_friend.d != NULL)
+  {
+    m_friend.d = _flowPtr; //Down friend
+
+  }
+
+  if (_flowPtr->GetFlowID().seg + 1 == m_id.seg &&
+           _flowPtr->GetFlowID().col == m_id.col &&
+           _flowPtr->GetFlowID().row == m_id.row &&
+           m_friend.f != NULL)
+  {
+    m_friend.f = _flowPtr; //Front friend
+  }
+
+  else if (_flowPtr->GetFlowID().seg -1 == m_id.seg &&
+           _flowPtr->GetFlowID().col == m_id.col &&
+           _flowPtr->GetFlowID().row == m_id.row &&
+           m_friend.b != NULL)
+  {
+
+    m_friend.b= _flowPtr; //Back friend
+
+  }
+  return;
+}
+
+void Flow::SelfEquilibrium()
+{
+  Vec4 sum =  fvec.ltf +
+              fvec.rtf +
+              fvec.ldf +
+              fvec.rdf +
+              fvec.ltb +
+              fvec.rtb +
+              fvec.ldb +
+              fvec.rdb;
+
+  sum = Vec4(sum.m_x/16.0f, sum.m_y/16.0f, sum.m_z/16.0f);
+
+  fvec.ltf = Vec4(Vec4(fvec.ltf.m_x + sum.m_x,
+                  fvec.ltf.m_y + sum.m_y,
+                  fvec.ltf.m_z + sum.m_z)
+                * m_equilibrium_factor) + fvec.ltf;
+                // m_equilibrium_factor;
+
+  fvec.rtf = Vec4(Vec4(fvec.rtf.m_x + sum.m_x,
+                  fvec.rtf.m_y + sum.m_y,
+                  fvec.rtf.m_z + sum.m_z)
+                * m_equilibrium_factor) + (fvec.rtf);
+                //* m_equilibrium_factor);
+
+  fvec.ldf = Vec4(Vec4(fvec.ldf.m_x + sum.m_x,
+                  fvec.ldf.m_y + sum.m_y,
+                  fvec.ldf.m_z + sum.m_z)
+                * m_equilibrium_factor) + fvec.ldf;
+                 //m_equilibrium_factor);
+
+  fvec.rdf = Vec4(Vec4(fvec.rdf.m_x + sum.m_x,
+                  fvec.rdf.m_y + sum.m_y,
+                  fvec.rdf.m_z + sum.m_z)
+                * m_equilibrium_factor) + fvec.rdf;
+               // * m_equilibrium_factor);
+
+  fvec.ltb = Vec4(Vec4(fvec.ltb.m_x + sum.m_x,
+                  fvec.ltb.m_y + sum.m_y ,
+                  fvec.ltb.m_z + sum.m_z )
+                * m_equilibrium_factor) + fvec.ltf;
+               // * m_equilibrium_factor);
+
+  fvec.rtb = Vec4(Vec4(fvec.rtb.m_x + sum.m_x,
+                  fvec.rtb.m_y + sum.m_y,
+                  fvec.rtb.m_z + sum.m_z )
+                * m_equilibrium_factor) + fvec.rtf;
+//                * m_equilibrium_factor);
+
+  fvec.ldb = Vec4(Vec4(fvec.ldb.m_x + sum.m_x,
+                  fvec.ldb.m_y + sum.m_y,
+                  fvec.ldb.m_z + sum.m_z)
+                * m_equilibrium_factor) + fvec.ldf;
+                //* m_equilibrium_factor);
+
+  fvec.rdb = Vec4(Vec4(fvec.rdb.m_x + sum.m_x,
+                  fvec.rdb.m_y + sum.m_y,
+                  fvec.rdb.m_z + sum.m_z)
+                * m_equilibrium_factor) + fvec.rdf;
+                //* m_equilibrium_factor);
+
+}
+
+void Flow::FriendsEquilibrium()
+{
+  if (m_friend.r != NULL)
+  {
+    FlowVectors* fv = m_friend.r->fVec();
+
+
+
+  }
+}
+
 void Flow::SetPos(Vec4 _pos)
 {
   m_position = _pos;
@@ -229,10 +444,12 @@ FlowID Flow::GetFlowID()
 bool FlowID::operator ==(const FlowID &_rhs) const
 {
   if(row == _rhs.row &&
-     col == _rhs.col)
+     col == _rhs.col &&
+     seg == _rhs.seg)
     return true;
   else return false;
 }
+
 
 /* TRASHBIN
  *
@@ -248,4 +465,31 @@ bool FlowID::operator ==(const FlowID &_rhs) const
 
         // std::cout<<"distance calculated is = "<< m_position.dist(controlSphere->GetPos()) << std::endl;
  *
+ *
+ * //  std::cout<< "addr of m_friend.l after assignement ="<<m_friend.l<<std::endl;
+
+//  std::cout<< "addr of m_friend.r after assignement ="<<m_friend.r<<std::endl;
+
+//  std::cout<< "addr of m_friend.t after assignement ="<<m_friend.t<<std::endl;
+
+//  std::cout<< "addr of m_friend.d after assignement ="<<m_friend.d<<std::endl;
+
+//  std::cout<< "addr of m_friend.f after assignement ="<<m_friend.f<<std::endl;
+
+//  std::cout<< "addr of m_friend.b after assignement ="<<m_friend.b<<std::endl;
+
+//    std::cout<< "HOST adress is = "<<this<<std::endl<<std::endl;
+//    std::cout<< "friend D adress is = "<<m_friend.d<<std::endl<<std::endl<<std::endl;
+//     std:: cout<<"!!!!!!!! m_friend.b addr!!! = "<<m_friend.b<<std::endl<<std::endl;
+//     std::cout<< "flowPtr col = "<<_flowPtr->GetFlowID().col<<
+//                 "flowPtr row = "<<_flowPtr->GetFlowID().row<<
+//                 "flowPtr seg = "<<_flowPtr->GetFlowID().col<<
+//                 "flowPtr addr = "<<_flowPtr<<
+//                 "id col = "<<m_id.col<<
+//                 "id row = "<<m_id.row<<
+//                 "id seg = "<<m_id.seg<<
+//                 "self addr= "<<this<<
+
+
+                 //Down
  */

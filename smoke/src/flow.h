@@ -3,6 +3,7 @@
 #include "controlsphere.h"
 #include "Vec4.h"
 
+
 #ifdef __APPLE__
   #include <OpenGL/gl.h>
   #include <OpenGL/glu.h>
@@ -12,6 +13,7 @@
   #include <GL/gl.h>
   #include <GL/glu.h>
 #endif
+
 
 typedef struct FlowID{
  int row;
@@ -67,13 +69,14 @@ public:
   void SetNullFriends(int _r, int _c, int _s,
                       int _rmax, int _cmax, int _smax);
   void isMyFriend(Flow* _flowPtr);
-  FlowVectors* fVec(); // returns a pointer to Flow FlowVector struct
   void SetFriendVecFromPtr(FlowVectors* _fvecs);
   void SetFriendVec(FlowVectors _fvecs, Flow* _friend);
   void AddFriendVecFromPtr(FlowVectors *_fvecs);
+  FlowVectors* fVec(); // returns a pointer to Flow FlowVector struct
 
   void SelfEquilibrium();
   void FriendsEquilibrium();
+  Vec4 CalulateEquilibrium(Vec4 _m, Vec4 _f);
 
   void Decoy();
 
@@ -102,6 +105,7 @@ private:
   ControlSphere*  controlSphere;
   float           m_equilibrium_factor;
   float           m_friends_equilibrium_factor;
+  float           m__sphere_interaction_r;
 
 
 };

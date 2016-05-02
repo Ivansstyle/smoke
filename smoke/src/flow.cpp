@@ -3,9 +3,12 @@
 #include <cmath>
 #include <iostream>
 
-Flow::Flow() : m_sphere_attraction_factor(10.5f) , m_decoy(0.995f),
+//#define EQUILIBRIUM
+
+Flow::Flow() : m_sphere_attraction_factor(5.5f) , m_decoy(0.995f),
                m_particle_interaction_factor(0.03f), controlSphere(NULL),
-               m_equilibrium_factor(0.000001f)
+               m_equilibrium_factor(0.1f), m__sphere_interaction_r(0.1f),
+               m_friends_equilibrium_factor(0.000000001f)
 {
   fvec.ltf = Vec4(0,0,0);
   fvec.rtf = Vec4(0,0,0);
@@ -53,22 +56,20 @@ Vec4 Flow::CalculateParticleVector(Vec4 _ppos)
 
 void Flow::update()
 {
-//  if(m_friend.l !=0) {SetFriendVec(_fvecs, m_friend.l);}
-//  if(m_friend.r !=0) {SetFriendVec(_fvecs, m_friend.r);}
-//  if(m_friend.t !=0) {SetFriendVec(_fvecs, m_friend.t);}
-//  if(m_friend.d !=0) {SetFriendVec(_fvecs, m_friend.d);}
-//  if(m_friend.f !=0) {SetFriendVec(_fvecs, m_friend.f);}
-//  if(m_friend.b !=0) {SetFriendVec(_fvecs, m_friend.b);}
+
+  InteractWithSphere();
+
+  #ifdef EQUILIBRIUM
+
+  FriendsEquilibrium();
+
+  SelfEquilibrium();
+
+  #endif
+
+  Decoy();
 
 
-
-
-
-
-
- InteractWithSphere();
- SelfEquilibrium();
- Decoy();
 }
 
 
@@ -134,7 +135,7 @@ void Flow::draw()
 
 void Flow::InteractWithSphere()
 {
-  float interaction_distance = m_fsize + controlSphere->GetR() + 0.4f; // it works
+  float interaction_distance = m_fsize + controlSphere->GetR() + m__sphere_interaction_r; // it works
                                                   // but returns number that is -0.2f
 
   if (m_position.dist(controlSphere->GetPos()) < interaction_distance)
@@ -348,67 +349,120 @@ void Flow::SelfEquilibrium()
               fvec.ldb +
               fvec.rdb;
 
-  sum = Vec4(sum.m_x/16.0f, sum.m_y/16.0f, sum.m_z/16.0f);
+  sum = Vec4(sum.m_x/8.0f, sum.m_y/8.0f, sum.m_z/8.0f);
 
   fvec.ltf = Vec4(Vec4(fvec.ltf.m_x + sum.m_x,
                   fvec.ltf.m_y + sum.m_y,
                   fvec.ltf.m_z + sum.m_z)
-                * m_equilibrium_factor) + fvec.ltf;
+                * m_equilibrium_factor) + (fvec.rtf * fvec.rtf.dot(sum) * m_equilibrium_factor);
                 // m_equilibrium_factor;
 
   fvec.rtf = Vec4(Vec4(fvec.rtf.m_x + sum.m_x,
                   fvec.rtf.m_y + sum.m_y,
                   fvec.rtf.m_z + sum.m_z)
-                * m_equilibrium_factor) + (fvec.rtf);
+                * m_equilibrium_factor) + (fvec.rtf * fvec.rtf.dot(sum)* m_equilibrium_factor);
                 //* m_equilibrium_factor);
 
   fvec.ldf = Vec4(Vec4(fvec.ldf.m_x + sum.m_x,
                   fvec.ldf.m_y + sum.m_y,
                   fvec.ldf.m_z + sum.m_z)
-                * m_equilibrium_factor) + fvec.ldf;
+                * m_equilibrium_factor) + (fvec.ldf * fvec.ldf.dot(sum)* m_equilibrium_factor);
                  //m_equilibrium_factor);
 
   fvec.rdf = Vec4(Vec4(fvec.rdf.m_x + sum.m_x,
                   fvec.rdf.m_y + sum.m_y,
                   fvec.rdf.m_z + sum.m_z)
-                * m_equilibrium_factor) + fvec.rdf;
+                * m_equilibrium_factor) + (fvec.rdf * fvec.rdf.dot(sum)* m_equilibrium_factor);
                // * m_equilibrium_factor);
 
   fvec.ltb = Vec4(Vec4(fvec.ltb.m_x + sum.m_x,
                   fvec.ltb.m_y + sum.m_y ,
                   fvec.ltb.m_z + sum.m_z )
-                * m_equilibrium_factor) + fvec.ltf;
+                * m_equilibrium_factor) + (fvec.ltf * fvec.ltb.dot(sum)* m_equilibrium_factor);
                // * m_equilibrium_factor);
 
   fvec.rtb = Vec4(Vec4(fvec.rtb.m_x + sum.m_x,
                   fvec.rtb.m_y + sum.m_y,
                   fvec.rtb.m_z + sum.m_z )
-                * m_equilibrium_factor) + fvec.rtf;
+                * m_equilibrium_factor) + (fvec.rtf * fvec.rtb.dot(sum));
 //                * m_equilibrium_factor);
 
   fvec.ldb = Vec4(Vec4(fvec.ldb.m_x + sum.m_x,
                   fvec.ldb.m_y + sum.m_y,
                   fvec.ldb.m_z + sum.m_z)
-                * m_equilibrium_factor) + fvec.ldf;
+                * m_equilibrium_factor) + (fvec.ldf / fvec.rdb.dist(sum));
                 //* m_equilibrium_factor);
 
   fvec.rdb = Vec4(Vec4(fvec.rdb.m_x + sum.m_x,
                   fvec.rdb.m_y + sum.m_y,
                   fvec.rdb.m_z + sum.m_z)
-                * m_equilibrium_factor) + fvec.rdf;
+                * m_equilibrium_factor) + (fvec.rdf / fvec.ldb.dist(sum));
                 //* m_equilibrium_factor);
 
 }
 
 void Flow::FriendsEquilibrium()
 {
+  if (m_friend.l != NULL)
+  {
+    std::cout<<"works"<<std::endl;
+
+    FlowVectors* fv = m_friend.l->fVec();
+    fvec.ltf += fv->ltf + (Vec4(fv->ltf.m_x, fv->ltf.m_y, fv->ltf.m_z) * m_friends_equilibrium_factor);
+    fvec.ldf += fv->ldf + (Vec4(fv->ldf.m_x, fv->ldf.m_y, fv->ldf.m_z) * m_friends_equilibrium_factor);
+    fvec.ltb += fv->ltb + (Vec4(fv->ltb.m_x, fv->ltb.m_y, fv->ltb.m_z) * m_friends_equilibrium_factor);
+    fvec.ldb += fv->ldb + (Vec4(fv->ldb.m_x, fv->ldb.m_y, fv->ldb.m_z) * m_friends_equilibrium_factor);
+  }
+
   if (m_friend.r != NULL)
   {
     FlowVectors* fv = m_friend.r->fVec();
-
-
-
+    fvec.rtf += fv->rtf * m_friends_equilibrium_factor;
+    fvec.rdf += fv->rdf * m_friends_equilibrium_factor;
+    fvec.rtb += fv->rtb * m_friends_equilibrium_factor;
+    fvec.rdb += fv->rdb * m_friends_equilibrium_factor;
   }
+  if (m_friend.t != NULL)
+  {
+    FlowVectors* fv = m_friend.t->fVec();
+    fvec.rtf += fv->rtf * m_friends_equilibrium_factor;
+    fvec.ltf += fv->ltf * m_friends_equilibrium_factor;
+    fvec.rtb += fv->rtb * m_friends_equilibrium_factor;
+    fvec.ltb += fv->ltb * m_friends_equilibrium_factor;
+  }
+  if (m_friend.d != NULL)
+  {
+    FlowVectors* fv = m_friend.d->fVec();
+    fvec.rdf += fv->rdf * m_friends_equilibrium_factor;
+    fvec.ldf += fv->ldf * m_friends_equilibrium_factor;
+    fvec.rdb += fv->rdb * m_friends_equilibrium_factor;
+    fvec.ldb += fv->ldb * m_friends_equilibrium_factor;
+  }
+  if (m_friend.f != NULL)
+  {
+    FlowVectors* fv = m_friend.f->fVec();
+    fvec.rtf += fv->rtf * m_friends_equilibrium_factor;
+    fvec.ltf += fv->ltf * m_friends_equilibrium_factor;
+    fvec.rdf += fv->rdf * m_friends_equilibrium_factor;
+    fvec.ldf += fv->ldf * m_friends_equilibrium_factor;
+  }
+  if (m_friend.b != NULL)
+  {
+    FlowVectors* fv = m_friend.b->fVec();
+    fvec.rtb += fv->rtb * m_friends_equilibrium_factor;
+    fvec.ltb += fv->ltb * m_friends_equilibrium_factor;
+    fvec.rdb += fv->rdb * m_friends_equilibrium_factor;
+    fvec.ldb += fv->ldb * m_friends_equilibrium_factor;
+  }
+
+
+
+
+}
+
+Vec4 Flow::CalulateEquilibrium(Vec4 _m, Vec4 _f)
+{
+  _m;
 }
 
 void Flow::SetPos(Vec4 _pos)

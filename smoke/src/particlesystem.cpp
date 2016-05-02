@@ -151,8 +151,8 @@ void ParticleSystem::draw()
     controlsphere.draw();
 
     glDisable(GL_LIGHTING);
-    //space.testDrawSpace();
-    //space.flowspace.drawFlows();
+    space.testDrawSpace();
+    space.flowspace.drawFlows();
     ParticleDraw();
 
 

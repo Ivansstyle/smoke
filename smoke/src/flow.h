@@ -27,17 +27,21 @@ public:
   Flow();
   //~Flow();
 
-  void SetFlowID(int _r, int _c, int _s);
+  void   SetFlowID(int _r, int _c, int _s);
   FlowID GetFlowID();
 
   void update();
   void draw();
   void drawVectors();
+
   void SetPos(Vec4 _pos);
   Vec4 GetPos();
+
   float GetSize();
   void SetSize(float _size);
+
   Vec4 CalculateParticleVector(Vec4 _ppos);
+
   void SetFlowVecPos(float _size);
   void GetSpherePtr(ControlSphere* _ptr);
   void InteractWithSphere();

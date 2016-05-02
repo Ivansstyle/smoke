@@ -29,6 +29,10 @@ class ParticleSystem
 {
 public:
 
+  Controls  controls;
+  bool      TriggerTick;
+  double    TriggerSpeed;
+
   ParticleSystem();
   ~ParticleSystem();
 
@@ -38,36 +42,29 @@ public:
  void resize(int w, int h);
 
  void CreateParticles();
- void TimingUpdate();
  void ParticleUpdate();
  void SearchForFlows(Vec4 _pos);
 
-
- bool TriggerTick;
+ void TimingUpdate();
  bool ParticleTriggerTick();
- double TriggerSpeed;
-
 
  bool isInit() const;
 
- Controls controls;
  void takeControl(SDL_Event* _e);
 
 private:
 
- void ParticleDraw();
- GLfloat mod(GLfloat _x);
-
-std::vector<Particle> m_particles;
-
-Space space;
-ControlSphere controlsphere;
+  std::vector<Particle> m_particles;
+  Space                 space;
+  ControlSphere         controlsphere;
 
 
-float emitter_out_velocity;
-float emitter_spinning_speed;
-float point_size_factor;
+  float                 emitter_out_velocity;
+  float                 emitter_spinning_speed;
+  float                 point_size_factor;
 
+  void ParticleDraw();
+  GLfloat mod(GLfloat _x);
 
 protected:
 

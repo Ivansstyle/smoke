@@ -13,21 +13,20 @@ public:
     ~FlowSpace();
 
     void init(Vec4 _size, int _resolution, Vec4 _origin);
-    void createFlows(const Vec4 _size, Vec4 _origin);
     void update();
+
+    void createFlows(const Vec4 _size, Vec4 _origin);
     void drawFlows();
     void CalculateFlowSize(int _resolution);
+
     void SetSpherePtr(ControlSphere* _ptr);
     void FlowSearch(Particle* _pPtr);
 
-
 private:
 
-
-
-    std::vector<Flow> m_flows;
-    GLfloat m_flowsize;
-    ControlSphere* m_spherePtr;
+    std::vector<Flow>   m_flows;
+    GLfloat             m_flowsize;
+    ControlSphere*      m_spherePtr;
 
 };
 

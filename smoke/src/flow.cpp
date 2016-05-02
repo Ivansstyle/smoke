@@ -196,7 +196,6 @@ void Flow::SetFlowVecPos(float _size)
   m_fsize = _size;
 }
 
-
 void Flow::SetPos(Vec4 _pos)
 {
   m_position = _pos;
@@ -216,6 +215,7 @@ float Flow::GetSize()
 {
   return m_fsize;
 }
+
 void Flow::SetSize(float _size)
 {
     m_fsize = _size;

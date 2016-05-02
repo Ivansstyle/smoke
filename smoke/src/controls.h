@@ -27,8 +27,6 @@ struct Event{
          space != _rhs.space &&
          lmouse != _rhs.lmouse &&
          rmouse != _rhs.rmouse &&
-         //mouse_x != _rhs.mouse_x &&
-         //mouse_y != _rhs.mouse_y &&
          letter != _rhs.letter) return true;
     else return false;
   }
@@ -39,19 +37,17 @@ class Controls
 
 public:
   Controls();
-
-  void KillControls();
-
-  Event* GiveControls();
-
+  //~Controls();
   void TakeControls(SDL_Event *_e);
 
-  Event event;
+  Event     event;
 
-  SDL_Event* m_e;
+  void   KillControls();
+  Event* GiveControls();
 
 private:
 
+  SDL_Event*  m_e;
 
 };
 

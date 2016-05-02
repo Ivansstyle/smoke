@@ -1,7 +1,7 @@
 
-#include "particlesystem.h"
 #include <sys/time.h>
-#include <iostream>
+
+#include "particlesystem.h"
 #include "GLFunctions.h"
 
 #define RESOLUTION_LQ 1  // handles extreme amounts of particles
@@ -21,8 +21,9 @@ ParticleSystem::ParticleSystem() : m_isInit(false),m_startTime(0.0),m_elapsedTim
 */
 void ParticleSystem::resize(int w, int h) {
   if (!m_isInit) return;
+
   point_size_factor = 1 * float(h) / 1080;
-  std::cout<< "PSF is = "<<point_size_factor<<std::endl;
+
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluPerspective(75.0, float(w) / float(h), 0.1f, 20.0f);
@@ -53,7 +54,7 @@ void ParticleSystem::init()
     //SPACE INITIALISATION
     space = Space();
     space.SetSize(Vec4(1.8f,1.0f,1.0f));
-    space.resolution(RESOLUTION_MQ);
+    space.resolution(RESOLUTION_LQ);
     space.flowspace.SetSpherePtr(&controlsphere);
     space.init();
 

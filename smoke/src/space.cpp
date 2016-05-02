@@ -2,7 +2,7 @@
 #include <iostream>
 //#include <cmath>
 
-Space::Space() : m_size(0,0,0), m_origin(0,0,-1.2f)
+Space::Space() : m_size(0,0,0), m_origin(0,0,-1.2f), m_resolution(2)
 {
 }
 
@@ -21,7 +21,7 @@ void Space::init()
   normal.zero =    Vec4(0,0,0);
 
   //Default gravity
-  m_gravity = Vec4(0,-0.0000001f,0);
+  m_gravity = Vec4(0,-0.0000005f,0);
 
   //FlowSpace initialisation
   flowspace.init(m_size, m_resolution, m_origin);
@@ -57,15 +57,9 @@ void Space::SetGravity(Vec4 _gravity)
 {
   m_gravity += _gravity;
 }
-
-float Space::GetResistance()
+void Space::resolution(int _res)
 {
-  return m_airresistance;
-}
-
-void Space::SetResistance(float _airResistance)
-{
-  m_airresistance = _airResistance;
+    m_resolution  = _res;
 }
 
 Vec4 Space::isInSpace(Vec4 _ppos)
@@ -122,20 +116,20 @@ Vec4 Space::SetBackToSpace(Vec4 _ppos, Vec4 _normal)
   GLfloat h = _size_in_space.m_y / 2.0f;
   GLfloat d = _size_in_space.m_z / 2.0f;
 
-  if      (_normal == normal.right)  {return Vec4( w + m_origin.m_x, _ppos.m_y, _ppos.m_z);}
-  else if (_normal == normal.left)   {return Vec4(-w + m_origin.m_x, _ppos.m_y, _ppos.m_z);}
-  else if (_normal == normal.ceiling){return Vec4(_ppos.m_x, h + m_origin.m_y, _ppos.m_z);}
-  else if (_normal == normal.floor)  {return Vec4(_ppos.m_x,-h + m_origin.m_y, _ppos.m_z);}
-  else if (_normal == normal.back)   {return Vec4(_ppos.m_x, _ppos.m_y,-d + m_origin.m_z);}
-  else if (_normal == normal.front)  {return Vec4(_ppos.m_x, _ppos.m_y, d + m_origin.m_z);}
+  if      (_normal == normal.right)  {return Vec4( w - 0.0002f + m_origin.m_x, _ppos.m_y, _ppos.m_z);}
+  else if (_normal == normal.left)   {return Vec4(-w + 0.0002f + m_origin.m_x, _ppos.m_y, _ppos.m_z);}
+  else if (_normal == normal.ceiling){return Vec4(_ppos.m_x, h - 0.0002f + m_origin.m_y,  _ppos.m_z);}
+  else if (_normal == normal.floor)  {return Vec4(_ppos.m_x,-h + 0.0002f + m_origin.m_y,  _ppos.m_z);}
+  else if (_normal == normal.back)   {return Vec4(_ppos.m_x, _ppos.m_y, -d - 0.0002f + m_origin.m_z);}
+  else if (_normal == normal.front)  {return Vec4(_ppos.m_x, _ppos.m_y,  d + 0.0002f + m_origin.m_z);}
   else return _ppos;
 }
 
 void Space::testDrawSpace()
 {
   glPushMatrix();
-  glColor3f(1.0f,1.0f,1.0f);
-  glLineWidth(2.0f);
+  glColor3f(0.9f,0.9f,0.9f);
+  glLineWidth(1.5f);
 
   glTranslatef(m_origin.m_x, m_origin.m_y, m_origin.m_z);
   GLFunctions::WiredCube(m_size.m_x, m_size.m_y, m_size.m_z);

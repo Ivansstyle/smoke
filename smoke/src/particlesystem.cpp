@@ -4,6 +4,11 @@
 #include <iostream>
 #include "GLFunctions.h"
 
+#define RESOLUTION_LQ 1  // handles extreme amounts of particles
+#define RESOLUTION_MQ 2
+#define RESOLUTION_HQ 3
+#define RESOLUTION_UHQ 4 //Can be slow and unpredictive
+
 ParticleSystem::ParticleSystem() : m_isInit(false),m_startTime(0.0),m_elapsedTime(0.0)
 {
 
@@ -16,7 +21,8 @@ ParticleSystem::ParticleSystem() : m_isInit(false),m_startTime(0.0),m_elapsedTim
 */
 void ParticleSystem::resize(int w, int h) {
   if (!m_isInit) return;
-
+  point_size_factor = 1 * float(h) / 1080;
+  std::cout<< "PSF is = "<<point_size_factor<<std::endl;
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluPerspective(75.0, float(w) / float(h), 0.1f, 20.0f);
@@ -47,6 +53,7 @@ void ParticleSystem::init()
     //SPACE INITIALISATION
     space = Space();
     space.SetSize(Vec4(1.8f,1.0f,1.0f));
+    space.resolution(RESOLUTION_MQ);
     space.flowspace.SetSpherePtr(&controlsphere);
     space.init();
 
@@ -54,7 +61,7 @@ void ParticleSystem::init()
 
 
 
-    TriggerSpeed = 0.0001;
+    TriggerSpeed = 0.0000001;
 
     emitter_out_velocity = 0.01f;
     emitter_spinning_speed = 30.0f;
@@ -70,15 +77,15 @@ void ParticleSystem::init()
     // Enable counter clockwise face ordering
     glFrontFace(GL_CCW);
 
-    glDisable(GL_LIGHTING);
-    glDisable(GL_NORMALIZE);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_NORMALIZE);
 
     glEnable(GL_LIGHT0);
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     GLfloat lightpos[] = {0.0f, 1.0f, 1.0f, 1.0f};
-    GLfloat lightdiff[] = {0.5f, 0.5f, 0.5f, 1.0f};
-    GLfloat lightamb[] = {0.2f, 0.2f, 0.2f, 1.0f};
+    GLfloat lightdiff[] = {0.1f, 0.1f, 0.35f, 1.0f};
+    GLfloat lightamb[] = {0.3f, 0.3f, 0.3f, 0.8f};
     GLfloat lightspec[] = {1.0f, 1.0f, 1.0f, 1.0f};
     glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, lightdiff);
@@ -132,7 +139,7 @@ void ParticleSystem::update()
 void ParticleSystem::draw()
 {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-
+    glEnable(GL_LIGHTING);
     Vec4 sphereNorm = space.isInSpace(controlsphere.GetPos());
     if (sphereNorm != Vec4(0,0,0))
     {
@@ -142,10 +149,9 @@ void ParticleSystem::draw()
 
     controlsphere.draw();
 
-    space.testDrawSpace();
-
+    glDisable(GL_LIGHTING);
+    //space.testDrawSpace();
     //space.flowspace.drawFlows();
-
     ParticleDraw();
 
 
@@ -154,7 +160,6 @@ void ParticleSystem::draw()
 
 void ParticleSystem::ParticleDraw()
 {
-#warning "research on f* point size"
       for (auto& i : m_particles)
       {
 
@@ -162,7 +167,7 @@ void ParticleSystem::ParticleDraw()
                    1.0f - mod(i.GetVel().m_z) * 300.0f,
                    1.0f - mod(i.GetVel().m_y) * 200.0f,
                    1.0f - 1.0f/ (i.GetPos().m_z/0.88f));
-        glPointSize( (1/ -(i.GetPos().m_z)) * 6.0f);
+        glPointSize( ((1/ -(i.GetPos().m_z)) * 6.0f)* point_size_factor - 1 );
         glBegin(GL_POINTS);
           i.draw();
         glEnd();
@@ -185,7 +190,7 @@ void ParticleSystem::takeControl(SDL_Event* _e)
 void ParticleSystem::CreateParticles()
 {
 
-    if (controls.event.space && TriggerTick)
+    if (controls.event.space && (TriggerTick || 1) )
     {
 
 

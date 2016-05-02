@@ -20,8 +20,6 @@ public:
   Particle();
   ~Particle();
 
-  bool m_inSphere;
-
   void UpdatePos();
 
   void SetVel(Vec4 _vel);
@@ -38,16 +36,13 @@ public:
   void draw();
   void bounce(Vec4 _normal);
 
-
 private:
 
-  //Flow::FlowID m_pFlowID;
   Vec4 m_pos;
   Vec4 m_vel;
   float m_mass;
   float m_bouncieness;
   float m_decoy;
-
   Flow* flowPtr;
 
 

@@ -36,6 +36,7 @@ public:
   void SetPos(Vec4 _pos);
   Vec4 GetPos();
   float GetSize();
+  void SetSize(float _size);
   Vec4 CalculateParticleVector(Vec4 _ppos);
   void SetFlowVecPos(float _size);
   void GetSpherePtr(ControlSphere* _ptr);

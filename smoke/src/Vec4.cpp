@@ -25,6 +25,11 @@ Vec4 Vec4::power(const float &_rhs) const
         );
 }
 
+float Vec4::vsum()
+{
+    return m_x + m_y + m_z;
+}
+
 
 float Vec4::dot(const Vec4 &_rhs) const
 {

@@ -24,6 +24,8 @@ public:
     ~Space();
 
     void init();
+    void initFlowSpace();
+    void testDrawSpace();
 
     Vec4 GetSize();
     void SetSize(Vec4 _size);
@@ -31,18 +33,10 @@ public:
     void SetOrigin(Vec4 _origin);
     Vec4 GetGravity();
     void SetGravity(Vec4 _gravity);
-    float GetResistance();
-    void SetResistance(float _airResistance);
-
+    void resolution(int _res);
 
     Vec4 isInSpace(Vec4 _ppos);
     Vec4 SetBackToSpace(Vec4 _ppos, Vec4 _normal);
-
-    void initFlowSpace();
-
-
-    void testDrawSpace();
-
 
     FlowSpace flowspace;
 
@@ -61,18 +55,12 @@ private:
     Normal normal;
 
     Vec4 m_size;
-
     Vec4 m_origin;
-
     Vec4 m_gravity;
 
     float m_airresistance;
 
     int m_resolution;
-    GLfloat m_height;
-    GLfloat m_width;
-
-
 
 };
 

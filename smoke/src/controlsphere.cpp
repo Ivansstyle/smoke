@@ -13,8 +13,8 @@
 #include <iostream>
 #include <cmath>
 
-ControlSphere::ControlSphere() : m_pos(0.0,0.0,-3) , m_r(0.1) ,
-                                 m_speed(0.021f), m_maxspeed(0.04f), m_slowDownSpeed(0.95f)
+ControlSphere::ControlSphere() : m_pos(0.0,0.0,-3) , m_r(0.05f) ,
+                                 m_speed(0.009f), m_maxspeed(0.007f), m_slowDownSpeed(0.95f)
 {
 
 }
@@ -73,7 +73,7 @@ void ControlSphere::Move(Vec4 _move)
   {
     m_vel *= m_slowDownSpeed;
   }
-  else if (_move.length() <= m_maxspeed)
+  else if (m_vel.length() <= m_maxspeed && _move.vsum() < 3)
   {
     m_vel += _move*m_speed;
   }

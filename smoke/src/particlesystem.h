@@ -66,6 +66,7 @@ ControlSphere controlsphere;
 
 float emitter_out_velocity;
 float emitter_spinning_speed;
+float point_size_factor;
 
 
 protected:

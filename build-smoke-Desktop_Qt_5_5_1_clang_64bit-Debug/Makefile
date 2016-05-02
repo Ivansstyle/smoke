@@ -54,14 +54,22 @@ SOURCES       = ../smoke/src/main.cpp \
 		../smoke/src/controlsphere.cpp \
 		../smoke/src/Vec4.cpp \
 		../smoke/src/space.cpp \
-		../smoke/src/flowspace.cpp 
+		../smoke/src/flowspace.cpp \
+		../smoke/src/controls.cpp \
+		../smoke/src/flow.cpp \
+		../smoke/src/Mat4.cpp \
+		../smoke/src/GLFunctions.cpp 
 OBJECTS       = main.o \
 		particlesystem.o \
 		particle.o \
 		controlsphere.o \
 		Vec4.o \
 		space.o \
-		flowspace.o
+		flowspace.o \
+		controls.o \
+		flow.o \
+		Mat4.o \
+		GLFunctions.o
 DIST          = ../../../Qt/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.5/clang_64/mkspecs/qdevice.pri \
 		../../../Qt/5.5/clang_64/mkspecs/features/device_config.prf \
@@ -209,13 +217,21 @@ DIST          = ../../../Qt/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		../smoke/src/controlsphere.h \
 		../smoke/src/Vec4.h \
 		../smoke/src/space.h \
-		../smoke/src/flowspace.h ../smoke/src/main.cpp \
+		../smoke/src/flowspace.h \
+		../smoke/src/controls.h \
+		../smoke/src/flow.h \
+		../smoke/src/Mat4.h \
+		../smoke/src/GLFunctions.h ../smoke/src/main.cpp \
 		../smoke/src/particlesystem.cpp \
 		../smoke/src/particle.cpp \
 		../smoke/src/controlsphere.cpp \
 		../smoke/src/Vec4.cpp \
 		../smoke/src/space.cpp \
-		../smoke/src/flowspace.cpp
+		../smoke/src/flowspace.cpp \
+		../smoke/src/controls.cpp \
+		../smoke/src/flow.cpp \
+		../smoke/src/Mat4.cpp \
+		../smoke/src/GLFunctions.cpp
 QMAKE_TARGET  = smoke
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = smoke.app/Contents/MacOS/smoke
@@ -579,8 +595,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../smoke/src/particlesystem.h ../smoke/src/particle.h ../smoke/src/controlsphere.h ../smoke/src/Vec4.h ../smoke/src/space.h ../smoke/src/flowspace.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../smoke/src/main.cpp ../smoke/src/particlesystem.cpp ../smoke/src/particle.cpp ../smoke/src/controlsphere.cpp ../smoke/src/Vec4.cpp ../smoke/src/space.cpp ../smoke/src/flowspace.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../smoke/src/particlesystem.h ../smoke/src/particle.h ../smoke/src/controlsphere.h ../smoke/src/Vec4.h ../smoke/src/space.h ../smoke/src/flowspace.h ../smoke/src/controls.h ../smoke/src/flow.h ../smoke/src/Mat4.h ../smoke/src/GLFunctions.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../smoke/src/main.cpp ../smoke/src/particlesystem.cpp ../smoke/src/particle.cpp ../smoke/src/controlsphere.cpp ../smoke/src/Vec4.cpp ../smoke/src/space.cpp ../smoke/src/flowspace.cpp ../smoke/src/controls.cpp ../smoke/src/flow.cpp ../smoke/src/Mat4.cpp ../smoke/src/GLFunctions.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -666,20 +682,166 @@ main.o: ../smoke/src/main.cpp /usr/local/include/SDL2/SDL.h \
 		/usr/local/include/SDL2/SDL_timer.h \
 		/usr/local/include/SDL2/SDL_version.h \
 		../smoke/src/particle.h \
+		../smoke/src/flow.h \
+		../smoke/src/controlsphere.h \
 		../smoke/src/Vec4.h \
-		../smoke/src/particlesystem.h
+		../smoke/src/controls.h \
+		../smoke/src/particlesystem.h \
+		../smoke/src/space.h \
+		../smoke/src/flowspace.h \
+		../smoke/src/GLFunctions.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../smoke/src/main.cpp
 
 particlesystem.o: ../smoke/src/particlesystem.cpp ../smoke/src/particlesystem.h \
 		../smoke/src/particle.h \
-		../smoke/src/Vec4.h
+		../smoke/src/flow.h \
+		../smoke/src/controlsphere.h \
+		../smoke/src/Vec4.h \
+		../smoke/src/controls.h \
+		/usr/local/include/SDL2/SDL.h \
+		/usr/local/include/SDL2/SDL_main.h \
+		/usr/local/include/SDL2/SDL_stdinc.h \
+		/usr/local/include/SDL2/SDL_config.h \
+		/usr/local/include/SDL2/SDL_platform.h \
+		/usr/local/include/SDL2/begin_code.h \
+		/usr/local/include/SDL2/close_code.h \
+		/usr/local/include/SDL2/SDL_assert.h \
+		/usr/local/include/SDL2/SDL_atomic.h \
+		/usr/local/include/SDL2/SDL_audio.h \
+		/usr/local/include/SDL2/SDL_error.h \
+		/usr/local/include/SDL2/SDL_endian.h \
+		/usr/local/include/SDL2/SDL_mutex.h \
+		/usr/local/include/SDL2/SDL_thread.h \
+		/usr/local/include/SDL2/SDL_rwops.h \
+		/usr/local/include/SDL2/SDL_clipboard.h \
+		/usr/local/include/SDL2/SDL_cpuinfo.h \
+		/usr/local/include/SDL2/SDL_events.h \
+		/usr/local/include/SDL2/SDL_video.h \
+		/usr/local/include/SDL2/SDL_pixels.h \
+		/usr/local/include/SDL2/SDL_rect.h \
+		/usr/local/include/SDL2/SDL_surface.h \
+		/usr/local/include/SDL2/SDL_blendmode.h \
+		/usr/local/include/SDL2/SDL_keyboard.h \
+		/usr/local/include/SDL2/SDL_keycode.h \
+		/usr/local/include/SDL2/SDL_scancode.h \
+		/usr/local/include/SDL2/SDL_mouse.h \
+		/usr/local/include/SDL2/SDL_joystick.h \
+		/usr/local/include/SDL2/SDL_gamecontroller.h \
+		/usr/local/include/SDL2/SDL_quit.h \
+		/usr/local/include/SDL2/SDL_gesture.h \
+		/usr/local/include/SDL2/SDL_touch.h \
+		/usr/local/include/SDL2/SDL_filesystem.h \
+		/usr/local/include/SDL2/SDL_haptic.h \
+		/usr/local/include/SDL2/SDL_hints.h \
+		/usr/local/include/SDL2/SDL_loadso.h \
+		/usr/local/include/SDL2/SDL_log.h \
+		/usr/local/include/SDL2/SDL_messagebox.h \
+		/usr/local/include/SDL2/SDL_power.h \
+		/usr/local/include/SDL2/SDL_render.h \
+		/usr/local/include/SDL2/SDL_system.h \
+		/usr/local/include/SDL2/SDL_timer.h \
+		/usr/local/include/SDL2/SDL_version.h \
+		../smoke/src/space.h \
+		../smoke/src/flowspace.h \
+		../smoke/src/GLFunctions.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o particlesystem.o ../smoke/src/particlesystem.cpp
 
 particle.o: ../smoke/src/particle.cpp ../smoke/src/particle.h \
-		../smoke/src/Vec4.h
+		../smoke/src/flow.h \
+		../smoke/src/controlsphere.h \
+		../smoke/src/Vec4.h \
+		../smoke/src/controls.h \
+		/usr/local/include/SDL2/SDL.h \
+		/usr/local/include/SDL2/SDL_main.h \
+		/usr/local/include/SDL2/SDL_stdinc.h \
+		/usr/local/include/SDL2/SDL_config.h \
+		/usr/local/include/SDL2/SDL_platform.h \
+		/usr/local/include/SDL2/begin_code.h \
+		/usr/local/include/SDL2/close_code.h \
+		/usr/local/include/SDL2/SDL_assert.h \
+		/usr/local/include/SDL2/SDL_atomic.h \
+		/usr/local/include/SDL2/SDL_audio.h \
+		/usr/local/include/SDL2/SDL_error.h \
+		/usr/local/include/SDL2/SDL_endian.h \
+		/usr/local/include/SDL2/SDL_mutex.h \
+		/usr/local/include/SDL2/SDL_thread.h \
+		/usr/local/include/SDL2/SDL_rwops.h \
+		/usr/local/include/SDL2/SDL_clipboard.h \
+		/usr/local/include/SDL2/SDL_cpuinfo.h \
+		/usr/local/include/SDL2/SDL_events.h \
+		/usr/local/include/SDL2/SDL_video.h \
+		/usr/local/include/SDL2/SDL_pixels.h \
+		/usr/local/include/SDL2/SDL_rect.h \
+		/usr/local/include/SDL2/SDL_surface.h \
+		/usr/local/include/SDL2/SDL_blendmode.h \
+		/usr/local/include/SDL2/SDL_keyboard.h \
+		/usr/local/include/SDL2/SDL_keycode.h \
+		/usr/local/include/SDL2/SDL_scancode.h \
+		/usr/local/include/SDL2/SDL_mouse.h \
+		/usr/local/include/SDL2/SDL_joystick.h \
+		/usr/local/include/SDL2/SDL_gamecontroller.h \
+		/usr/local/include/SDL2/SDL_quit.h \
+		/usr/local/include/SDL2/SDL_gesture.h \
+		/usr/local/include/SDL2/SDL_touch.h \
+		/usr/local/include/SDL2/SDL_filesystem.h \
+		/usr/local/include/SDL2/SDL_haptic.h \
+		/usr/local/include/SDL2/SDL_hints.h \
+		/usr/local/include/SDL2/SDL_loadso.h \
+		/usr/local/include/SDL2/SDL_log.h \
+		/usr/local/include/SDL2/SDL_messagebox.h \
+		/usr/local/include/SDL2/SDL_power.h \
+		/usr/local/include/SDL2/SDL_render.h \
+		/usr/local/include/SDL2/SDL_system.h \
+		/usr/local/include/SDL2/SDL_timer.h \
+		/usr/local/include/SDL2/SDL_version.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o particle.o ../smoke/src/particle.cpp
 
-controlsphere.o: ../smoke/src/controlsphere.cpp ../smoke/src/controlsphere.h
+controlsphere.o: ../smoke/src/controlsphere.cpp ../smoke/src/controlsphere.h \
+		../smoke/src/Vec4.h \
+		../smoke/src/controls.h \
+		/usr/local/include/SDL2/SDL.h \
+		/usr/local/include/SDL2/SDL_main.h \
+		/usr/local/include/SDL2/SDL_stdinc.h \
+		/usr/local/include/SDL2/SDL_config.h \
+		/usr/local/include/SDL2/SDL_platform.h \
+		/usr/local/include/SDL2/begin_code.h \
+		/usr/local/include/SDL2/close_code.h \
+		/usr/local/include/SDL2/SDL_assert.h \
+		/usr/local/include/SDL2/SDL_atomic.h \
+		/usr/local/include/SDL2/SDL_audio.h \
+		/usr/local/include/SDL2/SDL_error.h \
+		/usr/local/include/SDL2/SDL_endian.h \
+		/usr/local/include/SDL2/SDL_mutex.h \
+		/usr/local/include/SDL2/SDL_thread.h \
+		/usr/local/include/SDL2/SDL_rwops.h \
+		/usr/local/include/SDL2/SDL_clipboard.h \
+		/usr/local/include/SDL2/SDL_cpuinfo.h \
+		/usr/local/include/SDL2/SDL_events.h \
+		/usr/local/include/SDL2/SDL_video.h \
+		/usr/local/include/SDL2/SDL_pixels.h \
+		/usr/local/include/SDL2/SDL_rect.h \
+		/usr/local/include/SDL2/SDL_surface.h \
+		/usr/local/include/SDL2/SDL_blendmode.h \
+		/usr/local/include/SDL2/SDL_keyboard.h \
+		/usr/local/include/SDL2/SDL_keycode.h \
+		/usr/local/include/SDL2/SDL_scancode.h \
+		/usr/local/include/SDL2/SDL_mouse.h \
+		/usr/local/include/SDL2/SDL_joystick.h \
+		/usr/local/include/SDL2/SDL_gamecontroller.h \
+		/usr/local/include/SDL2/SDL_quit.h \
+		/usr/local/include/SDL2/SDL_gesture.h \
+		/usr/local/include/SDL2/SDL_touch.h \
+		/usr/local/include/SDL2/SDL_filesystem.h \
+		/usr/local/include/SDL2/SDL_haptic.h \
+		/usr/local/include/SDL2/SDL_hints.h \
+		/usr/local/include/SDL2/SDL_loadso.h \
+		/usr/local/include/SDL2/SDL_log.h \
+		/usr/local/include/SDL2/SDL_messagebox.h \
+		/usr/local/include/SDL2/SDL_power.h \
+		/usr/local/include/SDL2/SDL_render.h \
+		/usr/local/include/SDL2/SDL_system.h \
+		/usr/local/include/SDL2/SDL_timer.h \
+		/usr/local/include/SDL2/SDL_version.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controlsphere.o ../smoke/src/controlsphere.cpp
 
 Vec4.o: ../smoke/src/Vec4.cpp ../smoke/src/Vec4.h \
@@ -687,11 +849,214 @@ Vec4.o: ../smoke/src/Vec4.cpp ../smoke/src/Vec4.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Vec4.o ../smoke/src/Vec4.cpp
 
 space.o: ../smoke/src/space.cpp ../smoke/src/space.h \
-		../smoke/src/Vec4.h
+		../smoke/src/flowspace.h \
+		../smoke/src/flow.h \
+		../smoke/src/controlsphere.h \
+		../smoke/src/Vec4.h \
+		../smoke/src/controls.h \
+		/usr/local/include/SDL2/SDL.h \
+		/usr/local/include/SDL2/SDL_main.h \
+		/usr/local/include/SDL2/SDL_stdinc.h \
+		/usr/local/include/SDL2/SDL_config.h \
+		/usr/local/include/SDL2/SDL_platform.h \
+		/usr/local/include/SDL2/begin_code.h \
+		/usr/local/include/SDL2/close_code.h \
+		/usr/local/include/SDL2/SDL_assert.h \
+		/usr/local/include/SDL2/SDL_atomic.h \
+		/usr/local/include/SDL2/SDL_audio.h \
+		/usr/local/include/SDL2/SDL_error.h \
+		/usr/local/include/SDL2/SDL_endian.h \
+		/usr/local/include/SDL2/SDL_mutex.h \
+		/usr/local/include/SDL2/SDL_thread.h \
+		/usr/local/include/SDL2/SDL_rwops.h \
+		/usr/local/include/SDL2/SDL_clipboard.h \
+		/usr/local/include/SDL2/SDL_cpuinfo.h \
+		/usr/local/include/SDL2/SDL_events.h \
+		/usr/local/include/SDL2/SDL_video.h \
+		/usr/local/include/SDL2/SDL_pixels.h \
+		/usr/local/include/SDL2/SDL_rect.h \
+		/usr/local/include/SDL2/SDL_surface.h \
+		/usr/local/include/SDL2/SDL_blendmode.h \
+		/usr/local/include/SDL2/SDL_keyboard.h \
+		/usr/local/include/SDL2/SDL_keycode.h \
+		/usr/local/include/SDL2/SDL_scancode.h \
+		/usr/local/include/SDL2/SDL_mouse.h \
+		/usr/local/include/SDL2/SDL_joystick.h \
+		/usr/local/include/SDL2/SDL_gamecontroller.h \
+		/usr/local/include/SDL2/SDL_quit.h \
+		/usr/local/include/SDL2/SDL_gesture.h \
+		/usr/local/include/SDL2/SDL_touch.h \
+		/usr/local/include/SDL2/SDL_filesystem.h \
+		/usr/local/include/SDL2/SDL_haptic.h \
+		/usr/local/include/SDL2/SDL_hints.h \
+		/usr/local/include/SDL2/SDL_loadso.h \
+		/usr/local/include/SDL2/SDL_log.h \
+		/usr/local/include/SDL2/SDL_messagebox.h \
+		/usr/local/include/SDL2/SDL_power.h \
+		/usr/local/include/SDL2/SDL_render.h \
+		/usr/local/include/SDL2/SDL_system.h \
+		/usr/local/include/SDL2/SDL_timer.h \
+		/usr/local/include/SDL2/SDL_version.h \
+		../smoke/src/particle.h \
+		../smoke/src/GLFunctions.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o space.o ../smoke/src/space.cpp
 
-flowspace.o: ../smoke/src/flowspace.cpp ../smoke/src/flowspace.h
+flowspace.o: ../smoke/src/flowspace.cpp ../smoke/src/flowspace.h \
+		../smoke/src/flow.h \
+		../smoke/src/controlsphere.h \
+		../smoke/src/Vec4.h \
+		../smoke/src/controls.h \
+		/usr/local/include/SDL2/SDL.h \
+		/usr/local/include/SDL2/SDL_main.h \
+		/usr/local/include/SDL2/SDL_stdinc.h \
+		/usr/local/include/SDL2/SDL_config.h \
+		/usr/local/include/SDL2/SDL_platform.h \
+		/usr/local/include/SDL2/begin_code.h \
+		/usr/local/include/SDL2/close_code.h \
+		/usr/local/include/SDL2/SDL_assert.h \
+		/usr/local/include/SDL2/SDL_atomic.h \
+		/usr/local/include/SDL2/SDL_audio.h \
+		/usr/local/include/SDL2/SDL_error.h \
+		/usr/local/include/SDL2/SDL_endian.h \
+		/usr/local/include/SDL2/SDL_mutex.h \
+		/usr/local/include/SDL2/SDL_thread.h \
+		/usr/local/include/SDL2/SDL_rwops.h \
+		/usr/local/include/SDL2/SDL_clipboard.h \
+		/usr/local/include/SDL2/SDL_cpuinfo.h \
+		/usr/local/include/SDL2/SDL_events.h \
+		/usr/local/include/SDL2/SDL_video.h \
+		/usr/local/include/SDL2/SDL_pixels.h \
+		/usr/local/include/SDL2/SDL_rect.h \
+		/usr/local/include/SDL2/SDL_surface.h \
+		/usr/local/include/SDL2/SDL_blendmode.h \
+		/usr/local/include/SDL2/SDL_keyboard.h \
+		/usr/local/include/SDL2/SDL_keycode.h \
+		/usr/local/include/SDL2/SDL_scancode.h \
+		/usr/local/include/SDL2/SDL_mouse.h \
+		/usr/local/include/SDL2/SDL_joystick.h \
+		/usr/local/include/SDL2/SDL_gamecontroller.h \
+		/usr/local/include/SDL2/SDL_quit.h \
+		/usr/local/include/SDL2/SDL_gesture.h \
+		/usr/local/include/SDL2/SDL_touch.h \
+		/usr/local/include/SDL2/SDL_filesystem.h \
+		/usr/local/include/SDL2/SDL_haptic.h \
+		/usr/local/include/SDL2/SDL_hints.h \
+		/usr/local/include/SDL2/SDL_loadso.h \
+		/usr/local/include/SDL2/SDL_log.h \
+		/usr/local/include/SDL2/SDL_messagebox.h \
+		/usr/local/include/SDL2/SDL_power.h \
+		/usr/local/include/SDL2/SDL_render.h \
+		/usr/local/include/SDL2/SDL_system.h \
+		/usr/local/include/SDL2/SDL_timer.h \
+		/usr/local/include/SDL2/SDL_version.h \
+		../smoke/src/particle.h \
+		../smoke/src/GLFunctions.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o flowspace.o ../smoke/src/flowspace.cpp
+
+controls.o: ../smoke/src/controls.cpp ../smoke/src/controls.h \
+		/usr/local/include/SDL2/SDL.h \
+		/usr/local/include/SDL2/SDL_main.h \
+		/usr/local/include/SDL2/SDL_stdinc.h \
+		/usr/local/include/SDL2/SDL_config.h \
+		/usr/local/include/SDL2/SDL_platform.h \
+		/usr/local/include/SDL2/begin_code.h \
+		/usr/local/include/SDL2/close_code.h \
+		/usr/local/include/SDL2/SDL_assert.h \
+		/usr/local/include/SDL2/SDL_atomic.h \
+		/usr/local/include/SDL2/SDL_audio.h \
+		/usr/local/include/SDL2/SDL_error.h \
+		/usr/local/include/SDL2/SDL_endian.h \
+		/usr/local/include/SDL2/SDL_mutex.h \
+		/usr/local/include/SDL2/SDL_thread.h \
+		/usr/local/include/SDL2/SDL_rwops.h \
+		/usr/local/include/SDL2/SDL_clipboard.h \
+		/usr/local/include/SDL2/SDL_cpuinfo.h \
+		/usr/local/include/SDL2/SDL_events.h \
+		/usr/local/include/SDL2/SDL_video.h \
+		/usr/local/include/SDL2/SDL_pixels.h \
+		/usr/local/include/SDL2/SDL_rect.h \
+		/usr/local/include/SDL2/SDL_surface.h \
+		/usr/local/include/SDL2/SDL_blendmode.h \
+		/usr/local/include/SDL2/SDL_keyboard.h \
+		/usr/local/include/SDL2/SDL_keycode.h \
+		/usr/local/include/SDL2/SDL_scancode.h \
+		/usr/local/include/SDL2/SDL_mouse.h \
+		/usr/local/include/SDL2/SDL_joystick.h \
+		/usr/local/include/SDL2/SDL_gamecontroller.h \
+		/usr/local/include/SDL2/SDL_quit.h \
+		/usr/local/include/SDL2/SDL_gesture.h \
+		/usr/local/include/SDL2/SDL_touch.h \
+		/usr/local/include/SDL2/SDL_filesystem.h \
+		/usr/local/include/SDL2/SDL_haptic.h \
+		/usr/local/include/SDL2/SDL_hints.h \
+		/usr/local/include/SDL2/SDL_loadso.h \
+		/usr/local/include/SDL2/SDL_log.h \
+		/usr/local/include/SDL2/SDL_messagebox.h \
+		/usr/local/include/SDL2/SDL_power.h \
+		/usr/local/include/SDL2/SDL_render.h \
+		/usr/local/include/SDL2/SDL_system.h \
+		/usr/local/include/SDL2/SDL_timer.h \
+		/usr/local/include/SDL2/SDL_version.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controls.o ../smoke/src/controls.cpp
+
+flow.o: ../smoke/src/flow.cpp ../smoke/src/flow.h \
+		../smoke/src/controlsphere.h \
+		../smoke/src/Vec4.h \
+		../smoke/src/controls.h \
+		/usr/local/include/SDL2/SDL.h \
+		/usr/local/include/SDL2/SDL_main.h \
+		/usr/local/include/SDL2/SDL_stdinc.h \
+		/usr/local/include/SDL2/SDL_config.h \
+		/usr/local/include/SDL2/SDL_platform.h \
+		/usr/local/include/SDL2/begin_code.h \
+		/usr/local/include/SDL2/close_code.h \
+		/usr/local/include/SDL2/SDL_assert.h \
+		/usr/local/include/SDL2/SDL_atomic.h \
+		/usr/local/include/SDL2/SDL_audio.h \
+		/usr/local/include/SDL2/SDL_error.h \
+		/usr/local/include/SDL2/SDL_endian.h \
+		/usr/local/include/SDL2/SDL_mutex.h \
+		/usr/local/include/SDL2/SDL_thread.h \
+		/usr/local/include/SDL2/SDL_rwops.h \
+		/usr/local/include/SDL2/SDL_clipboard.h \
+		/usr/local/include/SDL2/SDL_cpuinfo.h \
+		/usr/local/include/SDL2/SDL_events.h \
+		/usr/local/include/SDL2/SDL_video.h \
+		/usr/local/include/SDL2/SDL_pixels.h \
+		/usr/local/include/SDL2/SDL_rect.h \
+		/usr/local/include/SDL2/SDL_surface.h \
+		/usr/local/include/SDL2/SDL_blendmode.h \
+		/usr/local/include/SDL2/SDL_keyboard.h \
+		/usr/local/include/SDL2/SDL_keycode.h \
+		/usr/local/include/SDL2/SDL_scancode.h \
+		/usr/local/include/SDL2/SDL_mouse.h \
+		/usr/local/include/SDL2/SDL_joystick.h \
+		/usr/local/include/SDL2/SDL_gamecontroller.h \
+		/usr/local/include/SDL2/SDL_quit.h \
+		/usr/local/include/SDL2/SDL_gesture.h \
+		/usr/local/include/SDL2/SDL_touch.h \
+		/usr/local/include/SDL2/SDL_filesystem.h \
+		/usr/local/include/SDL2/SDL_haptic.h \
+		/usr/local/include/SDL2/SDL_hints.h \
+		/usr/local/include/SDL2/SDL_loadso.h \
+		/usr/local/include/SDL2/SDL_log.h \
+		/usr/local/include/SDL2/SDL_messagebox.h \
+		/usr/local/include/SDL2/SDL_power.h \
+		/usr/local/include/SDL2/SDL_render.h \
+		/usr/local/include/SDL2/SDL_system.h \
+		/usr/local/include/SDL2/SDL_timer.h \
+		/usr/local/include/SDL2/SDL_version.h \
+		../smoke/src/GLFunctions.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o flow.o ../smoke/src/flow.cpp
+
+Mat4.o: ../smoke/src/Mat4.cpp ../smoke/src/Mat4.h \
+		../smoke/src/Vec4.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Mat4.o ../smoke/src/Mat4.cpp
+
+GLFunctions.o: ../smoke/src/GLFunctions.cpp ../smoke/src/GLFunctions.h \
+		../smoke/src/Vec4.h \
+		../smoke/src/Mat4.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GLFunctions.o ../smoke/src/GLFunctions.cpp
 
 ####### Install
 

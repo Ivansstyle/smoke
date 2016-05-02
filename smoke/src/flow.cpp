@@ -50,26 +50,23 @@ void Flow::draw()
 {
   glPushMatrix();
 
-  glColor4f(0.0f,0.0f,1.0f,0.8f);
-  glLineWidth(0.1f);
+      glTranslatef(m_position.m_x, m_position.m_y, m_position.m_z);
 
-  glTranslatef(m_position.m_x, m_position.m_y, m_position.m_z);
+      drawVectors();
 
-  GLFunctions::WiredCube(0.2f,0.2f,0.2f);
-  glLineWidth(3.0f);
+      glColor4f(0.2f,0.2f,1.0f,0.5f);
+      glLineWidth(0.1f);
 
-  glColor4f(1.0f,0.9f,0.0f,0.8f);
-  glPointSize(2.0f);
+      GLFunctions::WiredCube(m_fsize*2.0f, m_fsize*2.0f, m_fsize*2.0f);
+      glLineWidth(3.0f);
 
-  glBegin(GL_POINTS);
-    glVertex3f(m_position.m_x,m_position.m_y,m_position.m_z);
-    glColor4f(1.0f,1.0f,1.0f,1.0f);
-  glEnd(); //glPoint
+      glColor4f(1.0f,0.1f,0.0f,0.8f);
+      glPointSize(2.0f);
 
-  glPointSize(10.0f);
-
-  // Vector Draw
-  drawVectors();
+      glBegin(GL_POINTS);
+        glVertex3f(m_position.m_x,m_position.m_y,m_position.m_z);
+        glColor4f(1.0f,1.0f,1.0f,1.0f);
+      glEnd(); //glPoint
 
   glPopMatrix();
 }
@@ -220,6 +217,10 @@ Vec4 Flow::GetPos()
 float Flow::GetSize()
 {
   return m_fsize;
+}
+void Flow::SetSize(float _size)
+{
+    m_fsize = _size;
 }
 
 FlowID Flow::GetFlowID()

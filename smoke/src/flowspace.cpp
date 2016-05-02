@@ -3,7 +3,6 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
-#warning "remove iostream after"
 
 FlowSpace::FlowSpace() : m_spherePtr(NULL)
 {
@@ -69,14 +68,12 @@ void FlowSpace::createFlows(const Vec4 _size,Vec4 _origin)
   GLfloat h = _size_in_space.m_y / 2.0f;
   GLfloat d = _size_in_space.m_z / 2.0f;
 
-
-
   int r_max = int(ceil(float(_size.m_x / (2.0f * m_flowsize)))) ; //Rows
   int c_max = int(ceil(float(_size.m_y / (2.0f * m_flowsize)))) ; //Colls
   int s_max = int(ceil(float(_size.m_z / (2.0f * m_flowsize)))) ; //Segmemnts
 
-  m_flows.reserve(r_max*c_max*s_max);
 
+  m_flows.reserve(r_max*c_max*s_max);
 
     for (int s = 0; s < s_max; ++s)
     {
@@ -91,6 +88,7 @@ void FlowSpace::createFlows(const Vec4 _size,Vec4 _origin)
                          h - m_flowsize - ((2.0f * m_flowsize) * c),
                         -d - m_flowsize - ((2.0f * m_flowsize) * s))
                         + _origin);
+
           f.SetFlowVecPos(m_flowsize);
           f.GetSpherePtr(m_spherePtr);
 
@@ -105,8 +103,11 @@ void FlowSpace::CalculateFlowSize(Vec4 _size, int _resolution)
 {
   // Implemet an algorythm
 #warning "do this"
+if      (_resolution == 1) m_flowsize = 0.1f;
+else if (_resolution == 2) m_flowsize = 0.07f;
+else if (_resolution == 3) m_flowsize = 0.05f;
+else if (_resolution == 4) m_flowsize = 0.045f;
 
-  m_flowsize = 0.1f;
 }
 
 void FlowSpace::SetSpherePtr(ControlSphere *_ptr)

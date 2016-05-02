@@ -1,7 +1,11 @@
 #include "particle.h"
 
 
-Particle::Particle() : m_bouncieness(0.65) , m_decoy(0.99f) ,flowPtr(NULL)
+Particle::Particle() :
+          m_bouncieness(0.65) ,
+          m_decoy(0.99f),
+          flowPtr(NULL)
+
 {
 
 }
@@ -36,6 +40,7 @@ void Particle::UpdateFlowVel()
 }
 void Particle::UpdatePos()
 {
+
     m_pos += m_vel;
     m_vel *= m_decoy;
 }
@@ -48,7 +53,6 @@ void Particle::SetPos(Vec4 _pos)
 {
     m_pos = _pos;
 }
-
 
 void Particle::SetVel(Vec4 _vel)
 {

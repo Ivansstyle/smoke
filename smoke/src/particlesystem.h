@@ -54,10 +54,16 @@ public:
 
 private:
 
+ void ParticleDraw();
+
 std::vector<Particle> m_particles;
 
 Space space;
 ControlSphere controlsphere;
+
+
+float emitter_out_velocity;
+float emitter_spinning_speed;
 
 
 protected:

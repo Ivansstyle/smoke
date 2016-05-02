@@ -134,7 +134,7 @@ Vec4 Space::SetBackToSpace(Vec4 _ppos, Vec4 _normal)
 void Space::testDrawSpace()
 {
   glPushMatrix();
-
+  glColor3f(1.0f,1.0f,1.0f);
   glLineWidth(2.0f);
 
   glTranslatef(m_origin.m_x, m_origin.m_y, m_origin.m_z);

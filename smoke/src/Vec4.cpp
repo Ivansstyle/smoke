@@ -2,6 +2,7 @@
 #include "Mat4.h"
 #include <cmath>
 #include <cassert>
+#include <iostream>
 
 void Vec4::colourGL() const
 {
@@ -131,11 +132,18 @@ void Vec4::set(GLfloat _x, GLfloat _y, GLfloat _z, GLfloat _w)
 
 }
 
+
 void Vec4::vertexGL() const
 {
 
 }
+GLfloat Vec4::dist(const Vec4 &_rhs) const
+{
+    return   GLfloat(sqrt((pow((m_x - _rhs.m_x),2)  +
+                          (pow((m_y - _rhs.m_y),2)  +
+                          (pow((m_z - _rhs.m_z),2))))));
 
+}
 Vec4 Vec4::refl(Vec4 _normal)
 {
   Vec4 v = Vec4(m_x,m_y,m_z);

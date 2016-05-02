@@ -31,6 +31,9 @@ public:
   Vec4 GetVel();
   Vec4 GetPos();
   void UpdateGravity(Vec4 _gravity);
+  void UpdateFlowVel();
+
+  bool isInFlow(Flow* _ptr);
 
   void draw();
   void bounce(Vec4 _normal);
@@ -44,6 +47,7 @@ private:
   float m_mass;
   float m_bouncieness;
 
+  Flow* flowPtr;
 
 
 

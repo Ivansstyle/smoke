@@ -13,7 +13,8 @@
 #include <iostream>
 #include <cmath>
 
-ControlSphere::ControlSphere() : m_pos(0.0,0.0,-3) , m_r(0.1) , m_speed(0.005f)
+ControlSphere::ControlSphere() : m_pos(0.0,0.0,-3) , m_r(0.1) ,
+                                 m_speed(0.021f), m_maxspeed(0.04f), m_slowDownSpeed(0.95f)
 {
 
 }
@@ -42,9 +43,14 @@ void ControlSphere::SetR(GLdouble _r)
 {
     m_r = _r;
 }
+Vec4 ControlSphere::GetVel()
+{
+  return m_vel;
+}
 
 void ControlSphere::draw()
 {
+      glColor3f(0.1f,0.9f,0.1f);
       glPushMatrix();
       glTranslatef(m_pos.m_x,m_pos.m_y,m_pos.m_z);
 
@@ -58,19 +64,28 @@ void ControlSphere::draw()
 
 void ControlSphere::Move(Vec4 _move)
 {
-  m_pos.m_x += _move.m_x;
-  m_pos.m_y += _move.m_y;
-  m_pos.m_z += _move.m_z;
+  if (_move == Vec4(0,0,0))
+  {
+    m_vel *= m_slowDownSpeed;
+  }
+  else if (_move.length() <= m_maxspeed)
+  {
+    m_vel += _move*m_speed;
+  }
+  m_pos += m_vel;
+
 }
 
 void ControlSphere::update(Event* event)
 {
- if (event->left) {Move(Vec4(-1.0f*m_speed,0.0,0.0));}
+ Vec4 mov_vec;
+ if (event->left) {Move(Vec4(-1.0f * m_speed,0.0,0.0));}
  else if (event->right) {Move(Vec4(1.0f*m_speed,0.0,0.0));}
  else if (event->down) {Move(Vec4(0.0,0.0,1.0f *m_speed));}
  else if (event->up) {Move(Vec4(0.0,0.0,-1.0f * m_speed));}
  else if (event->shift) {Move(Vec4 (0.0,1.0f * m_speed, 0.0));}
  else if (event->ctrl) {Move(Vec4 (0.0, -1.0f * m_speed, 0.0));}
+ else {Move(Vec4(0,0,0));}
 }
 
 Vec4 ControlSphere::SphereCollisionNormal(Vec4 _ppos)
@@ -104,13 +119,22 @@ bool ControlSphere::SphereCollision(Vec4 _ppos)
                                 pow((_ppos.m_y - m_pos.m_y),2) +
                                 pow((_ppos.m_z - m_pos.m_z),2));
 
-    if (m_collision_distance <= m_r) {return true;}
+    if (m_collision_distance <= (m_r)) {return true;}
     else return false;
   }
 }
 
 Vec4 ControlSphere::SetBackToSpace(Vec4 _normal)
 {
-  return (_normal * (m_r + 0.01) + m_pos);
+  return (_normal * (m_r + 0.01f) + m_pos);
 }
 
+/*Trashbin
+ *
+ * std::cout<<"coll dist = "<<m_collision_distance<<std::endl;
+ *   m_pos.m_x += _move.m_x;
+  m_pos.m_y += _move.m_y;
+  m_pos.m_z += _move.m_z;
+ *
+ *
+ */

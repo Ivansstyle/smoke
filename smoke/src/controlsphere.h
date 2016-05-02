@@ -16,6 +16,7 @@ public:
 
   Vec4 GetPos() const;
   void SetPos(Vec4 _pos);
+  Vec4 GetVel();
   GLdouble GetR() const;
   void SetR(GLdouble _r);
   Vec4 SetBackToSpace(Vec4 _normal);
@@ -30,9 +31,13 @@ public:
 
 private:
   Vec4 m_pos;
+  Vec4 m_vel;
   GLdouble m_r;
   GLfloat m_collision_distance;
   float m_speed;
+  float m_maxspeed;
+  float m_slowDownSpeed;
+
 
 
 

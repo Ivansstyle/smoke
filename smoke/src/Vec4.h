@@ -35,6 +35,7 @@ class Vec4
     void normalize();
 
 
+
     Vec4 operator *(const Mat4 &_r) const;
     Vec4 operator *(GLfloat _rhs) const;
     void operator *=(GLfloat _rhs);
@@ -48,8 +49,10 @@ class Vec4
     void set(GLfloat _x, GLfloat _y, GLfloat _z, GLfloat _w=1.0f);
     void vertexGL() const;
 
-    // reflection vector normal
+    // reflection vector
     Vec4 refl(Vec4 _normal);
+    // distance between 2 points
+    GLfloat dist(const Vec4 &_rhs) const;
 
 
   union

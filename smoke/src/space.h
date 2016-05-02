@@ -16,6 +16,7 @@
 #endif
 
 
+
 class Space
 {
 public:
@@ -32,9 +33,6 @@ public:
     void SetGravity(Vec4 _gravity);
     float GetResistance();
     void SetResistance(float _airResistance);
-
-
-#warning "implement element that will represent space vertex coordinates"
 
 
     Vec4 isInSpace(Vec4 _ppos);

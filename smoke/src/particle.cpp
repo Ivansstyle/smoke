@@ -7,8 +7,28 @@ Particle::Particle() : m_bouncieness(0.88)
 }
 Particle::~Particle()
 {
+
 }
 
+bool Particle::isInFlow(Flow *_ptrFlow)
+{
+  if (m_pos.m_x > _ptrFlow->GetPos().m_x - _ptrFlow->GetSize() &&
+      m_pos.m_x < _ptrFlow->GetPos().m_x + _ptrFlow->GetSize() &&
+      m_pos.m_y > _ptrFlow->GetPos().m_y - _ptrFlow->GetSize() &&
+      m_pos.m_y < _ptrFlow->GetPos().m_y + _ptrFlow->GetSize() &&
+      m_pos.m_z < _ptrFlow->GetPos().m_z + _ptrFlow->GetSize() &&
+      m_pos.m_z > _ptrFlow->GetPos().m_z - _ptrFlow->GetSize())
+  {
+    flowPtr = _ptrFlow;
+    return true;
+  }
+  else return false;
+}
+
+void Particle::UpdateFlowVel()
+{
+
+}
 void Particle::UpdatePos()
 {
     m_pos += m_vel;
@@ -36,10 +56,7 @@ void Particle::AddVel(Vec4 _vel)
 
 void Particle::draw()
 {
-
-    glBegin(GL_POINTS);
     glVertex3f(m_pos[0],m_pos[1],m_pos[2]);
-            glEnd();
 }
 
 void Particle::UpdateGravity(Vec4 _gravity)

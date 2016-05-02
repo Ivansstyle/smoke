@@ -35,16 +35,29 @@ void ParticleSystem::init()
     if (m_isInit) return;
 
 
-    //SPACE INITIALISATION
 
-    space = Space();
-    space.SetSize(Vec4(1.8f,1.0f,1.0f));
-    space.init();
 
+    //CONTROLSPHERE INITIALISATION
     controlsphere = ControlSphere();
     controlsphere.SetPos(space.GetOrigin());
 
-    TriggerSpeed = 0.1;
+    //POINTER TO CONTROLSPHERE
+
+
+    //SPACE INITIALISATION
+    space = Space();
+    space.SetSize(Vec4(1.8f,1.0f,1.0f));
+    space.flowspace.SetSpherePtr(&controlsphere);
+    space.init();
+
+
+
+
+
+    TriggerSpeed = 0.05;
+
+    emitter_out_velocity = 0.01f;
+    emitter_spinning_speed = 20;
 
 
 
@@ -103,6 +116,8 @@ void ParticleSystem::update()
   //Passing controls to the ControlSphere
   controlsphere.update(controls.GiveControls());
 
+  space.flowspace.update();
+
   //Calling Particle creation
   CreateParticles();
 
@@ -110,13 +125,6 @@ void ParticleSystem::update()
   ParticleUpdate();
 
   TriggerTick = ParticleTriggerTick();
-  if (TriggerTick)
-  {
-    //std::cout<<"half tick is = "<<HalfSec<<std::endl;
-  }
-
-
-    //controls.KillControls();
 
 }
 
@@ -124,16 +132,34 @@ void ParticleSystem::update()
 void ParticleSystem::draw()
 {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-    for (auto& i : m_particles)
-    {
-        i.draw();
-    }
+//    for (auto& i : m_particles)
+//    {
+//        i.draw();
+//    }
 
     controlsphere.draw();
 
     space.testDrawSpace();
 
     space.flowspace.drawFlows();
+
+    ParticleDraw();
+
+}
+
+void ParticleSystem::ParticleDraw()
+{
+#warning "research on f* point size"
+  glColor4f(1.0f,1.0f,1.0f,1.0f);
+      for (auto& i : m_particles)
+      {
+        glPointSize(-(i.GetPos().m_z) * 2.0f + 5);
+        glBegin(GL_POINTS);
+          i.draw();
+        glEnd();
+       }
+
+ // POINTS // PARTICLES
 
 }
 
@@ -149,11 +175,19 @@ void ParticleSystem::takeControl(SDL_Event* _e)
 
 void ParticleSystem::CreateParticles()
 {
+
     if (controls.event.space && TriggerTick)
     {
+
+
       Particle p = Particle();
-      p.SetPos(controlsphere.GetPos());
-      p.SetVel(Vec4(0.01,0,0.0));
+      p.SetPos(controlsphere.GetPos() + Vec4(0,0.0155f,0));
+      p.SetVel(Vec4(cos(m_elapsedTime * emitter_spinning_speed) *
+                                          emitter_out_velocity,
+                    0.0f,
+                   (sin(m_elapsedTime * emitter_spinning_speed) *
+                                          emitter_out_velocity)));
+      p.AddVel(controlsphere.GetVel());
       m_particles.push_back(p);
     }
 }
@@ -205,6 +239,10 @@ void ParticleSystem::ParticleUpdate()
       {
         i.bounce(normal_controlsphere);
         i.SetPos(controlsphere.SetBackToSpace(normal_controlsphere));
+        if (!controls.event.space)
+        {
+          i.SetVel(controlsphere.GetVel() * 0.5);
+        }
       }
       else
       {
@@ -218,6 +256,15 @@ void ParticleSystem::ParticleUpdate()
 
 /* TRASHBIN
  *
+ *from Update();
+ *   if (TriggerTick)
+  {
+    std::cout<<"half tick is = "<<HalfSec<<std::endl;
+  }
+
+
+    controls.KillControls();
+
  *
 //    glPushMatrix();
 //    glTranslatef(0,0.0f,-6.0f);
@@ -242,6 +289,10 @@ void ParticleSystem::ParticleUpdate()
 
        /// from timerTick
       //      std::cout<<elapsed<<"  is elapsed"<<std::endl;
+
+
+      if (TriggerTick){std::cout<< "ControlSphere adress is  -- "
+        << &controlsphere << std::endl;}
 
 */
 

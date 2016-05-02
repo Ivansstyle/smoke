@@ -54,10 +54,10 @@ void ParticleSystem::init()
 
 
 
-    TriggerSpeed = 0.05;
+    TriggerSpeed = 0.0001;
 
     emitter_out_velocity = 0.01f;
-    emitter_spinning_speed = 20;
+    emitter_spinning_speed = 30.0f;
 
 
 
@@ -132,28 +132,37 @@ void ParticleSystem::update()
 void ParticleSystem::draw()
 {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-//    for (auto& i : m_particles)
-//    {
-//        i.draw();
-//    }
+
+    Vec4 sphereNorm = space.isInSpace(controlsphere.GetPos());
+    if (sphereNorm != Vec4(0,0,0))
+    {
+      controlsphere.SetVel(controlsphere.GetVel().refl(sphereNorm));
+      controlsphere.SetPos(space.SetBackToSpace(controlsphere.GetPos(),sphereNorm));
+    }
 
     controlsphere.draw();
 
     space.testDrawSpace();
 
-    space.flowspace.drawFlows();
+    //space.flowspace.drawFlows();
 
     ParticleDraw();
+
+
 
 }
 
 void ParticleSystem::ParticleDraw()
 {
 #warning "research on f* point size"
-  glColor4f(1.0f,1.0f,1.0f,1.0f);
       for (auto& i : m_particles)
       {
-        glPointSize(-(i.GetPos().m_z) * 2.0f + 5);
+
+        glColor4f( 1.0f - mod(i.GetVel().m_x) * 400.0f,
+                   1.0f - mod(i.GetVel().m_z) * 300.0f,
+                   1.0f - mod(i.GetVel().m_y) * 200.0f,
+                   1.0f - 1.0f/ (i.GetPos().m_z/0.88f));
+        glPointSize( (1/ -(i.GetPos().m_z)) * 6.0f);
         glBegin(GL_POINTS);
           i.draw();
         glEnd();
@@ -183,11 +192,11 @@ void ParticleSystem::CreateParticles()
       Particle p = Particle();
       p.SetPos(controlsphere.GetPos() + Vec4(0,0.0155f,0));
       p.SetVel(Vec4(cos(m_elapsedTime * emitter_spinning_speed) *
-                                          emitter_out_velocity,
-                    0.0f,
+                                          emitter_out_velocity *(cos(m_elapsedTime)),
+                    0.2f * ((sin(m_elapsedTime)*0.3f) * emitter_out_velocity),
                    (sin(m_elapsedTime * emitter_spinning_speed) *
                                           emitter_out_velocity)));
-      p.AddVel(controlsphere.GetVel());
+      p.AddVel(controlsphere.GetVel() * 0.2f);
       m_particles.push_back(p);
     }
 }
@@ -229,6 +238,8 @@ void ParticleSystem::ParticleUpdate()
       Vec4 normal_space = space.isInSpace(_ppos);
       Vec4 normal_controlsphere = controlsphere.SphereCollisionNormal(_ppos);
 
+       space.flowspace.FlowSearch(&i);
+       i.UpdateFlowVel();
 
       if (normal_space != Vec4(0,0,0))
       {
@@ -253,6 +264,13 @@ void ParticleSystem::ParticleUpdate()
   }
 
 }
+GLfloat ParticleSystem::mod(GLfloat _x)
+{
+  if (_x > 0)
+    return _x;
+  else return -_x;
+}
+
 
 /* TRASHBIN
  *
@@ -293,6 +311,14 @@ void ParticleSystem::ParticleUpdate()
 
       if (TriggerTick){std::cout<< "ControlSphere adress is  -- "
         << &controlsphere << std::endl;}
+
+
+
+//    for (auto& i : m_particles)
+//    {
+//        i.draw();
+//    }
+
 
 */
 

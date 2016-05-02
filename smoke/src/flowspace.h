@@ -2,6 +2,7 @@
 #define FLOWSPACE_H
 
 #include "flow.h"
+#include "particle.h"
 #include <vector>
 
 
@@ -17,6 +18,7 @@ public:
     void drawFlows();
     void CalculateFlowSize(Vec4 _size, int _resolution);
     void SetSpherePtr(ControlSphere* _ptr);
+    void FlowSearch(Particle* _pPtr);
 
 
 private:

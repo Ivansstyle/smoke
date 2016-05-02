@@ -17,6 +17,7 @@ public:
   Vec4 GetPos() const;
   void SetPos(Vec4 _pos);
   Vec4 GetVel();
+  void SetVel(Vec4 _vel);
   GLdouble GetR() const;
   void SetR(GLdouble _r);
   Vec4 SetBackToSpace(Vec4 _normal);

@@ -46,6 +46,7 @@ private:
   Vec4 m_vel;
   float m_mass;
   float m_bouncieness;
+  float m_decoy;
 
   Flow* flowPtr;
 

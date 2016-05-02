@@ -47,6 +47,11 @@ Vec4 ControlSphere::GetVel()
 {
   return m_vel;
 }
+void ControlSphere::SetVel(Vec4 _vel)
+{
+  m_vel = _vel;
+}
+
 
 void ControlSphere::draw()
 {
@@ -72,6 +77,7 @@ void ControlSphere::Move(Vec4 _move)
   {
     m_vel += _move*m_speed;
   }
+
   m_pos += m_vel;
 
 }

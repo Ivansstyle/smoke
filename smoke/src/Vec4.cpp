@@ -17,6 +17,15 @@ Vec4 Vec4::cross(const Vec4 &_rhs) const
               m_w);
 }
 
+Vec4 Vec4::power(const float &_rhs) const
+{
+  return Vec4(pow(m_x,_rhs),
+              pow(m_y,_rhs),
+              pow(m_z,_rhs)
+        );
+}
+
+
 float Vec4::dot(const Vec4 &_rhs) const
 {
   return m_x *_rhs.m_x + m_y*_rhs.m_y + m_z*_rhs.m_z;

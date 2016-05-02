@@ -5,7 +5,7 @@
 #include <iostream>
 #warning "remove iostream after"
 
-FlowSpace::FlowSpace()
+FlowSpace::FlowSpace() : m_spherePtr(NULL)
 {
 
 }
@@ -112,6 +112,15 @@ void FlowSpace::CalculateFlowSize(Vec4 _size, int _resolution)
 void FlowSpace::SetSpherePtr(ControlSphere *_ptr)
 {
   m_spherePtr = _ptr;
+}
+
+void FlowSpace::FlowSearch(Particle *_pPtr)
+{
+  for (auto& i : m_flows)
+  {
+     if( _pPtr->isInFlow(&i))  break;
+  }
+
 }
 
 

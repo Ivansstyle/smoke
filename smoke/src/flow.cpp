@@ -4,7 +4,8 @@
 #include <cmath>
 #warning "remove iostream after"
 
-Flow::Flow() : m_sphere_attraction_factor(0.2f) , m_decoy(0.99f)
+Flow::Flow() : m_sphere_attraction_factor(10.5f) , m_decoy(0.99f) ,controlSphere(NULL),
+               m_particle_interaction_factor(0.0003f)
 {
   fvec.ltf = Vec4(0,0,0);
   fvec.rtf = Vec4(0,0,0);
@@ -23,7 +24,20 @@ Flow::Flow() : m_sphere_attraction_factor(0.2f) , m_decoy(0.99f)
 
 Vec4 Flow::CalculateParticleVector(Vec4 _ppos)
 {
-
+  // Calculate Resoluting Power times Interaction Factor
+  Vec4 respow = ( fvec.ltf * (fvec.ltf + fvec_p.ltf).dist(_ppos) * m_particle_interaction_factor +
+                  fvec.rtf * (fvec.rtf + fvec_p.rtf).dist(_ppos) * m_particle_interaction_factor +
+                  fvec.ldf * (fvec.ldf + fvec_p.ldf).dist(_ppos) * m_particle_interaction_factor +
+                  fvec.rdf * (fvec.rdf + fvec_p.rdf).dist(_ppos) * m_particle_interaction_factor +
+                  fvec.ltb * (fvec.ltb + fvec_p.ltb).dist(_ppos) * m_particle_interaction_factor +
+                  fvec.rtb * (fvec.rtb + fvec_p.rtb).dist(_ppos) * m_particle_interaction_factor +
+                  fvec.ldb * (fvec.ldb + fvec_p.ldb).dist(_ppos) * m_particle_interaction_factor +
+                  fvec.rdb * (fvec.rdb + fvec_p.rdb).dist(_ppos) * m_particle_interaction_factor
+                 );
+  respow = Vec4(respow.m_x / 8.0f,
+                respow.m_y / 8.0f,
+                respow.m_z /8.0f);
+  return respow;
 }
 
 void Flow::update()
@@ -62,41 +76,41 @@ void Flow::draw()
 
 void Flow::InteractWithSphere()
 {
-  float interaction_distance = m_fsize + controlSphere->GetR() + 0.2f; // it works
+  float interaction_distance = m_fsize + controlSphere->GetR() + 0.4f; // it works
                                                   // but returns number that is -0.2f
 
   if (m_position.dist(controlSphere->GetPos()) < interaction_distance)
   {
-    fvec.ltf += controlSphere->GetVel() *
-  ((fvec.ltf + fvec_p.ltf).dist(controlSphere->GetPos()) * m_sphere_attraction_factor);
+    fvec.ltf += (controlSphere->GetVel() *
+(2.0f/((fvec.ltf + fvec_p.ltf).dist(controlSphere->GetPos()) * m_sphere_attraction_factor))) ;
 
 
     fvec.rtf += controlSphere->GetVel() *
-  ((fvec.rtf + fvec_p.rtf).dist(controlSphere->GetPos()) * m_sphere_attraction_factor);
+(2.0f/((fvec.rtf + fvec_p.rtf).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
 
 
     fvec.ldf += controlSphere->GetVel() *
-  ((fvec.ldf + fvec_p.ldf).dist(controlSphere->GetPos()) * m_sphere_attraction_factor);
+(2.0f/((fvec.ldf + fvec_p.ldf).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
 
 
     fvec.rdf += controlSphere->GetVel() *
-  ((fvec.rdf + fvec_p.rdf).dist(controlSphere->GetPos()) * m_sphere_attraction_factor);
+(2.0f/((fvec.rdf + fvec_p.rdf).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
 
 
     fvec.ltb += controlSphere->GetVel() *
-  ((fvec.ltb + fvec_p.ltb).dist(controlSphere->GetPos()) * m_sphere_attraction_factor);
+(2.0f/((fvec.ltb + fvec_p.ltb).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
 
 
     fvec.rtb += controlSphere->GetVel() *
-  ((fvec.rtb + fvec_p.rtb).dist(controlSphere->GetPos()) * m_sphere_attraction_factor);
+(2.0f/((fvec.rtb + fvec_p.rtb).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
 
 
     fvec.ldb += controlSphere->GetVel() *
-  ((fvec.ldb + fvec_p.ldb).dist(controlSphere->GetPos()) * m_sphere_attraction_factor);
+(2.0f/((fvec.ldb + fvec_p.ldb).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
 
 
     fvec.rdb += controlSphere->GetVel() *
-  ((fvec.rdb + fvec_p.rdb).dist(controlSphere->GetPos()) * m_sphere_attraction_factor);
+(2.0f/((fvec.rdb + fvec_p.rdb).dist(controlSphere->GetPos()) * m_sphere_attraction_factor));
   }
 }
 

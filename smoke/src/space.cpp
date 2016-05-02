@@ -21,7 +21,7 @@ void Space::init()
   normal.zero =    Vec4(0,0,0);
 
   //Default gravity
-  m_gravity = Vec4(0,-0.002f,0);
+  m_gravity = Vec4(0,-0.0000001f,0);
 
   //FlowSpace initialisation
   flowspace.init(m_size, m_resolution, m_origin);

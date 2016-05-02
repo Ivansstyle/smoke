@@ -29,6 +29,7 @@ class Vec4
     // self and _rhs (self x _rhs)
     Vec4 cross(const Vec4 &_rhs) const;
     float dot(const Vec4 &_rhs) const;
+    Vec4 power(const float &_rhs) const;
     float length() const;
     float lengthSquared() const;
     void normalGL();

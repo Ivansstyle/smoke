@@ -40,6 +40,7 @@ public:
  void CreateParticles();
  void TimingUpdate();
  void ParticleUpdate();
+ void SearchForFlows(Vec4 _pos);
 
 
  bool TriggerTick;
@@ -55,6 +56,7 @@ public:
 private:
 
  void ParticleDraw();
+ GLfloat mod(GLfloat _x);
 
 std::vector<Particle> m_particles;
 

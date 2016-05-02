@@ -1,11 +1,9 @@
 #include "flow.h"
 #include "GLFunctions.h"
-#include <iostream>
 #include <cmath>
-#warning "remove iostream after"
 
-Flow::Flow() : m_sphere_attraction_factor(10.5f) , m_decoy(0.99f) ,controlSphere(NULL),
-               m_particle_interaction_factor(0.0003f)
+Flow::Flow() : m_sphere_attraction_factor(10.5f) , m_decoy(0.99f),
+               m_particle_interaction_factor(0.0003f), controlSphere(NULL)
 {
   fvec.ltf = Vec4(0,0,0);
   fvec.rtf = Vec4(0,0,0);

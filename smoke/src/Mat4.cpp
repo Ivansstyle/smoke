@@ -12,17 +12,6 @@ Mat4::Mat4(GLfloat _s)
   m_33 = _s;
 }
 
-
-void Mat4::operator *= (const Mat4 &_rhs)
-{
-
-}
-
-Mat4 Mat4::operator * (const Mat4 &_rhs) const
-{
-
-}
-
 void Mat4::identity()
 {
   m_00 = 1.0f;
@@ -44,9 +33,4 @@ void Mat4::loadProjection() const
   glLoadIdentity();
   glMultMatrixf(m_openGL);
   glMatrixMode(GL_MODELVIEW);
-}
-
-const Mat4 & Mat4::transpose()
-{
-
 }

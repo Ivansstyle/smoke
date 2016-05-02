@@ -70,10 +70,10 @@ private:
 
   float m_fsize;
   float m_sphere_attraction_factor;
+  GLfloat m_decoy;
   float m_particle_interaction_factor;
   FlowID m_id;
   Vec4 m_position;
-  GLfloat m_decoy;
   FlowVectors fvec;
   FlowVectorPos fvec_p;
   ControlSphere* controlSphere;

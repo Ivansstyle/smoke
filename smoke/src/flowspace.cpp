@@ -2,7 +2,7 @@
 #include "GLFunctions.h"
 #include <vector>
 #include <cmath>
-#include <iostream>
+
 
 FlowSpace::FlowSpace() : m_spherePtr(NULL)
 {
@@ -16,7 +16,7 @@ FlowSpace::~FlowSpace()
 
 void FlowSpace::init(Vec4 _size, int _resolution, Vec4 _origin)
 {
-  CalculateFlowSize(_size, _resolution);
+  CalculateFlowSize(_resolution);
 
   // main flow creation sequence
   createFlows(_size, _origin);
@@ -99,15 +99,12 @@ void FlowSpace::createFlows(const Vec4 _size,Vec4 _origin)
 
 }
 
-void FlowSpace::CalculateFlowSize(Vec4 _size, int _resolution)
+void FlowSpace::CalculateFlowSize(int _resolution)
 {
-  // Implemet an algorythm
-#warning "do this"
-if      (_resolution == 1) m_flowsize = 0.1f;
-else if (_resolution == 2) m_flowsize = 0.07f;
-else if (_resolution == 3) m_flowsize = 0.05f;
-else if (_resolution == 4) m_flowsize = 0.045f;
-
+    if      (_resolution == 1) m_flowsize = 0.1f;
+    else if (_resolution == 2) m_flowsize = 0.07f;
+    else if (_resolution == 3) m_flowsize = 0.05f;
+    else if (_resolution == 4) m_flowsize = 0.045f;
 }
 
 void FlowSpace::SetSpherePtr(ControlSphere *_ptr)

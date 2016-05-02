@@ -16,7 +16,7 @@ public:
     void createFlows(const Vec4 _size, Vec4 _origin);
     void update();
     void drawFlows();
-    void CalculateFlowSize(Vec4 _size, int _resolution);
+    void CalculateFlowSize(int _resolution);
     void SetSpherePtr(ControlSphere* _ptr);
     void FlowSearch(Particle* _pPtr);
 

@@ -13,8 +13,10 @@
 #include <iostream>
 #include <cmath>
 
+
+
 ControlSphere::ControlSphere() : m_pos(0.0,0.0,-3) , m_r(0.05f) ,
-                                 m_speed(0.009f), m_maxspeed(0.007f), m_slowDownSpeed(0.95f)
+                                 m_speed(0.009f), m_maxspeed(0.007f), m_slowDownSpeed(0.99f)
 {
 
 }
@@ -69,11 +71,10 @@ void ControlSphere::draw()
 
 void ControlSphere::Move(Vec4 _move)
 {
-  if (_move == Vec4(0,0,0))
-  {
+
     m_vel *= m_slowDownSpeed;
-  }
-  else if (m_vel.length() <= m_maxspeed && _move.vsum() < 3)
+
+  if (m_vel.length() <= m_maxspeed && _move.vsum() < 3)
   {
     m_vel += _move*m_speed;
   }
@@ -82,16 +83,16 @@ void ControlSphere::Move(Vec4 _move)
 
 }
 
-void ControlSphere::update(Event* event)
+void ControlSphere::update(Event event)
 {
  Vec4 mov_vec;
- if (event->left) {Move(Vec4(-1.0f * m_speed,0.0,0.0));}
- else if (event->right) {Move(Vec4(1.0f*m_speed,0.0,0.0));}
- else if (event->down) {Move(Vec4(0.0,0.0,1.0f *m_speed));}
- else if (event->up) {Move(Vec4(0.0,0.0,-1.0f * m_speed));}
- else if (event->shift) {Move(Vec4 (0.0,1.0f * m_speed, 0.0));}
- else if (event->ctrl) {Move(Vec4 (0.0, -1.0f * m_speed, 0.0));}
- else {Move(Vec4(0,0,0));}
+ if (event.left)   {mov_vec+=Vec4(-1.0f * m_speed,0.0,0.0);}
+ if (event.right)  {mov_vec+=Vec4(1.0f*m_speed,0.0,0.0);}
+ if (event.down)   {mov_vec+=Vec4(0.0,0.0,1.0f *m_speed);}
+ if (event.up)     {mov_vec+=Vec4(0.0,0.0,-1.0f * m_speed);}
+ if (event.shift)  {mov_vec+=Vec4 (0.0,1.0f * m_speed, 0.0);}
+ if (event.ctrl)   {mov_vec+=Vec4 (0.0, -1.0f * m_speed, 0.0);}
+ Move(mov_vec);
 }
 
 Vec4 ControlSphere::SphereCollisionNormal(Vec4 _ppos)

@@ -1,6 +1,6 @@
 
 #include <sys/time.h>
-
+#include <iostream>
 #include "particlesystem.h"
 #include "GLFunctions.h"
 
@@ -9,7 +9,9 @@
 #define RESOLUTION_HQ 3
 #define RESOLUTION_UHQ 4 //Can be slow and unpredictive
 
-ParticleSystem::ParticleSystem() : m_isInit(false),m_startTime(0.0),m_elapsedTime(0.0)
+ParticleSystem::ParticleSystem() : m_isInit(false),m_startTime(0.0),m_elapsedTime(0.0),
+                                 m_draw_space(true), m_draw_flows(true), m_flow_behavior(0)
+
 {
 
 }
@@ -54,9 +56,15 @@ void ParticleSystem::init()
     //SPACE INITIALISATION
     space = Space();
     space.SetSize(Vec4(1.8f,1.0f,1.0f));
-    space.resolution(RESOLUTION_LQ);
+    space.resolution(RESOLUTION_MQ);
     space.flowspace.SetSpherePtr(&controlsphere);
     space.init();
+
+    controls.draw_space = &m_draw_space;
+    controls.draw_flows = &m_draw_flows;
+    controls.delete_particles = &m_delete_particles;
+    controls.flow_behavior = &m_flow_behavior;
+
 
 
 
@@ -71,13 +79,10 @@ void ParticleSystem::init()
 
     // Enable texturing
     glDisable(GL_TEXTURE_2D);
-
-    glPointSize(10);
-
-
     // Enable counter clockwise face ordering
     glFrontFace(GL_CCW);
 
+    //Lighting is alternated in the scene, because there are objects that are not lighted
     glEnable(GL_LIGHTING);
     glEnable(GL_NORMALIZE);
 
@@ -118,13 +123,27 @@ void ParticleSystem::init()
 
 void ParticleSystem::update()
 {
+  //if (controls.GiveControls().blow && m_flow_behavior == BEHAVIOR_DEF) {m_flow_behavior = BEHAVIOR_BLOW;}
  //Timing Update
   TimingUpdate();
 
   //Passing controls to the ControlSphere
-  controlsphere.update(controls.GiveControls());
+   controlsphere.update(controls.GiveControls());
 
-  space.flowspace.update();
+  Vec4 sphereNorm = space.isInSpace(controlsphere.GetPos());
+
+  if (sphereNorm != Vec4(0,0,0))
+  {
+    controlsphere.SetVel(controlsphere.GetVel().refl(sphereNorm));
+    controlsphere.SetPos(space.SetBackToSpace(controlsphere.GetPos(),sphereNorm));
+  }
+
+
+
+
+
+  space.flowspace.update(m_flow_behavior);
+
 
   //Calling Particle creation
   CreateParticles();
@@ -133,7 +152,6 @@ void ParticleSystem::update()
   ParticleUpdate();
 
   TriggerTick = ParticleTriggerTick();
-
 }
 
 
@@ -141,21 +159,20 @@ void ParticleSystem::draw()
 {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     glEnable(GL_LIGHTING);
-    Vec4 sphereNorm = space.isInSpace(controlsphere.GetPos());
-    if (sphereNorm != Vec4(0,0,0))
-    {
-      controlsphere.SetVel(controlsphere.GetVel().refl(sphereNorm));
-      controlsphere.SetPos(space.SetBackToSpace(controlsphere.GetPos(),sphereNorm));
-    }
 
-    controlsphere.draw();
+        controlsphere.draw();
 
     glDisable(GL_LIGHTING);
-    space.testDrawSpace();
-    space.flowspace.drawFlows();
-    ParticleDraw();
 
+    static bool toggle = false;
 
+    if (m_draw_space) space.testDrawSpace();
+
+    if (m_draw_flows) space.flowspace.drawFlows();
+
+        ParticleDraw();
+
+    if (controls.GiveControls().suck) {m_flow_behavior  = 1;}
 
 }
 
@@ -185,9 +202,18 @@ bool ParticleSystem::isInit() const
 
 void ParticleSystem::takeControl(SDL_Event* _e)
 {
+
+
   controls.TakeControls(_e);
+
+
+
 }
 
+///
+/// \brief ParticleSystem::CreateParticles
+///
+///
 void ParticleSystem::CreateParticles()
 {
 
@@ -267,6 +293,8 @@ void ParticleSystem::ParticleUpdate()
       }
           i.UpdateGravity(space.GetGravity());
           i.UpdatePos();
+
+          if(m_delete_particles) {m_particles.pop_back();}
   }
 
 }

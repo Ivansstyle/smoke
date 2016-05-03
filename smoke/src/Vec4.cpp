@@ -29,6 +29,14 @@ float Vec4::vsum()
 {
     return m_x + m_y + m_z;
 }
+Vec4 Vec4::vecsqrt()
+{
+//    assert(m_x != 0.0f);
+//    assert(m_y != 0.0f);
+//    assert(m_z != 0.0f);
+
+    return Vec4(sqrt(m_x), sqrt(m_y), sqrt(m_y));
+}
 
 
 float Vec4::dot(const Vec4 &_rhs) const

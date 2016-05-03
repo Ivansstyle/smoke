@@ -5,10 +5,11 @@
 
 //#define EQUILIBRIUM
 
-Flow::Flow() : m_sphere_attraction_factor(5.5f) , m_decoy(0.995f),
-               m_particle_interaction_factor(0.03f), controlSphere(NULL),
-               m_equilibrium_factor(0.1f), m__sphere_interaction_r(0.1f),
-               m_friends_equilibrium_factor(0.000000001f)
+Flow::Flow() : m_sphere_attraction_factor(5.5f) , m_decoy(0.993f),
+               m_particle_interaction_factor(0.002f), controlSphere(NULL),
+               m_equilibrium_factor(0.1f), m__sphere_interaction_r(0.18f),
+               m_friends_equilibrium_factor(),
+               m_suck_blow_force(0.0002f)
 {
   fvec.ltf = Vec4(0,0,0);
   fvec.rtf = Vec4(0,0,0);
@@ -56,6 +57,8 @@ Vec4 Flow::CalculateParticleVector(Vec4 _ppos)
 
 void Flow::update()
 {
+  if (behaviour == BEHAVIOR_SUCK) suck();
+  if (behaviour == BEHAVIOR_BLOW) blow();
 
   InteractWithSphere();
 
@@ -71,6 +74,33 @@ void Flow::update()
 
 
 }
+
+void Flow::blow()
+{
+    fvec.ltf += (((fvec.ltf + fvec_p.ltf + m_position) - controlSphere->GetPos()))* (1.0f/((fvec_p.ltf + m_position).dist(controlSphere->GetPos()))) * m_suck_blow_force;
+    fvec.rtf += (((fvec.rtf + fvec_p.rtf + m_position) - controlSphere->GetPos()))* (1.0f/((fvec_p.rtf + m_position).dist(controlSphere->GetPos()))) * m_suck_blow_force;
+    fvec.ldf += (((fvec.ldf + fvec_p.ldf + m_position) - controlSphere->GetPos()))* (1.0f/((fvec_p.ldf + m_position).dist(controlSphere->GetPos()))) * m_suck_blow_force;
+    fvec.rdf += (((fvec.rdf + fvec_p.rdf + m_position) - controlSphere->GetPos()))* (1.0f/((fvec_p.rdf + m_position).dist(controlSphere->GetPos()))) * m_suck_blow_force;
+    fvec.ltb += (((fvec.ltb + fvec_p.ltb + m_position) - controlSphere->GetPos()))* (1.0f/((fvec_p.ltb + m_position).dist(controlSphere->GetPos()))) * m_suck_blow_force;
+    fvec.rtb += (((fvec.rtb + fvec_p.rtb + m_position) - controlSphere->GetPos()))* (1.0f/((fvec_p.rtb + m_position).dist(controlSphere->GetPos()))) * m_suck_blow_force;
+    fvec.ldb += (((fvec.ldb + fvec_p.ldb + m_position) - controlSphere->GetPos()))* (1.0f/((fvec_p.ldb + m_position).dist(controlSphere->GetPos()))) * m_suck_blow_force;
+    fvec.rdb += (((fvec.rdb + fvec_p.rdb + m_position) - controlSphere->GetPos()))* (1.0f/((fvec_p.rdb + m_position).dist(controlSphere->GetPos()))) * m_suck_blow_force;
+}
+
+void Flow::suck()
+{
+    fvec.ltf += ((controlSphere->GetPos() - (fvec.ltf + fvec_p.ltf + m_position))* (1.0f/(controlSphere->GetPos().dist(fvec_p.ltf + m_position)))) * m_suck_blow_force;
+    fvec.rtf += ((controlSphere->GetPos() - (fvec.rtf + fvec_p.rtf + m_position))* (1.0f/(controlSphere->GetPos().dist(fvec_p.rtf + m_position)))) * m_suck_blow_force;
+    fvec.ldf += ((controlSphere->GetPos() - (fvec.ldf + fvec_p.ldf + m_position))* (1.0f/(controlSphere->GetPos().dist(fvec_p.ldf + m_position)))) * m_suck_blow_force;
+    fvec.rdf += ((controlSphere->GetPos() - (fvec.rdf + fvec_p.rdf + m_position))* (1.0f/(controlSphere->GetPos().dist(fvec_p.rdf + m_position)))) * m_suck_blow_force;
+    fvec.ltb += ((controlSphere->GetPos() - (fvec.ltb + fvec_p.ltb + m_position))* (1.0f/(controlSphere->GetPos().dist(fvec_p.ltb + m_position)))) * m_suck_blow_force;
+    fvec.rtb += ((controlSphere->GetPos() - (fvec.rtb + fvec_p.rtb + m_position))* (1.0f/(controlSphere->GetPos().dist(fvec_p.rtb + m_position)))) * m_suck_blow_force;
+    fvec.ldb += ((controlSphere->GetPos() - (fvec.ldb + fvec_p.ldb + m_position))* (1.0f/(controlSphere->GetPos().dist(fvec_p.ldb + m_position)))) * m_suck_blow_force;
+    fvec.rdb += ((controlSphere->GetPos() - (fvec.rdb + fvec_p.rdb + m_position))* (1.0f/(controlSphere->GetPos().dist(fvec_p.rdb + m_position)))) * m_suck_blow_force;
+}
+
+
+
 
 
 void Flow::SetFriendVec(FlowVectors _fvecs, Flow *_friend)

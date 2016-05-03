@@ -12,7 +12,7 @@ public:
   ~ControlSphere();
 
   void draw();
-  void update(Event* event);
+  void update(Event event);
 
   Vec4 GetPos() const;
   void SetPos(Vec4 _pos);

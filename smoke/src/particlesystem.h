@@ -3,7 +3,9 @@
 
 #define MAX_PARTICLES 2^13
 
-
+#include "particle.h"
+#include "controls.h"
+#include "controlsphere.h"
 
 #ifdef __APPLE__ //OpenGL for MacOsX
 #include <OpenGL/gl.h>
@@ -63,14 +65,17 @@ private:
   float                 emitter_spinning_speed;
   float                 point_size_factor;
 
+  bool m_draw_space;
+  bool m_draw_flows;
+  bool m_delete_particles;
+  int m_flow_behavior;
+
   void ParticleDraw();
   GLfloat mod(GLfloat _x);
 
 protected:
 
  bool m_isInit;
-
-
 
 
  /// The time since the object was initialised, which is used for animation purposes

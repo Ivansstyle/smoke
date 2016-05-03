@@ -1,4 +1,4 @@
-#ifndef FLOW_H
+    #ifndef FLOW_H
 #define FLOW_H
 #include "controlsphere.h"
 #include "Vec4.h"
@@ -13,6 +13,10 @@
   #include <GL/gl.h>
   #include <GL/glu.h>
 #endif
+
+#define BEHAVIOR_DEF 0
+#define BEHAVIOR_SUCK 1
+#define BEHAVIOR_BLOW 2
 
 
 typedef struct FlowID{
@@ -46,12 +50,16 @@ public:
   Flow();
   //~Flow();
 
+  int behaviour;
+
   void   SetFlowID(int _r, int _c, int _s);
   FlowID GetFlowID();
 
   void update();
   void draw();
   void drawVectors();
+  void suck();
+  void blow();
 
   void SetPos(Vec4 _pos);
   Vec4 GetPos();
@@ -76,6 +84,13 @@ public:
 
   void SelfEquilibrium();
   void FriendsEquilibrium();
+
+  ///
+  /// \brief CalulateEquilibrium
+  /// \param[in] _m
+  /// \param[] _f
+  /// \return
+  ///
   Vec4 CalulateEquilibrium(Vec4 _m, Vec4 _f);
 
   void Decoy();
@@ -106,6 +121,7 @@ private:
   float           m_equilibrium_factor;
   float           m_friends_equilibrium_factor;
   float           m__sphere_interaction_r;
+  float           m_suck_blow_force;
 
 
 };

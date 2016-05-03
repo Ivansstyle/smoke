@@ -2,8 +2,16 @@
 #define CONTROLS_H
 #include <SDL2/SDL.h>
 
+//#include "particlesystem.h"
+
 struct Event{
-  bool up,
+  bool
+       blow,
+       suck,
+          f,
+          s,
+          r,
+         up,
        down,
        left,
       right,
@@ -36,14 +44,23 @@ class Controls
 {
 
 public:
-  Controls();
+    Controls();
   //~Controls();
   void TakeControls(SDL_Event *_e);
+  char GetInput();
+
+  bool* draw_space;
+  bool* draw_flows;
+  bool* delete_particles;
+  int* flow_behavior;
+
+
+
 
   Event     event;
 
   void   KillControls();
-  Event* GiveControls();
+  Event GiveControls();
 
 private:
 

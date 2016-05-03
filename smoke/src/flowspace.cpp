@@ -30,12 +30,14 @@ void FlowSpace::init(Vec4 _size, int _resolution, Vec4 _origin)
 //  m_flows.push_back(f);
 
 }
-void FlowSpace::update()
+void FlowSpace::update(int _behaviour)
 {
 
   for (auto& i : m_flows)
   {
+      i.behaviour = _behaviour;
       i.update();
+
   }
 }
 

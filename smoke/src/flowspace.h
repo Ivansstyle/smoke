@@ -1,9 +1,13 @@
 #ifndef FLOWSPACE_H
 #define FLOWSPACE_H
 
-#include "flow.h"
-#include "particle.h"
 #include <vector>
+
+#include "flow.h"
+
+#include "controlsphere.h"
+#include "particle.h"
+
 
 
 class FlowSpace
@@ -13,7 +17,7 @@ public:
     ~FlowSpace();
 
     void init(Vec4 _size, int _resolution, Vec4 _origin);
-    void update();
+    void update(int _behaviour);
 
     void createFlows(const Vec4 _size, Vec4 _origin);
     void drawFlows();

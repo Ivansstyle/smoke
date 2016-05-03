@@ -40,19 +40,19 @@ int initSDL()
     }
     else
     {
-#ifdef __APPLE__ //Use OpenGL 2.1 core for MacOsX in Compability Mode
+    #ifdef __APPLE__ //Use OpenGL 2.1 core for MacOsX in Compability Mode
 
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 2 );
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 1 );
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY );
+    #elif __linux__
 
-
-#else   //Use OpenGL 3.1 core for LINUX
+   //Use OpenGL 3.1 core for LINUX
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_MAJOR_VERSION, 3 );
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 1 );
         SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE );
 
-#endif
+    #endif
         //Create window
         gWindow = SDL_CreateWindow( WINDOW_TITLE,
                                     SDL_WINDOWPOS_UNDEFINED,
@@ -85,16 +85,7 @@ Uint32 timerCallback(Uint32 interval, void *)
 }
 
 
-void handleInput(SDL_Event* _e)
-{
-
-  //Handle keypress with current mouse position
-      //std::cout<<"typed input --->"  <<_e.text.text[0]<<std::endl;
-      //char c = _e.text.text[0];
-      //std::cout<<"text input /t == "<< _e.text.text[0]<<"  and something else is "<<c<<std::endl;
-      particlesystem->controls.TakeControls( _e);
-
-}
+void handleInput(SDL_Event* _e)  { particlesystem->controls.TakeControls( _e); }
 
 
 /**
@@ -104,9 +95,6 @@ void handleInput(SDL_Event* _e)
  * @return EXIT_SUCCESS if it went well!
  */
 int main( int argc, char* args[] ) {
-
-  std::cout<<"HelloWorld!"<<std::endl;
-
 
     //Start up SDL and create window
     if( initSDL() == EXIT_FAILURE ) return EXIT_FAILURE;
